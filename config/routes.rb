@@ -1,5 +1,7 @@
 AuditMan::Application.routes.draw do
-  get 'courses/search'
+  resources :courses do
+    get :search, :on => :collection
+  end
 
   resources :majors
 

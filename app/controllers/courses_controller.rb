@@ -1,7 +1,9 @@
 class CoursesController < ApplicationController
-  
+
   respond_to :html
-  
+
+  load_and_authorize_resource
+
   def search
     @courses = Course.search(params[:term])
     
@@ -13,5 +15,39 @@ class CoursesController < ApplicationController
       }
     end
   end
-  
+
+  def index
+    respond_with @courses
+  end
+
+  def show
+    respond_with @course
+  end
+
+  def new
+    respond_with @course
+  end
+
+  def edit
+    respond_with @course
+  end
+
+  def create
+    @course.save
+
+    respond_with @course
+  end
+
+  def update
+    @course.update_attributes params[:course]
+
+    respond_with @course
+  end
+
+  def destroy
+    @course.destroy
+
+    respond_with :courses
+  end
+
 end
