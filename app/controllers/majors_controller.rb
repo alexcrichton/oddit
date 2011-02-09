@@ -1,0 +1,55 @@
+class MajorsController < ApplicationController
+
+  load_and_authorize_resource
+
+  before_filter :extract_course_ids, :only => [:create, :update]
+
+  respond_to :html
+
+  def index
+    respond_with @majors
+  end
+
+  def show
+    respond_with @major
+  end
+
+  def new
+    respond_with @major
+  end
+
+  def edit
+    respond_with @major
+  end
+
+  def create
+    @major.save
+
+    respond_with @major
+  end
+
+  def update
+    @major.update_attributes params[:major]
+
+    respond_with @major
+  end
+
+  def destroy
+    @major.destroy
+
+    respond_with :majors
+  end
+
+  protected
+
+  def extract_course_ids
+    return unless params[:major] && params[:major][:requirements_attributes]
+
+    params[:major][:requirements_attributes].each do |_, attrs|
+      next unless attrs['course_ids']
+
+      attrs['course_ids'] = attrs['course_ids'].values.reject(&:blank?)
+    end
+  end
+
+end

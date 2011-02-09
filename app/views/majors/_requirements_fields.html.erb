@@ -1,0 +1,37 @@
+<dl class='requirement'>
+  <dt><%= f.label :name %></dt>
+  <dd><%= f.text_field :name %></dd>
+
+  <dt><%= f.check_box :_destroy %></dt>
+  <dd><%= f.label :_destroy, 'Remove?' %></dd>
+
+  <dt>Courses</dt>
+
+  <%= f.fields_for :course_ids do |cf| %>
+    <% f.object.courses.each do |course| %>
+      <dd class='course'>
+        <%= render 'course_form', :f => cf, :course => course %>
+      </dd>
+    <% end %>
+  <% end %>
+
+  <dd>
+    <%= link_to '[add]', '#' %>
+
+    <%# In case we remove all of the above courses, make sure that the array
+        still gets submitted by having a blank one here %>
+    <div style='display:none'>
+      <%= f.fields_for :course_ids do |cf| %>
+        <%= render 'course_form', :f => cf, :course => '' %>
+      <% end %>
+    </div>
+
+    <div class='new-course' style='display:none'>
+      <%= f.fields_for :course_ids do |cf| %>
+        <%= render 'course_form', :f => cf, :course => 'CHANGEME' %>
+      <% end %>
+    </div>
+
+  </dd>
+
+</dl>

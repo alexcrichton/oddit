@@ -2,6 +2,7 @@
 @import "compass/css3";
 
 @import "errors";
+@import "dl";
 
 body {
   @include blueprint-typography-body(12px);

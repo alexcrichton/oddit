@@ -1,0 +1,21 @@
+dl {
+  margin: 5px 0;
+  overflow: visible;
+}
+
+dt {
+  width: 7.5em;
+  float: left;
+  clear: left;
+  text-align: right;
+  color: #333;
+}
+
+dd {
+  margin-right: 8px;
+  margin-left: 8em;
+}
+
+dt, dd {
+  line-height: 2em;
+}

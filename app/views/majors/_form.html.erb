@@ -1,0 +1,32 @@
+<% javascript 'rails', 'majors/form' %>
+
+<%= form_for @major do |f| %>
+  <%= render 'shared/error_messages', :target => @major %>
+
+  <dl>
+    <dt><%= f.label :name %></dt>
+    <dd><%= f.text_field :name %></dd>
+
+    <dt><%= f.label :year %></dt>
+    <dd><%= f.number_field :year %></dd>
+  </dl>
+
+  <fieldset>
+    <legend>Requirements <%= link_to '[add]', '#' %></legend>
+
+    <%= f.fields_for :requirements do |rf| %>
+      <%= render 'requirements_fields', :f => rf %>
+    <% end %>
+  </fieldset>
+
+  <script type='text/html' id='new-requirement'>
+    <%= f.fields_for :requirements, @major.requirements.build,
+          :child_index => 'CHANGEME' do |rf| %>
+      <%= render 'requirements_fields', :f => rf %>
+    <% end %>
+  </script>
+
+  <div class='actions'>
+    <%= f.submit :disable_with => 'Submitting...' %>
+  </div>
+<% end %>

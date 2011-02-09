@@ -38,6 +38,7 @@ GEM
     activesupport (3.0.3)
     arel (2.0.7)
     bson (1.2.0)
+    bson_ext (1.2.0)
     builder (2.1.2)
     cancan (1.5.1)
     compass (0.10.6)
@@ -91,9 +92,6 @@ GEM
     rest-client (1.6.1)
       mime-types (>= 1.16)
     sprockets (1.0.2)
-    sqlite3 (1.3.3)
-    sqlite3-ruby (1.3.3)
-      sqlite3 (>= 1.3.3)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -104,10 +102,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson_ext
   cancan
   compass
   heroku
   mongoid (>= 2.0.0.rc)
   paste!
   rails (= 3.0.3)
-  sqlite3-ruby

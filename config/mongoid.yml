@@ -8,11 +8,11 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: recipe_box_development
+  database: audit_man_development
 
 test:
   <<: *defaults
-  database: recipe_box_test
+  database: audit_man_test
 
 # set these environment variables on your prod server
 production:
