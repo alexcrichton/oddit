@@ -1,8 +1,5 @@
-<% course = course.id if course.is_a? Course %>
-<% value  = course.is_a?(String) ? '' : course %>
+<%= f.hidden_field key, :value => value,
+  :disabled => (key == 'CHANGEME') %>
 
-<%= f.hidden_field course == '' ? 'ignored' : course, :value => value,
-  :disabled => (course == 'CHANGEME') %>
-
-<%= text_field_tag 'id', '', :placeholder => 'Search...' %>
+<%= text_field_tag 'id', display , :placeholder => 'Search...' %>
 <%= link_to '[remove]', '#' %>

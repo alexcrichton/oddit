@@ -10,25 +10,28 @@
   <%= f.fields_for :course_ids do |cf| %>
     <% f.object.courses.each do |course| %>
       <dd class='course'>
-        <%= render 'course_form', :f => cf, :course => course %>
+        <%= render 'course_form', :f => cf, :key => course.id,
+              :value => course.id, :display => course.name %>
       </dd>
     <% end %>
   <% end %>
 
   <dd>
-    <%= link_to '[add]', '#' %>
+    <%= link_to '[add]', '#', :class => 'add' %>
 
     <%# In case we remove all of the above courses, make sure that the array
         still gets submitted by having a blank one here %>
     <div style='display:none'>
       <%= f.fields_for :course_ids do |cf| %>
-        <%= render 'course_form', :f => cf, :course => '' %>
+        <%= render 'course_form', :f => cf, :key => 'ignored',
+              :value => '', :display => '' %>
       <% end %>
     </div>
 
     <div class='new-course' style='display:none'>
       <%= f.fields_for :course_ids do |cf| %>
-        <%= render 'course_form', :f => cf, :course => 'CHANGEME' %>
+        <%= render 'course_form', :f => cf, :key => 'CHANGEME',
+              :value => '', :display => '' %>
       <% end %>
     </div>
 

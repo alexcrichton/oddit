@@ -1,8 +1,8 @@
 class MajorsController < ApplicationController
 
-  load_and_authorize_resource
-
   before_filter :extract_course_ids, :only => [:create, :update]
+
+  load_and_authorize_resource
 
   respond_to :html
 
