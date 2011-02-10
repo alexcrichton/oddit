@@ -32,6 +32,15 @@
     height: $block_height - 60px;
   }
 
+  .course {
+    padding: 1px;
+    &.selected {
+      padding: 0;
+      background: lighten(green, 65%);
+      border: 1px solid green;
+    }
+  }
+
   .ui-state-highlight, .semester {
     height: $block_height;
     margin: 10px;
@@ -57,5 +66,26 @@
 
   ul {
     display: none;
+  }
+
+  .req {
+    margin: 2px;
+  }
+
+  .name {
+    width: 100%;
+    display: inline-block;
+    padding: 3px;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: lighten(black, 50%);
+    }
+  }
+
+  .finished {
+    background: lighten(green, 65%);
+    border: 1px solid green;
   }
 }

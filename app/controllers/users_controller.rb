@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   respond_to :html
 
   def show
+    build_cache current_user.majors
     respond_with current_user
   end
 
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
     current_user.save
 
     respond_with @major do |format|
-      format.js
+      format.js { build_cache [@major] }
     end
   end
 
@@ -25,6 +26,42 @@ class UsersController < ApplicationController
     respond_with @major do |format|
        format.js
      end
+  end
+
+  protected
+
+  def build_cache majors
+    course_to_semester = {}
+    courses = current_user.semesters.map{ |s|
+      s.courses.tap{ |a| a.each{ |c| course_to_semester[c] = s.id } }
+    }.flatten
+
+    @cache = {}
+
+    majors.each do |major|
+      @cache[major] = {}
+
+      major.requirements.each do |requirement|
+        @cache[major][requirement] = []
+        req_courses = requirement.courses.dup
+
+        requirement.required.times {
+          course = (req_courses & courses).first
+
+          if course
+            courses.delete course
+            req_courses.delete course
+            @cache[major][requirement] << [
+              course.id, course_to_semester[course]]
+          else
+            break
+          end
+        }
+
+      end
+
+    end
+
   end
 
 end

@@ -1,5 +1,6 @@
 //= require <jquery>
 //= require <jquery/ui>
+//= require <jquery/scroll_to>
 
 window.bindAutocomplete = function(el) {
   $(el).autocomplete({
@@ -68,5 +69,20 @@ $(function() {
     }
 
     return false;
+  });
+
+  // Hovering to show connections
+  $('#majors .req').live('mouseover mouseout', function(e) {
+    $.each($(this).data('scheduled'), function(_, el) {
+      var course = $(
+        '.semester[data-id=' + el[1] + '] .course[data-id=' + el[0] + ']');
+
+      if (e.type == 'mouseover') {
+        course.addClass('selected');
+        course.closest('.courses').scrollTo(course);
+      } else {
+        course.removeClass('selected');
+      }
+    });
   });
 });

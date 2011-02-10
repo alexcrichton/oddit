@@ -8,13 +8,16 @@
   </legend>
 
   <% major.requirements.each do |req| %>
-    <div class='req'>
-      <%= link_to '#', :class => 'name' do %>
-      <%= req.name %>
+    <% finished = (@cache[major][req].size == req.required) %>
 
-      <% if req.required > 1 %>
-        (<%= req.required %>)
-      <% end %>
+    <div class='req<%= finished ? ' finished' : '' %>'
+         data-scheduled="<%= @cache[major][req].to_json %>">
+      <%= link_to '#', :class => 'name' do %>
+        <%= req.name %>
+
+        <% if req.required > 1 %>
+          (<%= req.required %>)
+        <% end %>
       <% end %>
 
       <ul>

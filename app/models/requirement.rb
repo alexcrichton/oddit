@@ -10,6 +10,6 @@ class Requirement
   embedded_in :major
   has_and_belongs_to_many :courses
 
-  attr_accessible :name, :course_ids
+  attr_accessible :name, :course_ids, :required
 
 end
