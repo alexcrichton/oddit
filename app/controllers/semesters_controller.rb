@@ -23,6 +23,14 @@ class SemestersController < ApplicationController
     respond_with @semester, :location => root_path
   end
 
+  def destroy
+    @semester.destroy
+
+    respond_with @semester do |format|
+      format.js
+    end
+  end
+
   def add
     @course = Course.find(params[:course_id]) rescue nil
     @semester.courses << @course

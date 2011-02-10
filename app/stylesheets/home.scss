@@ -3,21 +3,34 @@
   float: left;
   width: 65%;
 
+  .completed legend {
+    color: green;
+  }
+
+  .in_progress legend {
+    color: darken(yellow, 15%);
+  }
+
   fieldset {
     overflow: auto;
     background: white;
+  }
+
+  legend {
+    font-weight: bold;
   }
 
   .links {
     clear: both;
   }
 
-  .courses {
-    height: 180px;
-  }
-
-  $block_height: 240px;
+  $block_height: 225px;
   $block_width: 250px;
+
+  .courses {
+    overflow-y: auto;
+    height: $block_height - 60px;
+  }
 
   .ui-state-highlight, .semester {
     height: $block_height;
@@ -37,4 +50,12 @@
 #majors {
   float: right;
   width: 33%;
+
+  dt {
+    font-weight: bold;
+  }
+
+  ul {
+    display: none;
+  }
 }

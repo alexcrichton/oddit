@@ -43,7 +43,7 @@ class MajorsController < ApplicationController
   def update
     @major.update_attributes params[:major]
 
-    respond_with @major
+    respond_with @major, :location => edit_major_path(@major)
   end
 
   def destroy

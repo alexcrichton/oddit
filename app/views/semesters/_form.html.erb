@@ -9,6 +9,9 @@
 
     <dt><%= f.label :year %></dt>
     <dd><%= f.number_field :year %></dd>
+
+    <dt><%= f.label :state %></dt>
+    <dd><%= f.select :state, Semester::STATES %></dd>
   </dl>
 
   <div class='actions'><%= f.submit :disable_with => 'Submitting...' %></div>

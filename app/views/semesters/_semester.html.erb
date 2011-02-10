@@ -1,17 +1,21 @@
-<div class='semester' data-id="<%= semester.id %>">
+<div class='semester <%= semester.state %>' data-id="<%= semester.id %>">
   <fieldset>
     <legend>
       <%= semester.month %> <%= semester.year %> |
-      <%= link_to '[edit]', [:edit, semester] %>
+      <%= link_to '[edit]', [:edit, semester] %> |
+      <%= link_to '[remove]', semester, :method => :delete, :remote => true,
+            :confirm => 'Are you sure?' %>
     </legend>
 
     <div class='courses'>
       <% semester.courses.each do |course| %>
         <div class='course' data-id="<%= course.id %>">
-          <%= course.name %>
-          <%= link_to '[remove]',
+          <%= link_to '[X]',
                 remove_semester_path(semester, :course_id => course),
                 :method => :delete, :remote => true %>
+
+          <span class='number'><%= course.number %></span>
+          <span class='name'><%= truncate course.name, :length => 25 %></span>
         </div>
       <% end %>
     </div>

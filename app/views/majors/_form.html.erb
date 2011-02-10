@@ -9,15 +9,16 @@
 
     <dt><%= f.label :year %></dt>
     <dd><%= f.number_field :year %></dd>
+
+    <dt><strong>Requirements</strong></dt>
+    <dd><%= link_to '[add]', '#' %></dd>
   </dl>
 
-  <fieldset>
-    <legend>Requirements <%= link_to '[add]', '#' %></legend>
-
+  <div id='requirements'>
     <%= f.fields_for :requirements do |rf| %>
       <%= render 'requirements_fields', :f => rf %>
     <% end %>
-  </fieldset>
+  </div>
 
   <script type='text/html' id='new-requirement'>
     <%= f.fields_for :requirements, @major.requirements.build,

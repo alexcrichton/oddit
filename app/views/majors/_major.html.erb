@@ -1,9 +1,28 @@
-<fieldset>
+<fieldset data-id="<%= major.id %>">
+
   <legend>
     <%= major.name %> (<%= major.year %>)
-    <%= link_to '[edit]', [:edit, major] %>
+    <%= link_to '[edit]', [:edit, major] %> |
+    <%= link_to '[remove]', users_remove_major_path(:major_id => major),
+          :method => :delete, :remote => true %>
   </legend>
 
-  Requirements:
-  asdf
+  <% major.requirements.each do |req| %>
+    <div class='req'>
+      <%= link_to '#', :class => 'name' do %>
+      <%= req.name %>
+
+      <% if req.required > 1 %>
+        (<%= req.required %>)
+      <% end %>
+      <% end %>
+
+      <ul>
+        <% req.courses.each do |course| %>
+          <li><%= course.pretty_name %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 </fieldset>

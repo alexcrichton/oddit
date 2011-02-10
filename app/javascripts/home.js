@@ -56,4 +56,17 @@ $(function() {
   $('#semesters :text').each(function(_, el) {
     bindAutocomplete(el);
   });
+
+  // Expanding major menus
+  $('#majors .req .name').live('click', function() {
+    var el = $(this).siblings('ul');
+
+    if (el.is(':visible')) {
+      el.slideUp();
+    } else {
+      el.slideDown();
+    }
+
+    return false;
+  });
 });

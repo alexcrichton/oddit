@@ -12,3 +12,5 @@ end
 gem 'paste', :git => 'git://github.com/alexcrichton/paste.git'
 gem 'compass'
 gem 'cancan'
+
+gem 'nokogiri'

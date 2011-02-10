@@ -1,16 +1,23 @@
 class Semester
   include Mongoid::Document
 
+  STATES = [
+    ['Planned', 'planned'],
+    ['In Progress', 'in_progress'],
+    ['Completed', 'completed']
+  ]
+
   field :year, :type => Integer
   field :month
   field :position, :type => Integer
+  field :state
 
   embedded_in :user
   has_and_belongs_to_many :courses
 
   validates_presence_of :year, :month
 
-  attr_accessible :year, :month, :course_ids, :position
+  attr_accessible :year, :month, :course_ids, :position, :state
 
   scope :ordered, order_by(:position.asc).where(:position.ne => nil)
 

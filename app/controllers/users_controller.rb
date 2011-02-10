@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     current_user.save
 
     respond_with @major do |format|
-      format.js { render 'update_major' }
+      format.js
     end
   end
 
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     current_user.save
 
     respond_with @major do |format|
-       format.js { render 'update_major' }
+       format.js
      end
   end
 

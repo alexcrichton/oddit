@@ -6,11 +6,11 @@ class CoursesController < ApplicationController
 
   def search
     @courses = Course.search(params[:term])
-    
+
     respond_with @courses do |format|
       format.json {
         render :json => @courses.map { |c|
-          {:id => c.id, :value => c.name}
+          {:id => c.id, :value => c.pretty_name}
         }
       }
     end
@@ -35,7 +35,7 @@ class CoursesController < ApplicationController
   def create
     @course.save
 
-    respond_with @course
+    respond_with @course, :location => new_course_path
   end
 
   def update

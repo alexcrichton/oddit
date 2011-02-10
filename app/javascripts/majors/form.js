@@ -22,11 +22,11 @@ $(function() {
   });
 
   // Adding requirements
-  $('fieldset legend a').click(function() {
+  $('dl a').click(function() {
     var new_el = $($('#new-requirement').html().replace(/CHANGEME/g,
         new Date().getTime()));
 
-    $(this).closest('fieldset').append(new_el);
+    $('#requirements').prepend(new_el);
 
     return false;
   });
@@ -41,13 +41,14 @@ $(function() {
   // Finds the template, copies it, then binds the autocomplete and inserts
   $('.requirement a.add').live('click', function() {
     var script = $(this).siblings('.new-course').html();
-    script = script.replace(/CHANGEME/g, new Date().getTime());
+    script = script.replace(/ALTERME/g, new Date().getTime());
     var el = $('<dd>').addClass('course').html(script);
-    
+
     el.find('input:disabled').removeAttr('disabled');
     bindAutocomplete(el.find('input:text'));
-    
+
     $(el).insertBefore($(this).closest('dd'));
+    el.find('input:text').focus();
     return false;
   });
 
