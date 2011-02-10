@@ -1,0 +1,40 @@
+
+#semesters {
+  float: left;
+  width: 65%;
+
+  fieldset {
+    overflow: auto;
+    background: white;
+  }
+
+  .links {
+    clear: both;
+  }
+
+  .courses {
+    height: 180px;
+  }
+
+  $block_height: 240px;
+  $block_width: 250px;
+
+  .ui-state-highlight, .semester {
+    height: $block_height;
+    margin: 10px;
+    width: $block_width;
+    float: left;
+  }
+
+  .ui-state-highlight {
+    /* Account for the 1 px border around highlight */
+    overflow: auto;
+    height: $block_height - 2px;
+    width: $block_width - 2px;
+  }
+}
+
+#majors {
+  float: right;
+  width: 33%;
+}

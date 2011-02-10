@@ -1,0 +1,24 @@
+<% javascript 'rails' %>
+
+<h1>Listing Courses</h1>
+
+<%= link_to '[new]', new_course_path %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Number</th>
+    <th>Units</th>
+  </tr>
+  <% @courses.each do |course| %>
+    <tr>
+      <td><%= link_to course.name, course %></td>
+      <td><%= course.number %></td>
+      <td><%= course.units %></td>
+      <td>
+        <%= link_to '[edit]', [:edit, course] %> |
+        <%= link_to '[destroy]', course, :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,15 @@
+<% javascript 'rails' %>
+
+<%= form_for @semester do |f| %>
+  <%= render 'shared/error_messages', :target => @semester %>
+
+  <dl>
+    <dt><%= f.label :month, 'Season/Month' %></dt>
+    <dd><%= f.text_field :month %></dd>
+
+    <dt><%= f.label :year %></dt>
+    <dd><%= f.number_field :year %></dd>
+  </dl>
+
+  <div class='actions'><%= f.submit :disable_with => 'Submitting...' %></div>
+<% end %>

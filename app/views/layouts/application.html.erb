@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>AuditMan</title>
-  <%= stylesheet_tags 'application' %>
-  <%= javascript_tags %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
+  <head>
+    <title>AuditMan</title>
+    <%= stylesheet_tags 'application' %>
+    <%= javascript_tags %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
 
-<%= yield %>
+    <div id='main'>
+      <% flash.each do |kind, message| %>
+        <%= content_tag :div, message, :class => "flash #{kind}" %>
+      <% end %>
 
-</body>
+      <%= yield %>
+    </div>
+
+  </body>
 </html>

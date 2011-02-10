@@ -1,0 +1,28 @@
+<div class='semester' data-id="<%= semester.id %>">
+  <fieldset>
+    <legend>
+      <%= semester.month %> <%= semester.year %> |
+      <%= link_to '[edit]', [:edit, semester] %>
+    </legend>
+
+    <div class='courses'>
+      <% semester.courses.each do |course| %>
+        <div class='course' data-id="<%= course.id %>">
+          <%= course.name %>
+          <%= link_to '[remove]',
+                remove_semester_path(semester, :course_id => course),
+                :method => :delete, :remote => true %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form_for [:add, semester], :remote => true do |f| %>
+      <div>
+        <%= hidden_field_tag :course_id, '' %>
+        <span><%= text_field_tag :course_name %></span>
+        <%= f.submit 'Add Course', :disable_with => 'Adding...' %>
+      </div>
+    <% end %>
+
+  </fieldset>
+</div>

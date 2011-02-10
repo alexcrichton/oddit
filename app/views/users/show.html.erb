@@ -1,0 +1,20 @@
+<% javascript 'rails', 'home' %>
+<% stylesheet 'home' %>
+
+<div class='links'><%= link_to '[new semester]', [:new, :semester] %></div>
+
+<div id='semesters'>
+  <%= render current_user.semesters.ordered %>
+</div>
+
+<div id='majors'>
+  <%= render current_user.majors %>
+
+  <%= form_tag users_add_major_path, :remote => true do %>
+    <div>
+      <%= hidden_field_tag :major_id %>
+      <span><%= text_field_tag :major_name %></span>
+      <%= submit_tag 'Add Major', :disable_with => 'Adding...' %>
+    </div>
+  <% end %>
+</div>

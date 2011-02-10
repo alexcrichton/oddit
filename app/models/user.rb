@@ -4,7 +4,8 @@ class User
   field :andrew_id
   field :email
 
-  has_many :majors
+  has_and_belongs_to_many :majors
+  embeds_many :semesters
 
   validates_presence_of :andrew_id, :email
   validates_uniqueness_of :andrew_id, :email

@@ -10,6 +10,18 @@ class MajorsController < ApplicationController
     respond_with @majors
   end
 
+  def search
+    @majors = Major.search params[:term]
+
+    respond_with @majors do |format|
+      format.json {
+        render :json => @majors.map{ |m|
+          {:id => m.id, :value => m.pretty_name}
+        }
+      }
+    end
+  end
+
   def show
     respond_with @major
   end

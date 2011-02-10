@@ -9,5 +9,11 @@ class Major
   embeds_many :requirements
   accepts_nested_attributes_for :requirements, :allow_destroy => true
 
+  scope :search, lambda{ |q| where(:name => /#{q}/i) }
+
   attr_accessible :name, :year, :requirements_attributes
+
+  def pretty_name
+    name + " (#{year})"
+  end
 end

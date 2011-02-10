@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  helper_method :current_user
+
   rescue_from CanCan::AccessDenied do |e|
     store_location!
     flash[:error] = 'Denied!'
@@ -13,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    User.first
+    @current_user ||= User.first
   end
 
   def store_location!

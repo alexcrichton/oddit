@@ -1,0 +1,20 @@
+<% javascript 'rails' %>
+
+<%= form_for @course do |f| %>
+  <%= render 'shared/error_messages', :target => @course %>
+
+  <dl>
+    <dt><%= f.label :name %></dt>
+    <dd><%= f.text_field :name %></dd>
+
+    <dt><%= f.label :number %></dt>
+    <dd><%= f.text_field :number %></dd>
+
+    <dt><%= f.label :units %></dt>
+    <dd><%= f.number_field :units %></dd>
+  </dl>
+
+  <div class='actions'>
+    <%= f.submit :disable_with => 'Submitting...' %>
+  </div>
+<% end %>
