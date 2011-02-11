@@ -7,24 +7,32 @@
           :method => :delete, :remote => true %>
   </legend>
 
-  <% major.requirements.each do |req| %>
-    <% finished = (@cache[major][req].size == req.required) %>
+  <% major.requirement_groups.each do |group| %>
+    <div class='group'>
 
-    <div class='req<%= finished ? ' finished' : '' %>'
-         data-scheduled="<%= @cache[major][req].to_json %>">
-      <%= link_to '#', :class => 'name' do %>
-        <%= req.name %>
+      <h4><%= group.name %></h4>
 
-        <% if req.required > 1 %>
-          (<%= req.required %>)
-        <% end %>
+      <% group.requirements.each do |req| %>
+        <% finished = (@cache[major][req].size == req.required) %>
+
+        <div class='req<%= finished ? ' finished' : '' %>'
+             data-scheduled="<%= @cache[major][req].to_json %>">
+          <%= link_to '#', :class => 'name' do %>
+            <%= req.name %>
+
+            <% if req.required > 1 %>
+              (<%= req.required %>)
+            <% end %>
+          <% end %>
+
+          <ul>
+            <% req.courses.each do |course| %>
+              <li><%= course.pretty_name %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
 
-      <ul>
-        <% req.courses.each do |course| %>
-          <li><%= course.pretty_name %></li>
-        <% end %>
-      </ul>
     </div>
   <% end %>
 

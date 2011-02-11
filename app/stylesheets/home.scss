@@ -70,6 +70,7 @@
 
   .req {
     margin: 2px;
+    margin-left: 15px;
   }
 
   .name {
@@ -87,5 +88,9 @@
   .finished {
     background: lighten(green, 65%);
     border: 1px solid green;
+  }
+
+  h4 {
+    margin: 0;
   }
 }

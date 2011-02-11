@@ -1,33 +1,46 @@
 //= require <jquery>
 //= require <jquery/ui>
+//= require <jquery/tokeninput>
 
 $(function() {
 
   // Binding the autocomplete of each class search list
   function bindAutocomplete(el) {
-    $(el).autocomplete({
-      source: '/courses/search',
-      minLength: 2,
-      select: function(event, ui) {
-        if (ui.item) {
-          var hidden = $(event.srcElement).siblings('input:hidden');
-          hidden.val(ui.item.id);
-        }
-      }
+    $(el).tokenInput('/courses/search', {
+      classes: {
+          tokenList: "token-input-list-facebook",
+          token: "token-input-token-facebook",
+          tokenDelete: "token-input-delete-token-facebook",
+          selectedToken: "token-input-selected-token-facebook",
+          highlightedToken: "token-input-highlighted-token-facebook",
+          dropdown: "token-input-dropdown-facebook",
+          dropdownItem: "token-input-dropdown-item-facebook",
+          dropdownItem2: "token-input-dropdown-item2-facebook",
+          selectedDropdownItem: "token-input-selected-dropdown-item-facebook",
+          inputToken: "token-input-input-token-facebook"
+      },
+      prePopulate: $(el).data('courses')
     });
   }
 
-  $('.course input:text').each(function(i, el) {
-    bindAutocomplete(el);
-  });
-
-  // Adding requirements
+  // Adding groups
   $('dl a').click(function() {
-    var new_el = $($('#new-requirement').html().replace(/CHANGEME/g,
+    var new_el = $($('#new-group').html().replace(/CHANGEME/g,
         new Date().getTime()));
 
-    $('#requirements').prepend(new_el);
+    $('#groups').prepend(new_el);
+    return false;
+  });
 
+  // Adding a requirement
+  $('fieldset .add-req').live('click', function() {
+    var area = $(this).closest('fieldset');
+    var selector = '.new-requirement[data-id=' + area.data('id') + ']';
+    var new_el = $(selector).html().replace(/ALTERME/g, new Date().getTime());
+    new_el = $(new_el);
+
+    area.find('.requirements').append(new_el);
+    bindAutocomplete(new_el.find('.autocomplete'));
     return false;
   });
 
@@ -38,18 +51,8 @@ $(function() {
     return false;
   });
 
-  // Finds the template, copies it, then binds the autocomplete and inserts
-  $('.requirement a.add').live('click', function() {
-    var script = $(this).siblings('.new-course').html();
-    script = script.replace(/ALTERME/g, new Date().getTime());
-    var el = $('<dd>').addClass('course').html(script);
-
-    el.find('input:disabled').removeAttr('disabled');
-    bindAutocomplete(el.find('input:text'));
-
-    $(el).insertBefore($(this).closest('dd'));
-    el.find('input:text').focus();
-    return false;
+  // Tokenizers
+  $(':text.autocomplete').each(function(_, el) {
+    bindAutocomplete(el);
   });
-
 });

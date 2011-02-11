@@ -10,20 +10,20 @@
     <dt><%= f.label :year %></dt>
     <dd><%= f.number_field :year %></dd>
 
-    <dt><strong>Requirements</strong></dt>
+    <dt><strong>Groups</strong></dt>
     <dd><%= link_to '[add]', '#' %></dd>
   </dl>
 
-  <div id='requirements'>
-    <%= f.fields_for :requirements do |rf| %>
-      <%= render 'requirements_fields', :f => rf %>
+  <div id='groups'>
+    <%= f.fields_for :requirement_groups do |gf| %>
+      <%= render 'group_fields', :f => gf %>
     <% end %>
   </div>
 
-  <script type='text/html' id='new-requirement'>
-    <%= f.fields_for :requirements, @major.requirements.build,
-          :child_index => 'CHANGEME' do |rf| %>
-      <%= render 'requirements_fields', :f => rf %>
+  <script type='text/html' id='new-group'>
+    <%= f.fields_for :requirement_groups, @major.requirement_groups.build,
+          :child_index => 'CHANGEME' do |gf| %>
+      <%= render 'group_fields', :f => gf %>
     <% end %>
   </script>
 

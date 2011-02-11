@@ -6,12 +6,12 @@ class Major
 
   validates_presence_of :name, :year
 
-  embeds_many :requirements
-  accepts_nested_attributes_for :requirements, :allow_destroy => true
+  embeds_many :requirement_groups
+  accepts_nested_attributes_for :requirement_groups, :allow_destroy => true
 
   scope :search, lambda{ |q| where(:name => /#{q}/i) }
 
-  attr_accessible :name, :year, :requirements_attributes
+  attr_accessible :name, :year, :requirement_groups_attributes
 
   def pretty_name
     name + " (#{year})"

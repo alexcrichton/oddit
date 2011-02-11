@@ -5,12 +5,12 @@ class CoursesController < ApplicationController
   load_and_authorize_resource
 
   def search
-    @courses = Course.search(params[:term])
+    @courses = Course.search(params[:term] || params[:q])
 
     respond_with @courses do |format|
       format.json {
         render :json => @courses.map { |c|
-          {:id => c.id, :value => c.pretty_name}
+          {:id => c.id.to_s, :name => c.pretty_name, :value => c.pretty_name}
         }
       }
     end

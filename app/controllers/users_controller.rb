@@ -41,7 +41,9 @@ class UsersController < ApplicationController
     majors.each do |major|
       @cache[major] = {}
 
-      major.requirements.each do |requirement|
+      reqs = major.requirement_groups.map{ |g| g.requirements }.flatten
+
+      reqs.each do |requirement|
         @cache[major][requirement] = []
         req_courses = requirement.courses.dup
 
@@ -57,7 +59,6 @@ class UsersController < ApplicationController
             break
           end
         }
-
       end
 
     end

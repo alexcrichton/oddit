@@ -1,0 +1,25 @@
+<% id = f.object.new_record? ? f.options[:child_index] : f.object.id %>
+
+<fieldset data-id="<%= id %>">
+  <legend>
+    <%= f.label :name %> <%= f.text_field :name %>
+
+    |
+    <%= f.check_box :_destroy %> <%= f.label :_destroy, 'Remove?' %>
+  </legend>
+
+  <div class='requirements'>
+    <%= f.fields_for :requirements do |rf| %>
+      <%= render 'requirements_fields', :f => rf %>
+    <% end %>
+  </div>
+
+  <%= link_to '[add requirement]', '#', :class => 'add-req' %>
+
+  <script type='text/html' class='new-requirement' data-id="<%= id %>">
+    <%= f.fields_for :requirements, f.object.requirements.build,
+          :child_index => 'ALTERME' do |rf| %>
+      <%= render 'requirements_fields', :f => rf %>
+    <% end %>
+  </script>
+</fieldset>

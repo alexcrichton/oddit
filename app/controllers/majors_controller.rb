@@ -55,12 +55,17 @@ class MajorsController < ApplicationController
   protected
 
   def extract_course_ids
-    return unless params[:major] && params[:major][:requirements_attributes]
+    return unless params[:major] &&
+      params[:major][:requirement_groups_attributes]
 
-    params[:major][:requirements_attributes].each do |_, attrs|
-      next unless attrs['course_ids']
+    params[:major][:requirement_groups_attributes].each do |_, attrs|
+      next unless attrs['requirements_attributes']
 
-      attrs['course_ids'] = attrs['course_ids'].values.reject(&:blank?)
+      attrs['requirements_attributes'].each do |_, rattrs|
+        next unless rattrs['course_ids']
+
+        rattrs['course_ids'] = rattrs['course_ids'].split(',')
+      end
     end
   end
 

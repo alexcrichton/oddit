@@ -8,36 +8,13 @@
   <dt><%= f.check_box :_destroy %></dt>
   <dd><%= f.label :_destroy, 'Remove?' %></dd>
 
-  <dt>Courses</dt>
-
-  <%= f.fields_for :course_ids do |cf| %>
-    <% f.object.courses.each do |course| %>
-      <dd class='course'>
-        <%= render 'course_form', :f => cf, :key => course.id,
-              :value => course.id, :display => course.name %>
-      </dd>
-    <% end %>
-  <% end %>
+  <dt><%= f.label :course_id, 'Courses' %></dt>
 
   <dd>
-    <%= link_to '[add]', '#', :class => 'add' %>
-
-    <%# In case we remove all of the above courses, make sure that the array
-        still gets submitted by having a blank one here %>
-    <div style='display:none'>
-      <%= f.fields_for :course_ids do |cf| %>
-        <%= render 'course_form', :f => cf, :key => 'ignored',
-              :value => '', :display => '' %>
-      <% end %>
-    </div>
-
-    <div class='new-course' style='display:none'>
-      <%= f.fields_for :course_ids do |cf| %>
-        <%= render 'course_form', :f => cf, :key => 'ALTERME',
-              :value => '', :display => '' %>
-      <% end %>
-    </div>
-
+    <% data = f.object.courses.map{ |c|
+          {:name => c.pretty_name, :id => c.id.to_s} }.to_json %>
+    <%= f.text_field :course_ids, :class => 'autocomplete', :value => '',
+          :'data-courses' => data %>
   </dd>
 
 </dl>

@@ -85,4 +85,8 @@ $(function() {
       }
     });
   });
+
+  $('#majors h4').live('mouseover mouseout', function(e) {
+    $(this).closest('.group').find('.req').trigger(e.type);
+  });
 });
