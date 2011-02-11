@@ -1,4 +1,4 @@
-<% javascript 'rails' %>
+<% javascript 'rails', 'tooltip' %>
 
 <%= form_for @semester do |f| %>
   <%= render 'shared/error_messages', :target => @semester %>
@@ -12,6 +12,13 @@
 
     <dt><%= f.label :state %></dt>
     <dd><%= f.select :state, Semester::STATES %></dd>
+
+    <dt><%= f.label :scheduleman_id, 'Scheduleman ID' %></dt>
+    <dd>
+      <%= f.text_field :scheduleman_id,
+        :'data-tooltip' => scheduleman_tooltip %>
+      (optional)
+    </dd>
   </dl>
 
   <div class='actions'><%= f.submit :disable_with => 'Submitting...' %></div>

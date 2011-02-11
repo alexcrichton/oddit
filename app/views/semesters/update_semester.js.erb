@@ -1,9 +1,10 @@
 var area = $('#semesters [data-id=<%= @semester.id %>]');
 
-<% if @course %>
+<% if @course || request.path =~ /sync/ %>
   var newEl = $("<%= escape_javascript render(@semester) %>");
   bindAutocomplete(newEl.find(':text'));
   area.replaceWith(newEl);
+  newEl.find(':text').focus();
 <% else %>
   area.find('form :text').parent().addClass('field_with_errors');
 <% end %>

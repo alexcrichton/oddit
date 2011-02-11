@@ -5,5 +5,7 @@ class Ability
     return if user.nil?
 
     can :manage, :all
+
+    cannot :sync, Semester, :scheduleman_id => nil
   end
 end

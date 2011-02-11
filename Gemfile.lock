@@ -69,6 +69,7 @@ GEM
       mongo (~> 1.2)
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
+    nokogiri (1.4.4)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -91,6 +92,7 @@ GEM
     rake (0.8.7)
     rest-client (1.6.1)
       mime-types (>= 1.16)
+    ri_cal (0.8.7)
     sprockets (1.0.2)
     thor (0.14.6)
     treetop (1.4.9)
@@ -107,5 +109,7 @@ DEPENDENCIES
   compass
   heroku
   mongoid (>= 2.0.0.rc)
+  nokogiri
   paste!
   rails (= 3.0.4)
+  ri_cal

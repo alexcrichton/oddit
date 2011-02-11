@@ -31,6 +31,16 @@ class SemestersController < ApplicationController
     end
   end
 
+  def sync
+    @semester.scheduleman_sync!
+
+    flash.now[:notice] = 'Schedule synced!'
+
+    respond_with @semester do |format|
+      format.js { render 'update_semester' }
+    end
+  end
+
   def add
     @course = Course.find(params[:course_id]) rescue nil
     @semester.courses << @course

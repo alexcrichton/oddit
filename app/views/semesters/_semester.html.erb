@@ -3,8 +3,13 @@
     <legend>
       <%= semester.month %> <%= semester.year %> |
       <%= link_to '[edit]', [:edit, semester] %> |
-      <%= link_to '[remove]', semester, :method => :delete, :remote => true,
+      <%= link_to '[X]', semester, :method => :delete, :remote => true,
             :confirm => 'Are you sure?' %>
+
+      <% if can? :sync, semester %>
+        | <%= link_to '[sync]', [:sync, semester], :method => :put,
+            :remote => true %>
+      <% end %>
     </legend>
 
     <div class='courses'>

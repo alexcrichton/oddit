@@ -12,3 +12,9 @@ end
 gem 'paste', :git => 'git://github.com/alexcrichton/paste.git'
 gem 'compass'
 gem 'cancan'
+
+# Parsing the course list from CMU's SOC
+gem 'nokogiri'
+
+# Parsing scheduleman ics feeds
+gem 'ri_cal'

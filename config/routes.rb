@@ -3,6 +3,7 @@ AuditMan::Application.routes.draw do
     member do
       put :order
       put :add
+      put :sync
       delete :remove
     end
   end
