@@ -4,11 +4,8 @@
   <%= render 'shared/error_messages', :target => @semester %>
 
   <dl>
-    <dt><%= f.label :month, 'Season/Month' %></dt>
-    <dd><%= f.text_field :month %></dd>
-
-    <dt><%= f.label :year %></dt>
-    <dd><%= f.number_field :year %></dd>
+    <dt><%= f.label :name %></dt>
+    <dd><%= f.text_field :name %></dd>
 
     <dt><%= f.label :state %></dt>
     <dd><%= f.select :state, Semester::STATES %></dd>

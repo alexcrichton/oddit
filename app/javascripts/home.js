@@ -14,6 +14,57 @@ window.bindAutocomplete = function(el) {
   });
 };
 
+window.makeSortable = function(el) {
+  $(el).sortable({
+    receive: function(event) {
+      var semester_id, course_id;
+      var $el = $(event.originalEvent.target).closest('.course');
+      var container = $(event.target);
+
+      if ($el.is('.new')) {
+        course_id = $el.data('id');
+        semester_id = container.closest('.semester').data('id');
+        // Dragged from majors to courses
+        $el.remove();
+        $el = $('<div>').addClass('ui-state-highlight');
+        $el.html($('<img>').attr('src', '/images/ajax-small.gif'));
+        container.find('.new').replaceWith($el);
+
+        $.ajax({
+          url: '/semesters/' + semester_id + '/add',
+          type: 'PUT',
+          dataType: 'script',
+          data: {id: semester_id, course_id: course_id}
+        });
+      } else {
+        // Dragged between two semesters
+        course_id = $(event.srcElement).closest('.course').data('id');
+        semester_id = $(event.target).closest('.semester').data('id');
+
+        $.ajax({
+          url: '/semesters/' + semester_id + '/add',
+          type: 'PUT',
+          dataType: 'script',
+          data: {id: semester_id, course_id: course_id}
+        });
+      }
+    },
+    remove: function(event, ui) {
+      var course = $(event.srcElement).closest('.course');
+      var semester_id = $(event.target).closest('.semester').data('id');
+
+      $.ajax({
+        url: '/semesters/' + semester_id + '/remove',
+        type: 'DELETE',
+        dataType: 'script',
+        data: {id: semester_id, course_id: course.data('id')}
+      });
+    },
+    placeholder: 'ui-state-highlight',
+    connectWith: '.courses'
+  }).disableSelection();
+};
+
 $(function() {
   // Adding a new major
   $('#majors :text').autocomplete({
@@ -23,28 +74,6 @@ $(function() {
         var form = $(event.srcElement).closest('form');
         form.find('#major_id').val(ui.item.id);
       }
-    }
-  });
-
-  // Draggable semesters
-  $('#semesters').sortable({
-    handle: 'legend',
-    placeholder: 'ui-state-highlight',
-    update: function(event, ui) {
-      var elementMoved = $(ui.item[0]);
-
-      var csrf_token = $('meta[name=csrf-token]').attr('content'),
-          csrf_param = $('meta[name=csrf-param]').attr('content');
-
-      var data = {_method: 'put', pos: elementMoved.prevAll().length};
-      data[csrf_param] = csrf_token;
-
-      $.ajax({
-        dataType: 'script',
-        type: 'POST',
-        url: '/semesters/' + elementMoved.data('id') + '/order',
-        data: data
-      });
     }
   });
 
@@ -70,6 +99,16 @@ $(function() {
 
     return false;
   });
+
+  // Dragging courses between positions
+  makeSortable($('.courses'));
+
+  // Dragging requirements over to the courses
+  $('#majors .course').draggable({
+    connectToSortable: '.courses',
+    helper: 'clone',
+    cursorAt: {left: 5, top: 5}
+  }).disableSelection();
 
   // Hovering to show connections
   $('#majors .req').live('mouseover mouseout', function(e) {

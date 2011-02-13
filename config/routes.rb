@@ -1,7 +1,6 @@
 AuditMan::Application.routes.draw do
   resources :semesters do
     member do
-      put :order
       put :add
       put :sync
       delete :remove

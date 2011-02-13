@@ -1,20 +1,17 @@
 <div class='semester <%= semester.state %>' data-id="<%= semester.id %>">
   <fieldset>
     <legend>
-      <%= semester.month %> <%= semester.year %> |
-      <%= link_to '[edit]', [:edit, semester] %> |
-      <%= link_to '[X]', semester, :method => :delete, :remote => true,
-            :confirm => 'Are you sure?' %>
-
-      <% if can? :sync, semester %>
-        | <%= link_to '[sync]', [:sync, semester], :method => :put,
-            :remote => true %>
-      <% end %>
+      <%= semester.name %> |
+      <span class='units' data-units="<%= semester.units %>">
+        <%= semester.units %>
+      </span>
     </legend>
 
     <div class='courses'>
       <% semester.courses.each do |course| %>
-        <div class='course' data-id="<%= course.id %>">
+        <div class='course'
+             data-id="<%= course.id %>"
+             data-units="<%= course.units %>">
           <%= link_to '[X]',
                 remove_semester_path(semester, :course_id => course),
                 :method => :delete, :remote => true %>
@@ -27,11 +24,24 @@
 
     <%= form_for [:add, semester], :remote => true do |f| %>
       <div>
+        <%= hidden_field_tag :focus, '1' %>
         <%= hidden_field_tag :course_id, '' %>
+
         <span><%= text_field_tag :course_name %></span>
         <%= f.submit 'Add Course', :disable_with => 'Adding...' %>
       </div>
     <% end %>
+
+    <div class='links'>
+      <%= link_to '[edit]', [:edit, semester] %> |
+      <%= link_to '[X]', semester, :method => :delete, :remote => true,
+            :confirm => 'Are you sure?' %>
+
+      <% if can? :sync, semester %>
+        | <%= link_to '[sync]', [:sync, semester], :method => :put,
+            :remote => true %>
+      <% end %>
+    </div>
 
   </fieldset>
 </div>

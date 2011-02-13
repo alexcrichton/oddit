@@ -27,7 +27,9 @@
 
           <ul>
             <% req.courses.each do |course| %>
-              <li><%= course.pretty_name %></li>
+              <li><span class='course new' data-id="<%= course.id %>">
+                <%= course.pretty_name %>
+              </span></li>
             <% end %>
           </ul>
         </div>

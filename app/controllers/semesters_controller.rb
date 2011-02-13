@@ -61,12 +61,4 @@ class SemestersController < ApplicationController
      end
   end
 
-  def order
-    @semester.move_to params[:pos].to_i + 1
-
-    respond_with @semester do |format|
-      format.js { render :nothing => true }
-    end
-  end
-
 end

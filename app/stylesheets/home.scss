@@ -41,7 +41,7 @@
     }
   }
 
-  .ui-state-highlight, .semester {
+  .semester {
     height: $block_height;
     margin: 10px;
     width: $block_width;
@@ -49,10 +49,9 @@
   }
 
   .ui-state-highlight {
-    /* Account for the 1 px border around highlight */
-    overflow: auto;
-    height: $block_height - 2px;
-    width: $block_width - 2px;
+    height: 20px;
+    width: 100%;
+    display: inline-block;
   }
 }
 
