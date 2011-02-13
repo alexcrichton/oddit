@@ -7,7 +7,7 @@ class Requirement
   validates_presence_of :name
   validates_size_of :courses, :minimum => 1
 
-  embedded_in :major
+  embedded_in :requirement_group
   has_and_belongs_to_many :courses
 
   attr_accessible :name, :course_ids, :required
