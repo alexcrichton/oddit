@@ -1,6 +1,7 @@
 <% javascript 'rails', 'tooltip' %>
 
-<%= form_for @semester do |f| %>
+<% remote = request.format.to_s.match(/javascript/) %>
+<%= form_for @semester, :remote => remote do |f| %>
   <%= render 'shared/error_messages', :target => @semester %>
 
   <dl>

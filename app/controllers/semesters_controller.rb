@@ -8,7 +8,9 @@ class SemestersController < ApplicationController
   end
 
   def edit
-    respond_with @semester
+    respond_with @semester do |format|
+      format.js
+    end
   end
 
   def create
@@ -20,7 +22,9 @@ class SemestersController < ApplicationController
   def update
     @semester.update_attributes params[:semester]
 
-    respond_with @semester, :location => root_path
+    respond_with @semester, :location => root_path do |format|
+      format.js { render 'update_semester' }
+    end
   end
 
   def destroy

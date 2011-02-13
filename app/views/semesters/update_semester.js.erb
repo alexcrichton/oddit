@@ -1,6 +1,8 @@
 var area = $('#semesters [data-id=<%= @semester.id %>]');
+$('.ui-dialog-content').dialog('destroy');
 
-<% if @course || request.path =~ /sync/ %>
+<% p params %>
+<% if @course || params[:action] =~ /sync|update/ %>
   var newEl = $("<%= escape_javascript render(@semester) %>");
   bindAutocomplete(newEl.find(':text'));
   makeSortable(newEl.find('.courses'));

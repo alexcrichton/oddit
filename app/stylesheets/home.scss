@@ -1,3 +1,4 @@
+@import "compass/utilities/links/unstyled-link";
 
 #semesters {
   float: left;
@@ -18,6 +19,19 @@
 
   legend {
     font-weight: bold;
+
+    a {
+      @include unstyled-link;
+      padding: 1px 4px;
+      margin-top: 2px;
+      display: inline-block;
+
+      &:hover {
+        padding: 0 3px;
+        border: 1px solid black;
+        background: lighten(yellow, 40%);
+      }
+    }
   }
 
   .links {
@@ -25,7 +39,7 @@
   }
 
   $block_height: 225px;
-  $block_width: 250px;
+  $block_width: 272px;
 
   .courses {
     overflow-y: auto;
@@ -34,11 +48,23 @@
 
   .course {
     padding: 1px;
+
     &.selected {
       padding: 0;
       background: lighten(green, 65%);
       border: 1px solid green;
     }
+
+    .name {
+      width: 148px;
+      display: inline-block;
+    }
+  }
+
+  .units {
+    display: inline-block;
+    width: 15px;
+    text-align: center;
   }
 
   .semester {
@@ -50,7 +76,7 @@
 
   .ui-state-highlight {
     height: 20px;
-    width: 100%;
+    width: 98%;
     display: inline-block;
   }
 }

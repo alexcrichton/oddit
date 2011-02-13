@@ -7,5 +7,6 @@ class Ability
     can :manage, :all
 
     cannot :sync, Semester, :scheduleman_id => nil
+    cannot :sync, Semester, :scheduleman_id => ''
   end
 end
