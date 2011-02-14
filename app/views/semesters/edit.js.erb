@@ -1,6 +1,9 @@
 var el = $("<%= escape_javascript render('form') %>");
+
 el.dialog({
   width: 550,
   height: 200,
   modal: true
 });
+
+inputColorPick(el.find('#semester_color'));

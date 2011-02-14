@@ -1,4 +1,4 @@
-<fieldset data-id="<%= major.id %>">
+<fieldset data-id="<%= major.id %>" class='major'>
 
   <legend>
     <%= major.name %> <%= major.year %>
@@ -6,10 +6,16 @@
       (<%= completed_requirements_count major %> /
       <%= requirements_count major %>)
     </span>
+  </legend>
+
+  <div class='link'>
     <%= link_to '[edit]', [:edit, major] %> |
     <%= link_to '[remove]', users_remove_major_path(:major_id => major),
-          :method => :delete, :remote => true %>
-  </legend>
+          :method => :delete, :remote => true %> |
+    <%= link_to '[show/hide]', '#', :class => 'show-hide' %><br/>
+
+    <%= check_box_tag :show_completed %> show completed requirements
+  </div>
 
   <% major.requirement_groups.each do |group| %>
     <div class='group'>
@@ -21,12 +27,11 @@
       </h4>
 
       <% group.requirements.each do |req| %>
-        <% finished = (@cache[major][req].size == req.required) %>
-
-        <div class='req<%= finished ? ' finished' : '' %>'
-             data-scheduled="<%= @cache[major][req].to_json %>">
-          <%= link_to '#', :class => 'name' do %>
-            <%= req.name %>&nbsp;
+        <div class='req'
+             data-scheduled="<%= scheduled_data major, req %>">
+          <%= link_to '#', :class => 'name',
+                :style => requirement_style(major, req) do %>
+            <%= req.name %>
 
             <% if req.required > 1 %>
               (<%= req.required %>)

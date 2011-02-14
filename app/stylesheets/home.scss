@@ -23,7 +23,7 @@
     a {
       @include unstyled-link;
       padding: 1px 4px;
-      margin-top: 2px;
+      margin-top: 3px;
       display: inline-block;
 
       &:hover {
@@ -61,7 +61,7 @@
     }
   }
 
-  .units {
+  .course .units {
     display: inline-block;
     width: 15px;
     text-align: center;
@@ -108,11 +108,6 @@
     &:hover {
       color: lighten(black, 50%);
     }
-  }
-
-  .finished {
-    background: lighten(green, 65%);
-    border: 1px solid green;
   }
 
   h4 {

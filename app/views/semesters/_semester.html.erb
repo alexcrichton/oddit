@@ -1,10 +1,11 @@
 <div class='semester <%= semester.state %>' data-id="<%= semester.id %>">
-  <fieldset>
+  <fieldset style='<%= semester_style semester %>'>
     <legend>
       <%= link_to semester.name, [:edit, semester], :remote => true %> |
       <span class='units' data-units="<%= semester.units %>">
         <%= semester.units %>
       </span>
+      units
     </legend>
 
     <div class='courses'>

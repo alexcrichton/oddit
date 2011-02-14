@@ -7,4 +7,10 @@ module SemestersHelper
     " then the ID is " + content_tag(:code, '64f6c8ba6e')
   end
 
+  def semester_style semester
+    if semester.color
+      "border: 3px solid ##{semester.color}"
+    end
+  end
+
 end

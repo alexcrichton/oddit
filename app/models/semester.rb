@@ -10,6 +10,7 @@ class Semester
   field :name
   field :state
   field :scheduleman_id
+  field :color
 
   embedded_in :user
   has_and_belongs_to_many :courses
@@ -17,10 +18,7 @@ class Semester
   validates_presence_of :year, :name
   validates_format_of :scheduleman_id, :with => /^\w+$/, :allow_blank => true
 
-  attr_accessible :year, :name, :course_ids, :position, :state,
-    :scheduleman_id
-
-  scope :ordered, order_by(:position.asc).where(:position.ne => nil)
+  attr_accessible :name, :course_ids, :state, :scheduleman_id, :color
 
   def units
     courses.map(&:units).sum

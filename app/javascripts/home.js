@@ -128,4 +128,10 @@ $(function() {
   $('#majors h4').live('mouseover mouseout', function(e) {
     $(this).closest('.group').find('.req').trigger(e.type);
   });
+
+  // Accordian majors
+  $('#majors .show-hide').live('click', function() {
+    $(this).closest('.major').find('.group').slideToggle();
+    return false;
+  });
 });

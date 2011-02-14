@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     current_user.save
 
     respond_with @major do |format|
-      format.js { build_cache [@major] }
+      format.js { build_cache [@major] if @major }
     end
   end
 
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def build_cache majors
     course_to_semester = {}
     courses = current_user.semesters.map{ |s|
-      s.courses.tap{ |a| a.each{ |c| course_to_semester[c] = s.id } }
+      s.courses.tap{ |a| a.each{ |c| course_to_semester[c] = s } }
     }.flatten
 
     @cache = {}
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
             courses.delete course
             req_courses.delete course
             @cache[major][requirement] << [
-              course.id, course_to_semester[course]]
+              course, course_to_semester[course]]
           else
             break
           end
