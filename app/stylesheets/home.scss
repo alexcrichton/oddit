@@ -96,6 +96,10 @@
   .req {
     margin: 2px;
     margin-left: 15px;
+
+    &.completed {
+      display: none;
+    }
   }
 
   .name {

@@ -134,4 +134,12 @@ $(function() {
     $(this).closest('.major').find('.group').slideToggle();
     return false;
   });
+
+  $('#show_completed').live('click', function() {
+    if ($(this).is(':checked')) {
+      $(this).closest('.major').find('.completed').slideDown();
+    } else {
+      $(this).closest('.major').find('.completed').slideUp();
+    }
+  });
 });
