@@ -13,4 +13,8 @@ module SemestersHelper
     end
   end
 
+  def semester_class semester
+    ' completed' if semester.state == 'completed'
+  end
+
 end

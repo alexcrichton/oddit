@@ -1,47 +1,53 @@
 <div class='semester <%= semester.state %>' data-id="<%= semester.id %>">
   <fieldset style='<%= semester_style semester %>'>
     <legend>
-      <%= link_to semester.name, [:edit, semester], :remote => true %> |
+      <%= link_to semester.name, [:edit, semester], :remote => true,
+            :class => 'edit' %> |
       <span class='units' data-units="<%= semester.units %>">
         <%= semester.units %>
       </span>
       units
+
+      |
+      <%= link_to 'show/hide', '#', :class => 'show-hide' %>
     </legend>
 
-    <div class='courses'>
-      <% semester.courses.each do |course| %>
-        <div class='course'
-             data-id="<%= course.id %>"
-             data-units="<%= course.units %>">
-          <%= link_to '[X]',
-                remove_semester_path(semester, :course_id => course),
-                :method => :delete, :remote => true %>
+    <div class='content<%= semester_class semester %>'>
+      <div class='courses'>
+        <% semester.courses.each do |course| %>
+          <div class='course'
+               data-id="<%= course.id %>"
+               data-units="<%= course.units %>">
+            <%= link_to '[X]',
+                  remove_semester_path(semester, :course_id => course),
+                  :method => :delete, :remote => true %>
 
-          <span class='number'><%= course.number %></span>
-          <span class='name'><%= truncate course.name, :length => 25 %></span>
-          <span class='units'><%= course.units %></span>
+            <span class='number'><%= course.number %></span>
+            <span class='name'><%= truncate course.name, :length => 25 %></span>
+            <span class='units'><%= course.units %></span>
+          </div>
+        <% end %>
+      </div>
+
+      <%= form_for [:add, semester], :remote => true do |f| %>
+        <div>
+          <%= hidden_field_tag :focus, '1' %>
+          <%= hidden_field_tag :course_id, '' %>
+
+          <span><%= text_field_tag :course_name %></span>
+          <%= f.submit 'Add Course', :disable_with => 'Adding...' %>
         </div>
       <% end %>
-    </div>
 
-    <%= form_for [:add, semester], :remote => true do |f| %>
-      <div>
-        <%= hidden_field_tag :focus, '1' %>
-        <%= hidden_field_tag :course_id, '' %>
+      <div class='links'>
+        <%= link_to '[X]', semester, :method => :delete, :remote => true,
+              :confirm => 'Are you sure?' %>
 
-        <span><%= text_field_tag :course_name %></span>
-        <%= f.submit 'Add Course', :disable_with => 'Adding...' %>
+        <% if can? :sync, semester %>
+          | <%= link_to '[sync]', [:sync, semester], :method => :put,
+              :remote => true %>
+        <% end %>
       </div>
-    <% end %>
-
-    <div class='links'>
-      <%= link_to '[X]', semester, :method => :delete, :remote => true,
-            :confirm => 'Are you sure?' %>
-
-      <% if can? :sync, semester %>
-        | <%= link_to '[sync]', [:sync, semester], :method => :put,
-            :remote => true %>
-      <% end %>
     </div>
 
   </fieldset>

@@ -24,7 +24,7 @@
   legend {
     font-weight: bold;
 
-    a {
+    .edit {
       @include unstyled-link;
       padding: 1px 4px;
       margin-top: 3px;
@@ -72,10 +72,18 @@
   }
 
   .semester {
-    height: $block_height;
+/*    height: $block_height;*/
     margin: 5px 5px 10px 5px;
     width: $block_width;
     float: left;
+
+    &:nth-child(odd) {
+      clear: left;
+    }
+
+    .completed {
+      display: none;
+    }
   }
 
   .ui-state-highlight {
@@ -121,4 +129,8 @@
   h4 {
     margin: 0;
   }
+}
+
+.qtip {
+  z-index: 100000;
 }

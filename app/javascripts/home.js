@@ -3,6 +3,7 @@
 //= require <jquery/scroll_to>
 
 //= require <home/dragging>
+//= require <tooltip>
 
 $(function() {
   // Adding a new major
@@ -77,5 +78,11 @@ $(function() {
     } else {
       $(this).closest('.major').find('.completed').slideUp();
     }
+  });
+
+  // Accordian semesters
+  $('#semesters .show-hide').live('click', function() {
+    $(this).closest('.semester').find('.content').slideToggle();
+    return false
   });
 });

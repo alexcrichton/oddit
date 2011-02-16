@@ -1,7 +1,7 @@
 //= require <jquery/qtip>
 
-$(function() {
-  $('*[data-tooltip]').each(function(index, el) {
+window.qtipElement = function(els) {
+  $(els).each(function(index, el) {
     $(el).qtip({
       content: $(this).data('tooltip'),
       position: { corner: {target: 'rightMiddle', tooltip: 'leftMiddle' } },
@@ -10,4 +10,8 @@ $(function() {
       hide: {effect:{type:'hide'}, when:{event: 'mouseout'}}
     });
   });
+};
+
+$(function() {
+  qtipElement($('[data-tooltip]'));
 });
