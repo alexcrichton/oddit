@@ -24,8 +24,16 @@ class UsersController < ApplicationController
     current_user.save
 
     respond_with @major do |format|
-       format.js
-     end
+      format.js
+    end
+  end
+
+  def update_major
+    @major = Major.find(params[:major_id]) rescue nil
+
+    respond_with @major do |format|
+      format.js { build_cache [@major] }
+    end
   end
 
   protected

@@ -7,6 +7,11 @@ class Semester
     ['Completed', 'completed']
   ]
 
+  PALETTES = [
+    ['cccc00', '996680', '668099', '669966', '7fff66', '667fff', 'e666ff',
+      'eb4e00']
+  ]
+
   field :name
   field :state
   field :scheduleman_id
@@ -15,10 +20,13 @@ class Semester
   embedded_in :user
   has_and_belongs_to_many :courses
 
-  validates_presence_of :year, :name
+  validates_presence_of :name
   validates_format_of :scheduleman_id, :with => /^\w+$/, :allow_blank => true
 
   attr_accessible :name, :course_ids, :state, :scheduleman_id, :color
+
+  before_save :store_changes
+  after_save :scheduleman_sync!, :if => :need_sync?
 
   def units
     courses.map(&:units).sum
@@ -45,6 +53,16 @@ class Semester
     end
 
     save!
+  end
+
+  protected
+
+  def need_sync?
+    @last_changes && @last_changes.key?('scheduleman_id')
+  end
+
+  def store_changes
+    @last_changes = changes
   end
 
 end

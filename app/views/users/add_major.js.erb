@@ -4,6 +4,7 @@
   newEl.insertBefore(form);
   form.find(':text, #major_id').val('')
   form.find('.field_with_errors').removeClass('.field_with_errors');
+  makeDraggable(newEl.find('.course'));
 <% else %>
   $('#majors form :text').parent().addClass('field_with_errors');
 <% end %>

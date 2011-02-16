@@ -1,15 +1,18 @@
 var area = $('#semesters [data-id=<%= @semester.id %>]');
 $('.ui-dialog-content').dialog('destroy');
 
-<% p params %>
 <% if @course || params[:action] =~ /sync|update/ %>
   var newEl = $("<%= escape_javascript render(@semester) %>");
+  area.replaceWith(newEl);
+
   bindAutocomplete(newEl.find(':text'));
   makeSortable(newEl.find('.courses'));
-  area.replaceWith(newEl);
+
   <% if params[:focus] == '1' %>
     newEl.find(':text').focus();
   <% end %>
 <% else %>
   area.find('form :text').parent().addClass('field_with_errors');
 <% end %>
+
+window.updateMajors();

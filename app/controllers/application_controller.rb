@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.first
+    @current_user ||= User.last
   end
 
   def store_location!

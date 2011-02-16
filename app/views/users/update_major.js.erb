@@ -1,0 +1,5 @@
+var major = $("<%= escape_javascript render(@major) %>");
+
+$('.major[data-id=<%= @major.id %>]').replaceWith(major);
+
+makeDraggable(major.find('.course'));
