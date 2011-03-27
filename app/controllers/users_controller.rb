@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def build_cache majors
     course_to_semester = {}
-    courses = current_user.semesters.map{ |s|
+    courses_orig = current_user.semesters.map{ |s|
       s.courses.tap{ |a| a.each{ |c| course_to_semester[c] = s } }
     }.flatten
 
@@ -48,6 +48,7 @@ class UsersController < ApplicationController
 
     majors.each do |major|
       @cache[major] = {}
+      courses = courses_orig.dup
 
       reqs = major.requirement_groups.map{ |g| g.requirements }.flatten
 
