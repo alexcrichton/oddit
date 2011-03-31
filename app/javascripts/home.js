@@ -8,7 +8,7 @@
 $(function() {
 
   function hideMajorCourses(major) {
-    var ids = major.find('.taken .course').map(function(_, el) {
+    var ids = major.find('.course').map(function(_, el) {
       return $(el).data('id');
     });
     var others = major.siblings('.major').find('.taken .course').map(
@@ -79,7 +79,6 @@ $(function() {
 
       if (!course.is(':visible')) {
         course = course.closest('.semester');
-        console.log(course);
       }
 
       if (e.type == 'mouseover') {

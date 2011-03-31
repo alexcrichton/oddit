@@ -10,7 +10,12 @@
 <div id='majors'>
   <%= render current_user.majors %>
 
-  <%= form_tag users_add_major_path, :remote => true do %>
+  <div class='legend'>
+    <%= image_tag 'icons/puzzle.png' %> = planned,
+    <%= image_tag 'icons/accept.png' %> = completed
+  </div>
+
+  <%= form_tag add_major_path, :remote => true do %>
     <div>
       <%= hidden_field_tag :major_id %>
       <span><%= text_field_tag :major_name %></span>

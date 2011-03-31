@@ -172,10 +172,6 @@
     font-weight: bold;
   }
 
-  ul {
-    display: none;
-  }
-
   .req {
     margin: 2px;
     padding: 2px;
@@ -187,7 +183,6 @@
     }
 
     &.completed {
-      display: none;
       background: image-url('icons/accept.png') no-repeat top right;
       background-color: lighten(green, 60%);
     }

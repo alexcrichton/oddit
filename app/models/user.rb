@@ -14,6 +14,34 @@ class User
 
   after_create :initialize_semesters
 
+  def preload_courses!
+    mapping = Hash.new{ |h, k| h[k] = Set.new }
+    course_ids = Set.new
+    semesters.each{ |s|
+      s.course_ids.each{ |id|
+        mapping[id] << s
+        course_ids << id
+      }
+      s.courses = []
+    }
+
+    majors.each{ |major|
+      major.requirement_groups.each{ |group|
+        group.requirements.each{ |req|
+          req.course_ids.each { |id|
+            mapping[id] << req
+            course_ids << id
+          }
+          req.courses = []
+        }
+      }
+    }
+
+    Course.where(:_id.in => course_ids.to_a).each do |course|
+      mapping[course.id].each{ |o| o.courses << course }
+    end
+  end
+
   def semester_of course
     semesters.detect{ |s| s.course_ids.include?(course.id) }
   end

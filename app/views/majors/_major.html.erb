@@ -19,7 +19,6 @@
 
       <% major.requirement_groups.each do |group| %>
         <div class='group'>
-
           <h4>
             <%= group.name %>
             (<%= completed_requirements_count group %> /
@@ -27,7 +26,9 @@
           </h4>
 
           <% group.requirements.each do |req| %>
-            <div class='req<%= requirement_class(major, req) %>'
+            <% klass = requirement_class major, req %>
+            <div class='req<%= klass %>'
+                 <%= raw("style='display:none'") if klass == ' completed' %>
                  data-scheduled="<%= scheduled_data major, req %>">
               <%= link_to '#', :class => 'name' do %>
                 <%= req.name %>
@@ -37,7 +38,7 @@
                 <% end %>
               <% end %>
 
-              <ul>
+              <ul style='display:none'>
                 <% req.courses.each do |course| %>
                   <li class='<%= course_class(major, req, course) %>'>
                     <span class='course new' data-id="<%= course.id %>">
@@ -60,7 +61,7 @@
 
       <div class='links'>
         <% if can? :remove, major %>
-          <%= link_to '[X]', major, :method => :delete, :remote => true,
+          <%= link_to '[X]', [:remove, major], :method => :delete, :remote => true,
                 :confirm => 'Are you sure?', :class => 'remove',
                 :title => 'Remove this major' %>
         <% end %>

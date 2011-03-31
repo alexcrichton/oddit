@@ -39,6 +39,7 @@ class UsersController < ApplicationController
   protected
 
   def build_cache majors
+    current_user.preload_courses!
     @cache = {}
     majors.each{ |m| @cache[m] = m.satisfy_requirements(current_user) }
   end

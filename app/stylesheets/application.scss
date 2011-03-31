@@ -1,5 +1,5 @@
 @import "blueprint/typography";
-@import "compass/css3";
+@import "compass";
 
 @import "errors";
 @import "dl";
@@ -30,8 +30,37 @@ a {
   }
 
   .logo {
+    float: left;
     font-size: 40px;
+    a {
+      @include unstyled-link;
+      cursor: pointer;
+    }
   }
+
+  ul {
+    float: left;
+    @include horizontal-list;
+    margin: 25px 0 0 50px;
+  }
+
+  li {
+    border: none;
+    padding: 0 5px;
+    display: block;
+
+    &:hover {
+      border: 1px solid white;
+      @include border-radius(10px);
+    }
+
+    a {
+      @include unstyled-link;
+      cursor: pointer;
+      font-size: 18px;
+    }
+  }
+
 }
 
 #main {

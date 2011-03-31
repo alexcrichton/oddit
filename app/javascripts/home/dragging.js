@@ -17,15 +17,7 @@ window.makeDraggable = function(el) {
   $(el).draggable({
     connectToSortable: '.courses',
     helper: 'clone',
-    cursorAt: {left: 5, top: 5},
-    stop: function(event) {
-      // If added to the courses list or removed from the DOM
-      if ($(event.srcElement).closest('.courses') > 0 ||
-        $(event.srcElement).closest('body').length == 0) {
-
-        updateMajor($(event.target).closest('.major').data('id'));
-      }
-    }
+    cursorAt: {left: 5, top: 5}
   }).disableSelection();
 };
 

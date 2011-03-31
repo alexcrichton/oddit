@@ -24,6 +24,7 @@ class Semester
   validates_format_of :scheduleman_id, :with => /^\w+$/, :allow_blank => true
 
   attr_accessible :name, :course_ids, :state, :scheduleman_id, :color
+  attr_accessor :courses
 
   before_save :store_changes
   after_save :scheduleman_sync!, :if => :need_sync?

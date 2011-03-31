@@ -1,7 +1,5 @@
 class MajorsController < ApplicationController
 
-  before_filter :extract_course_ids, :only => [:create, :update]
-
   load_and_authorize_resource
 
   respond_to :html
@@ -50,23 +48,6 @@ class MajorsController < ApplicationController
     @major.destroy
 
     respond_with :majors
-  end
-
-  protected
-
-  def extract_course_ids
-    return unless params[:major] &&
-      params[:major][:requirement_groups_attributes]
-
-    params[:major][:requirement_groups_attributes].each do |_, attrs|
-      next unless attrs['requirements_attributes']
-
-      attrs['requirements_attributes'].each do |_, rattrs|
-        next unless rattrs['course_ids']
-
-        rattrs['course_ids'] = rattrs['course_ids'].split(',')
-      end
-    end
   end
 
 end

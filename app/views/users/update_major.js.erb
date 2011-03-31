@@ -1,5 +1,22 @@
 var major = $("<%= escape_javascript render(@major) %>");
 
-$('.major[data-id=<%= @major.id %>]').replaceWith(major);
+var old = $('.major[data-id=<%= @major.id %>]');
 
+// Persist the state of the current major into the newly-rendered major
+if (old.find(':checkbox').is(':checked')) {
+  major.find(':checkbox').attr('checked', 'checked');
+  major.find('.completed').show();
+}
+
+old.find('.req ul:visible').each(function(i, el) {
+  var req_index = $(el).closest('.req').prevAll('.req').length;
+  var group_index = $(el).closest('.group').prevAll('.group').length;
+
+  var selector = '.group:nth(' + group_index + ')';
+  selector += ' .req:nth(' + req_index + ')';
+  selector += ' ul';
+  major.find(selector).show();
+});
+
+old.replaceWith(major);
 makeDraggable(major.find('.course'));

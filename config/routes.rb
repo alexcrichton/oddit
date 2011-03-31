@@ -18,9 +18,9 @@ AuditMan::Application.routes.draw do
   match 'login'  => 'sessions#create'
   match 'logout' => 'sessions#destroy'
 
-  get 'users/update_major'
-  post 'users/add_major'
-  delete 'users/remove_major'
+  get 'users/update_major',    :as => 'update_major'
+  post 'users/add_major',      :as => 'add_major'
+  delete 'users/remove_major', :as => 'remove_major'
 
   root :to => 'users#show'
 end
