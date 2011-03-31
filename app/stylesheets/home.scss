@@ -18,13 +18,16 @@
 
   fieldset {
     overflow: auto;
-    border: 3px solid;
+    padding: 8px 0 3px 0;
+    min-height: 19px;
+    border: 3px solid #666;
     @include border-radius(7px);
   }
 
   legend {
     font-weight: bold;
     padding: 0 10px;
+    margin-left: 10px;
 
     .edit {
       @include unstyled-link;
@@ -50,6 +53,7 @@
   .courses {
     overflow-y: auto;
     height: $block_height - 60px;
+    margin: 0 8px;
   }
 
   .drag {
@@ -63,6 +67,10 @@
     height: 80px;
     border: 2px dashed #878;
     @include border-radius(15px);
+  }
+
+  .semester.selected legend {
+    background: lighten(green, 65%);
   }
 
   .course {
@@ -93,12 +101,12 @@
       position: absolute;
       right: 3px;
     }
-  }
 
-  .course .units {
-    display: inline-block;
-    width: 15px;
-    text-align: center;
+    .units {
+      display: inline-block;
+      width: 15px;
+      text-align: center;
+    }
   }
 
   .semester {
@@ -129,7 +137,7 @@
     }
 
     .show-hide {
-      right: 7px;
+      right: 10px;
       bottom: 6px;
     }
   }
@@ -148,6 +156,7 @@
   .major {
     position: relative;
   }
+
   fieldset {
     border: 2px solid black;
     padding: 10px;
@@ -169,23 +178,34 @@
 
   .req {
     margin: 2px;
-    margin-left: 15px;
+    padding: 2px;
+    border-top: 1px dotted black;
+    background-color: lighten(red, 40%);
+
+    &:first-of-type {
+      border: none;
+    }
 
     &.completed {
       display: none;
+      background: image-url('icons/accept.png') no-repeat top right;
+      background-color: lighten(green, 60%);
+    }
+
+    &.planned {
+      background: image-url('icons/puzzle.png') no-repeat top right;
+      background-color: lighten(yellow, 35%);
     }
 
     ul {
       list-style: none;
       padding: 0;
       margin: 5px;
-      border-bottom: 1px dashed #444;
     }
 
     li {
       padding: 5px 5px;
       margin: 0px 5px;
-      border-top: 1px dashed #444;
     }
 
     .taken {
@@ -207,6 +227,7 @@
 
   h4 {
     margin: 0;
+    font-size: 13px;
   }
 }
 

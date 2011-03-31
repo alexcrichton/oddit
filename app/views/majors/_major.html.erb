@@ -1,5 +1,5 @@
-<div class='major'>
-  <fieldset data-id="<%= major.id %>">
+<div class='major' data-id="<%= major.id %>">
+  <fieldset>
 
     <legend>
       <%= major.name %> <%= major.year %>
@@ -11,7 +11,7 @@
 
     <div class='content'>
       <div class='more'>
-        <%= check_box_tag "show_completed_#{major.id}", '', '',
+        <%= check_box_tag "show_completed_#{major.id}", '0', false,
               :class => 'show_completed' %>
         <%= label_tag "show_completed_#{major.id}",
               'Show completed requirements?' %>
@@ -28,13 +28,12 @@
 
           <% group.requirements.each do |req| %>
             <div class='req<%= requirement_class(major, req) %>'
-                 style="<%= requirement_style(major, req) %>"
                  data-scheduled="<%= scheduled_data major, req %>">
               <%= link_to '#', :class => 'name' do %>
                 <%= req.name %>
 
                 <% if req.required > 1 %>
-                  (<%= req.required %>)
+                  (<%= @cache[major][req].size %> / <%= req.required %>)
                 <% end %>
               <% end %>
 
@@ -44,6 +43,12 @@
                     <span class='course new' data-id="<%= course.id %>">
                       <%= course.pretty_name %>
                     </span>
+                  </li>
+                <% end %>
+
+                <% if req.use_others_in_group %>
+                  <li>
+                    Any other course in <%= req.requirement_group.name %>
                   </li>
                 <% end %>
               </ul>

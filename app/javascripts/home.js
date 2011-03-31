@@ -77,6 +77,11 @@ $(function() {
       var course = $(
         '.semester[data-id=' + el[1] + '] .course[data-id=' + el[0] + ']');
 
+      if (!course.is(':visible')) {
+        course = course.closest('.semester');
+        console.log(course);
+      }
+
       if (e.type == 'mouseover') {
         course.addClass('selected');
         course.closest('.courses').scrollTo(course);

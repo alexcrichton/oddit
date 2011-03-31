@@ -19,18 +19,12 @@ module MajorsHelper
   def requirement_class major, req
     if satisfied?(major, req)
       semesters = @cache[major][req].map{ |c| current_user.semester_of(c) }
+
       if semesters.all?{ |s| s.state == 'completed' }
-        " completed"
+        ' completed'
+      else
+        ' planned'
       end
-    end
-  end
-
-  def requirement_style major, req
-    if satisfied?(major, req)
-      semester = current_user.semester_of @cache[major][req].last
-
-      style = "border: 2px solid ##{semester.color};"
-      style << "background: #{Color.new(semester.color).lighten(0.8)};"
     end
   end
 
