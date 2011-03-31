@@ -1,20 +1,28 @@
-<dl class='requirement'>
-  <dt><%= f.label :name %></dt>
-  <dd><%= f.text_field :name %></dd>
+<div class='requirement'>
+  <div class='info'>
+    <div class='name'><%= f.text_field :name, :placeholder => 'Name...' %></div>
+    <div class='required'>
+      <%= f.label :required, 'Amt:' %>
+      <%= f.text_field :required %>
 
-  <dt><%= f.label :required %></dt>
-  <dd><%= f.text_field :required %></dd>
+      <div class='remove'>
+        <%= f.check_box :_destroy %>
+        <%= f.label :_destroy, 'Remove?' %>
+      </div>
 
-  <dt><%= f.check_box :_destroy %></dt>
-  <dd><%= f.label :_destroy, 'Remove?' %></dd>
+      <div class='extra'>
+        <%= f.check_box :use_others_in_group %>
+        <%= f.label :use_others_in_group,
+                'Use other classes in requirement group' %>
+      </div>
+    </div>
+  </div>
 
-  <dt><%= f.label :course_id, 'Courses' %></dt>
-
-  <dd>
+  <div class='courses'>
+    <%= f.label :course_ids, 'Courses:' %>
     <% data = f.object.courses.map{ |c|
           {:name => c.pretty_name, :id => c.id.to_s} }.to_json %>
     <%= f.text_field :course_ids, :class => 'autocomplete', :value => '',
           :'data-courses' => data %>
-  </dd>
-
-</dl>
+  </div>
+</div>

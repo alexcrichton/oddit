@@ -14,6 +14,10 @@ class User
 
   after_create :initialize_semesters
 
+  def semester_of course
+    semesters.detect{ |s| s.course_ids.include?(course.id) }
+  end
+
   protected
 
   def initialize_semesters

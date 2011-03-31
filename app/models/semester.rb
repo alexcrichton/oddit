@@ -16,9 +16,9 @@ class Semester
   field :state
   field :scheduleman_id
   field :color
+  field :course_ids, :type => Array
 
   embedded_in :user
-  has_and_belongs_to_many :courses
 
   validates_presence_of :name
   validates_format_of :scheduleman_id, :with => /^\w+$/, :allow_blank => true
@@ -32,6 +32,13 @@ class Semester
     courses.map(&:units).sum
   end
 
+  def courses
+    # Can mongoid do has_and_belongs_to_many where it doesn't update the other
+    # end?
+    @courses = nil if course_ids_changed?
+    @courses ||= Course.where(:_id.in => course_ids)
+  end
+
   # Parses the iCal feed from scheduleman for a schedule given that the ID
   # that scheduleman assigned the schedule has already been entered in
   def scheduleman_sync!
@@ -39,7 +46,11 @@ class Semester
 
     url = 'https://scheduleman.org/schedules/' + scheduleman_id + '.ics'
 
-    calendar = RiCal.parse_string(open(url).read)[0]
+    begin
+      calendar = RiCal.parse_string(open(url).read)[0]
+    rescue OpenURI::HTTPError
+      return
+    end
 
     self.course_ids = []
 
@@ -52,6 +63,7 @@ class Semester
       end
     end
 
+    self.course_ids = course_ids.uniq
     save!
   end
 

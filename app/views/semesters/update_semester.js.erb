@@ -7,6 +7,7 @@ $('.ui-dialog-content').dialog('destroy');
 
   bindAutocomplete(newEl.find(':text'));
   makeSortable(newEl.find('.courses'));
+  newEl.find('.content').show();
 
   <% if params[:focus] == '1' %>
     newEl.find(':text').focus();

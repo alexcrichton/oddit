@@ -8,6 +8,12 @@
   </head>
   <body>
 
+    <div id='header'>
+      <div class='content'>
+        <div class='logo'>AuditMan</div>
+      </div>
+    </div>
+
     <div id='main'>
       <% flash.each do |kind, message| %>
         <%= content_tag :div, message, :class => "flash #{kind}" %>

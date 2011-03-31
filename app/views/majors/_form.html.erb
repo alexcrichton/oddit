@@ -1,4 +1,5 @@
 <% javascript 'rails', 'majors/form' %>
+<% stylesheet 'majors/form' %>
 
 <%= form_for @major do |f| %>
   <%= render 'shared/error_messages', :target => @major %>
@@ -8,7 +9,7 @@
     <dd><%= f.text_field :name %></dd>
 
     <dt><%= f.label :year %></dt>
-    <dd><%= f.number_field :year %></dd>
+    <dd><%= f.text_field :year %></dd>
 
     <dt><strong>Groups</strong></dt>
     <dd><%= link_to '[add]', '#' %></dd>

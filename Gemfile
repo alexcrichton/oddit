@@ -2,7 +2,7 @@ source :rubygems
 
 gem 'rails', '3.0.4'
 
-gem 'mongoid', '>= 2.0.0.rc'
+gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
 
 group :useful do

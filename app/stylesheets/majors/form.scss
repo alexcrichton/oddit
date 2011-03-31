@@ -1,0 +1,55 @@
+@import "compass";
+
+fieldset {
+  border: 3px solid black;
+  @include border-radius(20px);
+  margin-bottom: 15px;
+}
+
+legend {
+  font-size: 16px;
+  padding: 10px;
+  margin-left: 20px;
+
+  input {
+    font-size: 16px;
+    padding: 2px;
+  }
+}
+
+.requirement {
+  overflow: auto;
+  padding: 10px;
+  margin: 10px;
+  border-bottom: 1px dashed #888;
+
+  .info {
+    float: left;
+    width: 250px;
+  }
+
+  .required {
+    padding-top: 5px;
+    width: 200px;
+
+    input[type=text] {
+      width: 50px;
+    }
+  }
+
+  .remove {
+    float: right;
+  }
+
+  .courses {
+    float: right;
+
+    label {
+      font-size: 15px;
+    }
+
+    ul {
+      width: 520px;
+    }
+  }
+}

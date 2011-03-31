@@ -1,4 +1,4 @@
-@import "compass/utilities/links/unstyled-link";
+@import "compass";
 
 .course {
   cursor: move;
@@ -18,11 +18,13 @@
 
   fieldset {
     overflow: auto;
-    background: white;
+    border: 3px solid;
+    @include border-radius(7px);
   }
 
   legend {
     font-weight: bold;
+    padding: 0 10px;
 
     .edit {
       @include unstyled-link;
@@ -50,18 +52,46 @@
     height: $block_height - 60px;
   }
 
+  .drag {
+    position: absolute;
+    width: 220px;
+    font-size: 20px;
+    color: #aaa;
+    padding-top: 50px;
+    margin: 10px;
+    text-align: center;
+    height: 80px;
+    border: 2px dashed #878;
+    @include border-radius(15px);
+  }
+
   .course {
     padding: 1px;
+    position: relative;
+    border-top: 1px dashed #888;
+
+    &:first-of-type {
+      border: none;
+    }
 
     &.selected {
-      padding: 0;
       background: lighten(green, 65%);
-      border: 1px solid green;
     }
 
     .name {
-      width: 148px;
+      width: 165px;
       display: inline-block;
+    }
+
+    a {
+      display: none;
+      padding: 0 2px;
+    }
+
+    &:hover a {
+      display: block;
+      position: absolute;
+      right: 3px;
     }
   }
 
@@ -72,10 +102,14 @@
   }
 
   .semester {
-/*    height: $block_height;*/
     margin: 5px 5px 10px 5px;
     width: $block_width;
     float: left;
+    position: relative;
+
+    form {
+      display: none;
+    }
 
     &:nth-child(odd) {
       clear: left;
@@ -83,6 +117,20 @@
 
     .completed {
       display: none;
+    }
+
+    input#course_name {
+      background: image-url('icons/search.png') no-repeat;
+      padding-left: 20px;
+      height: 18px;
+      background-position: 1px 1px;
+      width: 170px;
+      font-size: 14px;
+    }
+
+    .show-hide {
+      right: 7px;
+      bottom: 6px;
     }
   }
 
@@ -96,6 +144,20 @@
 #majors {
   float: right;
   width: 33%;
+
+  .major {
+    position: relative;
+  }
+  fieldset {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 5px 0;
+
+    .show-hide {
+      right: 13px;
+      bottom: 11px;
+    }
+  }
 
   dt {
     font-weight: bold;
@@ -111,6 +173,23 @@
 
     &.completed {
       display: none;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 5px;
+      border-bottom: 1px dashed #444;
+    }
+
+    li {
+      padding: 5px 5px;
+      margin: 0px 5px;
+      border-top: 1px dashed #444;
+    }
+
+    .taken {
+      font-weight: bold;
     }
   }
 
@@ -133,4 +212,52 @@
 
 .qtip {
   z-index: 100000;
+}
+
+.links {
+  padding-top: 4px;
+
+  a {
+    margin-left: 5px;
+    display: block;
+    float: left;
+  }
+}
+
+.show-hide {
+  position: absolute;
+  display: block;
+  @include replace-text-with-dimensions('icons/up.png');
+
+  &.other {
+    @include replace-text-with-dimensions('icons/download.png');
+  }
+}
+
+.completed .show-hide {
+  @include replace-text-with-dimensions('icons/download.png');
+
+  &.other {
+    @include replace-text-with-dimensions('icons/up.png');
+  }
+}
+
+.remove {
+  @include replace-text-with-dimensions('icons/remove.png');
+}
+
+.sync {
+  @include replace-text-with-dimensions('icons/refresh.png');
+}
+
+.edit {
+  @include replace-text-with-dimensions('icons/tool.png');
+}
+
+.add {
+  @include replace-text-with-dimensions('icons/add.png');
+
+  &.other {
+    display: none !important;
+  }
 }

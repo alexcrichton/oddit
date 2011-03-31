@@ -5,8 +5,10 @@
 @import "dl";
 
 body {
-  background-color: #4B7399;
+/*  background-color: #4B7399;*/
   @include blueprint-typography-body(12px);
+  padding: 0;
+  margin: 0;
 }
 
 a img {
@@ -17,13 +19,26 @@ a {
   color: #0000FF;
 }
 
+#header {
+  @include linear-gradient(color-stops(#333 95%, #fff), top);
+  height: 65px;
+
+  .content {
+    width: 900px;
+    color: white;
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-size: 40px;
+  }
+}
+
 #main {
-  width: 75%;
+  width: 900px;
   margin: 0 auto;
   background-color: #FFF;
   padding: 20px 40px;
-  border: solid 1px black;
-  margin-top: 20px;
   overflow: auto;
 }
 

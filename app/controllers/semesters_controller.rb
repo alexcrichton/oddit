@@ -46,8 +46,8 @@ class SemestersController < ApplicationController
   end
 
   def add
-    @course = Course.find(params[:course_id]) rescue nil
-    @semester.courses << @course
+    @course = Course.find(params[:course_id])
+    @semester.course_ids << @course.id
     @semester.save
 
     respond_with @course do |format|
@@ -56,8 +56,8 @@ class SemestersController < ApplicationController
   end
 
   def remove
-    @course = Course.find(params[:course_id]) rescue nil
-    @semester.courses.delete @course
+    @course = Course.find(params[:course_id])
+    @semester.course_ids.delete @course.id
     @semester.save
 
     respond_with @course  do |format|

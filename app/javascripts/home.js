@@ -6,6 +6,31 @@
 //= require <tooltip>
 
 $(function() {
+
+  function hideMajorCourses(major) {
+    var ids = major.find('.taken .course').map(function(_, el) {
+      return $(el).data('id');
+    });
+    var others = major.siblings('.major').find('.taken .course').map(
+      function(_, el) { return $(el).data('id'); });
+
+    for (var i = 0; i < ids.length; i++) {
+      if ($.inArray(ids[i], others) == -1) {
+        $('.course[data-id="' + ids[i] + '"]').css('opacity', '0.5');
+      }
+    }
+  }
+
+  function showMajorCourses(major) {
+    var ids = major.find('.taken .course').map(function(_, el) {
+      return $(el).data('id');
+    });
+
+    for (var i = 0; i < ids.length; i++) {
+      $('.course[data-id="' + ids[i] + '"]').css('opacity', '1');
+    }
+  }
+
   // Adding a new major
   $('#majors :text').autocomplete({
     source: '/majors/search',
@@ -67,12 +92,22 @@ $(function() {
 
   // Accordian majors
   $('#majors .show-hide').live('click', function() {
-    $(this).closest('.major').find('.group').slideToggle();
+    var major = $(this).closest('.major');
+    var group = major.find('.content');
+    if (group.is(':visible')) {
+      group.slideUp();
+      hideMajorCourses(major);
+    } else {
+      group.slideDown();
+      showMajorCourses(major);
+    }
+
+    $(this).toggleClass('other');
     return false;
   });
 
   // Showing/hiding requirements
-  $('#show_completed').live('click', function() {
+  $('.major .show_completed').live('click', function() {
     if ($(this).is(':checked')) {
       $(this).closest('.major').find('.completed').slideDown();
     } else {
@@ -83,6 +118,14 @@ $(function() {
   // Accordian semesters
   $('#semesters .show-hide').live('click', function() {
     $(this).closest('.semester').find('.content').slideToggle();
-    return false
+    $(this).toggleClass('other');
+    return false;
+  });
+
+  // Showing/hiding add course form
+  $('#semesters .add').live('click', function() {
+    $(this).closest('.semester').find('form').show().find('input:text').focus();
+    $(this).toggleClass('other');
+    return false;
   });
 });

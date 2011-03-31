@@ -1,54 +1,74 @@
-<fieldset data-id="<%= major.id %>" class='major'>
+<div class='major'>
+  <fieldset data-id="<%= major.id %>">
 
-  <legend>
-    <%= major.name %> <%= major.year %>
-    <span class='count'>
-      (<%= completed_requirements_count major %> /
-      <%= requirements_count major %>)
-    </span>
-  </legend>
+    <legend>
+      <%= major.name %> <%= major.year %>
+      <span class='count'>
+        (<%= completed_requirements_count major %> /
+        <%= requirements_count major %>)
+      </span>
+    </legend>
 
-  <div class='link'>
-    <%= link_to '[edit]', [:edit, major] %> |
-    <%= link_to '[remove]', users_remove_major_path(:major_id => major),
-          :method => :delete, :remote => true %> |
-    <%= link_to '[show/hide]', '#', :class => 'show-hide' %><br/>
+    <div class='content'>
+      <div class='more'>
+        <%= check_box_tag "show_completed_#{major.id}", '', '',
+              :class => 'show_completed' %>
+        <%= label_tag "show_completed_#{major.id}",
+              'Show completed requirements?' %>
+      </div>
 
-    <%= check_box_tag :show_completed %> show completed requirements
-  </div>
+      <% major.requirement_groups.each do |group| %>
+        <div class='group'>
 
-  <% major.requirement_groups.each do |group| %>
-    <div class='group'>
+          <h4>
+            <%= group.name %>
+            (<%= completed_requirements_count group %> /
+            <%= requirements_count group %>)
+          </h4>
 
-      <h4>
-        <%= group.name %>
-        (<%= completed_requirements_count group %> /
-        <%= requirements_count group %>)
-      </h4>
+          <% group.requirements.each do |req| %>
+            <div class='req<%= requirement_class(major, req) %>'
+                 style="<%= requirement_style(major, req) %>"
+                 data-scheduled="<%= scheduled_data major, req %>">
+              <%= link_to '#', :class => 'name' do %>
+                <%= req.name %>
 
-      <% group.requirements.each do |req| %>
-        <div class='req<%= requirement_class(major, req) %>'
-             style="<%= requirement_style(major, req) %>"
-             data-scheduled="<%= scheduled_data major, req %>">
-          <%= link_to '#', :class => 'name' do %>
-            <%= req.name %>
+                <% if req.required > 1 %>
+                  (<%= req.required %>)
+                <% end %>
+              <% end %>
 
-            <% if req.required > 1 %>
-              (<%= req.required %>)
-            <% end %>
+              <ul>
+                <% req.courses.each do |course| %>
+                  <li class='<%= course_class(major, req, course) %>'>
+                    <span class='course new' data-id="<%= course.id %>">
+                      <%= course.pretty_name %>
+                    </span>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
           <% end %>
 
-          <ul>
-            <% req.courses.each do |course| %>
-              <li><span class='course new' data-id="<%= course.id %>">
-                <%= course.pretty_name %>
-              </span></li>
-            <% end %>
-          </ul>
         </div>
       <% end %>
 
-    </div>
-  <% end %>
+      <div class='links'>
+        <% if can? :remove, major %>
+          <%= link_to '[X]', major, :method => :delete, :remote => true,
+                :confirm => 'Are you sure?', :class => 'remove',
+                :title => 'Remove this major' %>
+        <% end %>
 
-</fieldset>
+        <% if can? :update, major %>
+          <%= link_to '[edit]', [:edit, major],
+                :class => 'edit', :title => 'Edit major requirements' %>
+        <% end %>
+
+      </div>
+    </div>
+
+    <%= link_to 'show/hide', '#', :class => 'show-hide',
+          :title => 'Show/hide major' %>
+  </fieldset>
+</div>

@@ -6,7 +6,7 @@ window.bindAutocomplete = function(el) {
     source: '/courses/search',
     select: function(event, ui) {
       if (ui.item) {
-        var form = $(event.srcElement).closest('form');
+        var form = $(event.target).closest('form');
         form.find('#course_id').val(ui.item.id);
       }
     }
@@ -53,7 +53,7 @@ window.makeSortable = function(el) {
         });
       } else {
         // Dragged between two semesters
-        course_id = $(event.srcElement).closest('.course').data('id');
+        course_id = $(event.originalEvent.target).closest('.course').data('id');
         semester_id = $(event.target).closest('.semester').data('id');
 
         $.ajax({
@@ -65,7 +65,7 @@ window.makeSortable = function(el) {
       }
     },
     remove: function(event, ui) {
-      var course = $(event.srcElement).closest('.course');
+      var course = $(event.originalEvent.target).closest('.course');
       var semester_id = $(event.target).closest('.semester').data('id');
 
       $.ajax({

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def add_major
-    @major = Major.find(params[:major_id]) rescue nil
+    @major = Major.find(params[:major_id])
     current_user.majors << @major
     current_user.save
 
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def remove_major
-    @major = Major.find(params[:major_id]) rescue nil
+    @major = Major.find(params[:major_id])
     current_user.majors.delete @major
     current_user.save
 
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   def update_major
-    @major = Major.find(params[:major_id]) rescue nil
+    @major = Major.find(params[:major_id])
 
     respond_with @major do |format|
       format.js { build_cache [@major] }
@@ -39,39 +39,8 @@ class UsersController < ApplicationController
   protected
 
   def build_cache majors
-    course_to_semester = {}
-    courses_orig = current_user.semesters.map{ |s|
-      s.courses.tap{ |a| a.each{ |c| course_to_semester[c] = s } }
-    }.flatten
-
     @cache = {}
-
-    majors.each do |major|
-      @cache[major] = {}
-      courses = courses_orig.dup
-
-      reqs = major.requirement_groups.map{ |g| g.requirements }.flatten
-
-      reqs.each do |requirement|
-        @cache[major][requirement] = []
-        req_courses = requirement.courses.dup
-
-        requirement.required.times {
-          course = (req_courses & courses).first
-
-          if course
-            courses.delete course
-            req_courses.delete course
-            @cache[major][requirement] << [
-              course, course_to_semester[course]]
-          else
-            break
-          end
-        }
-      end
-
-    end
-
+    majors.each{ |m| @cache[m] = m.satisfy_requirements(current_user) }
   end
 
 end

@@ -9,7 +9,7 @@ module SemestersHelper
 
   def semester_style semester
     if semester.color
-      "border: 3px solid ##{semester.color}"
+      "border-color: ##{semester.color}"
     end
   end
 

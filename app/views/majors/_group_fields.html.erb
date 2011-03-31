@@ -2,9 +2,9 @@
 
 <fieldset data-id="<%= id %>">
   <legend>
-    <%= f.label :name %> <%= f.text_field :name %>
+    <%= f.label :name, 'Group Name:' %> <%= f.text_field :name %>
 
-    |
+    &mdash;
     <%= f.check_box :_destroy %> <%= f.label :_destroy, 'Remove?' %>
   </legend>
 

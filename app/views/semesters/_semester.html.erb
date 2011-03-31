@@ -1,26 +1,27 @@
 <div class='semester <%= semester.state %>' data-id="<%= semester.id %>">
   <fieldset style='<%= semester_style semester %>'>
     <legend>
-      <%= link_to semester.name, [:edit, semester], :remote => true,
-            :class => 'edit' %> |
+      <%= semester.name %> |
       <span class='units' data-units="<%= semester.units %>">
         <%= semester.units %>
       </span>
       units
-
-      |
-      <%= link_to 'show/hide', '#', :class => 'show-hide' %>
     </legend>
 
     <div class='content<%= semester_class semester %>'>
       <div class='courses'>
+        <% if semester.courses.size == 0 %>
+          <div class='drag'>Drag Courses Here</div>
+        <% end %>
+
         <% semester.courses.each do |course| %>
           <div class='course'
                data-id="<%= course.id %>"
                data-units="<%= course.units %>">
             <%= link_to '[X]',
                   remove_semester_path(semester, :course_id => course),
-                  :method => :delete, :remote => true %>
+                  :method => :delete, :remote => true,
+                  :class => 'remove', :title => 'Remove course' %>
 
             <span class='number'><%= course.number %></span>
             <span class='name'><%= truncate course.name, :length => 25 %></span>
@@ -35,20 +36,37 @@
           <%= hidden_field_tag :course_id, '' %>
 
           <span><%= text_field_tag :course_name %></span>
-          <%= f.submit 'Add Course', :disable_with => 'Adding...' %>
+          <%= f.submit 'Add', :disable_with => 'Adding...' %>
         </div>
       <% end %>
 
       <div class='links'>
-        <%= link_to '[X]', semester, :method => :delete, :remote => true,
-              :confirm => 'Are you sure?' %>
+        <% if can? :remove, semester %>
+          <%= link_to '[X]', semester, :method => :delete, :remote => true,
+                :confirm => 'Are you sure?', :class => 'remove',
+                :title => 'Delete this semester' %>
+        <% end %>
 
         <% if can? :sync, semester %>
-          | <%= link_to '[sync]', [:sync, semester], :method => :put,
-              :remote => true %>
+          <%= link_to '[sync]', [:sync, semester], :method => :put,
+              :remote => true, :class => 'sync',
+              :title => 'Sync with ScheduleMan' %>
+        <% end %>
+
+        <% if can? :update, semester %>
+          <%= link_to '[edit]', [:edit, semester], :remote => true,
+                :class => 'edit', :title => 'Edit semester settings' %>
+        <% end %>
+
+        <% if can? :add_course, semester %>
+          <%= link_to '[add]', '#', :class => 'add',
+                :title => 'Add a course/Hide search box' %>
         <% end %>
       </div>
     </div>
+
+    <%= link_to 'show/hide', '#', :class => 'show-hide',
+          :title => 'Show/hide semester' %>
 
   </fieldset>
 </div>
