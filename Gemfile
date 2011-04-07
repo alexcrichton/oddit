@@ -7,6 +7,9 @@ gem 'bson_ext'
 
 group :useful do
   gem 'heroku'
+
+  # OpenID URLs are huge
+  gem 'mongrel'
 end
 
 gem 'paste', :git => 'git://github.com/alexcrichton/paste.git'
@@ -18,3 +21,10 @@ gem 'nokogiri'
 
 # Parsing scheduleman ics feeds
 gem 'ri_cal'
+
+# OAuth/OpenID Login
+gem 'oa-oauth'
+gem 'oa-openid'
+
+# Pagination
+gem 'kaminari'

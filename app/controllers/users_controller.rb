@@ -1,16 +1,27 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
+
+  load_resource :except => [:show]
+  before_filter :find_user, :only => [:show]
+  authorize_resource
 
   respond_to :html
 
   def show
-    build_cache current_user.majors
-    respond_with current_user
+    build_cache @user.majors
+    respond_with @user
+  end
+
+  def home
+    @user = current_user
+    build_cache @user.majors
+    respond_with @user do |format|
+      format.html { render 'show' }
+    end
   end
 
   def add_major
     @major = Major.find(params[:major_id])
-    current_user.majors << @major
+    current_user.major_ids << @major.id
     current_user.save
 
     respond_with @major do |format|
@@ -20,7 +31,7 @@ class UsersController < ApplicationController
 
   def remove_major
     @major = Major.find(params[:major_id])
-    current_user.majors.delete @major
+    current_user.major_ids.delete @major.id
     current_user.save
 
     respond_with @major do |format|
@@ -42,6 +53,11 @@ class UsersController < ApplicationController
     current_user.preload_courses!
     @cache = {}
     majors.each{ |m| @cache[m] = m.satisfy_requirements(current_user) }
+  end
+
+  def find_user
+    @user = User.where(:andrew_id => params[:id]).first ||
+      User.find(params[:id])
   end
 
 end

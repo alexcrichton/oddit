@@ -22,7 +22,7 @@ $(function() {
   }
 
   function showMajorCourses(major) {
-    var ids = major.find('.taken .course').map(function(_, el) {
+    var ids = major.find('.course').map(function(_, el) {
       return $(el).data('id');
     });
 
@@ -132,5 +132,12 @@ $(function() {
         find('input:text').focus();
     $(this).toggleClass('other');
     return false;
+  });
+
+  // Escape closes add course form
+  $('#semesters input:text').live('keydown', function(e) {
+    if (e.keyCode == 27) { // ESC key
+      $(this).closest('.semester').find('a.add').click();
+    }
   });
 });

@@ -13,14 +13,19 @@ AuditMan::Application.routes.draw do
 
   resources :majors do
     get :search, :on => :collection
+    put :clone, :on => :member
   end
 
-  match 'login'  => 'sessions#create'
-  match 'logout' => 'sessions#destroy'
+  get 'login'                     => 'sessions#new'
+  match 'auth/:provider/callback' => 'sessions#create'
+  match 'auth/failure'            => 'sessions#failure'
+  match 'logout'                  => 'sessions#destroy'
 
   get 'users/update_major',    :as => 'update_major'
   post 'users/add_major',      :as => 'add_major'
   delete 'users/remove_major', :as => 'remove_major'
 
-  root :to => 'users#show'
+  root :to => 'users#home'
+
+  match ':id' => 'users#show'
 end

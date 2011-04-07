@@ -5,9 +5,22 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |e|
     store_location!
-    flash[:error] = 'Denied!'
+    if request.format =~ /html/
+      flash[:error] = 'Please log in.'
+    end
 
     redirect_to login_path
+  end
+
+  rescue_from ActionController::RoutingError,
+              ActionController::UnknownAction,
+              BSON::InvalidObjectId do |exception|
+
+    @exception     = exception
+
+    render :template => 'errors/404',
+           :layout   => 'application',
+           :status   => 404
   end
 
   def current_ability
@@ -15,7 +28,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.last
+    return @current_user if defined?(@current_user)
+    @current_user = User.where(:_id => session[:user_id]).first
   end
 
   def store_location!

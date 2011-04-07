@@ -4,27 +4,29 @@ class Major
   field :name
   field :year, :type => Integer
   field :college
+  field :cmu_audit_name
   field :major_file
   field :link
 
   validates_presence_of :name, :year
 
+  belongs_to :user
   embeds_many :requirement_groups
   accepts_nested_attributes_for :requirement_groups, :allow_destroy => true
 
   scope :search, lambda{ |q| where(:name => /#{q}/i) }
 
   attr_accessible :name, :year, :requirement_groups_attributes, :college,
-    :major_file, :link
+    :major_file, :link, :cmu_audit_name
 
   def audit_url
-    if college.present? && major_file.present? && name.present?
+    if college.present? && major_file.present? && cmu_audit_name.present?
       "https://enr-apps.as.cmu.edu/audit/audit?" + {
         :college   => college,
         :call      => 14,
         :year      => year,
         :MajorFile => major_file.gsub('/', ':'),
-        :major     => name
+        :major     => cmu_audit_name
       }.to_query
     end
   end

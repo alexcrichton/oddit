@@ -61,6 +61,17 @@ a {
     }
   }
 
+  .user-info {
+    float: right;
+
+    a {
+      @include unstyled-link;
+
+      &:hover {
+        color: #aaa;
+      }
+    }
+  }
 }
 
 #main {

@@ -14,7 +14,7 @@ $(function() {
   // Adding groups
   $('dl a').click(function() {
     var new_el = $($('#new-group').html().replace(/CHANGEME/g,
-        new Date().getTime()));
+        new Date().getTime()).replace(/__ENDSCRIPT__/g, '</script>'));
 
     $('#groups').prepend(new_el);
     return false;

@@ -566,5 +566,5 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .ui-progressbar .ui-progressbar-value {margin: -1px; height:100%; }
 
 .ui-autocomplete-loading {
-  background: white image-url('jquery/autocomplete/indicator.gif') right center no-repeat;
+  background: white image-url('jquery/autocomplete/indicator.gif') right center no-repeat !important;
 }

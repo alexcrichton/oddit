@@ -3,16 +3,45 @@ class User
 
   field :andrew_id
   field :email
+  field :name
+  field :major_ids, :type => Array
 
-  has_and_belongs_to_many :majors
+  has_many :authentications, :dependent => :destroy
   embeds_many :semesters
 
-  validates_presence_of :andrew_id, :email
-  validates_uniqueness_of :andrew_id, :email
+  validates_presence_of :email
+  validates_uniqueness_of :email
 
   attr_accessible :andrew_id, :email
 
   after_create :initialize_semesters
+
+  def majors
+    @majors ||= Major.where(:_id.in => major_ids).all # Trigger the query
+  end
+
+  def display_name
+    name.blank? ? email : name
+  end
+
+  def apply_omniauth(omniauth)
+    if email.blank?
+      self.email = omniauth['user_info']['email']
+
+      if omniauth['extra'] && omniauth['extra']['user_hash']
+        self.email ||= omniauth['extra']['user_hash']['email']
+      end
+    end
+
+    if name.blank?
+      self.name = omniauth['user_info']['name']
+    end
+
+    authentications.build(
+      :provider => omniauth['provider'],
+      :uid      => omniauth['uid']
+    )
+  end
 
   def preload_courses!
     mapping = Hash.new{ |h, k| h[k] = Set.new }

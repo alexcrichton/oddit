@@ -60,17 +60,22 @@
       <% end %>
 
       <div class='links'>
-        <% if can? :remove, major %>
+        <% if can? :remove_major, @user %>
           <%= link_to '[X]', remove_major_path(:major_id => major),
-                :method => :delete,
-                :remote => true, :confirm => 'Are you sure?',
-                :class => 'remove',
-                :title => 'Remove this major' %>
+                :method  => :delete,
+                :remote  => true,
+                :confirm => 'Are you sure?',
+                :class   => 'remove',
+                :title   => 'Remove this major' %>
         <% end %>
 
         <% if can? :update, major %>
           <%= link_to '[edit]', [:edit, major],
                 :class => 'edit', :title => 'Edit major requirements' %>
+        <% elsif can? :clone, major %>
+          <%= link_to '[clone]', [:clone, major], :class => 'clone',
+                :method => :put,
+                :title => 'Clone this major so you can edit it' %>
         <% end %>
 
         <% if major.audit_url %>
@@ -80,7 +85,7 @@
 
         <% if major.link %>
           <%= link_to '[info]', major.link, :class => 'info',
-                :target => 'blank' %>
+                :target => 'blank', :target => 'Official requirement list' %>
         <% end %>
       </div>
     </div>

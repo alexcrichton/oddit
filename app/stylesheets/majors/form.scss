@@ -1,6 +1,16 @@
 @import "compass";
 @import "icons";
 
+form {
+  dt {
+    width: 8.5em;
+  }
+
+  dd {
+    margin-left: 9em;
+  }
+}
+
 .requirement-group {
   border: 3px solid black;
   @include border-radius(20px);

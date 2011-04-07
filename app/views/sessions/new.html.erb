@@ -1,0 +1,14 @@
+<% stylesheet 'login' %>
+
+<div class='login'>
+  <div class='providers'>
+    <%= link_to image_tag('facebook_256.png'), '/auth/facebook' %>
+
+    <%= link_to image_tag('google_256.png'), '/auth/open_id?' +
+          {:openid_url => 'https://www.google.com/accounts/o8/id'}.to_query %>
+  </div>
+
+  <div class='note'>
+    Note: we just use this to identify you.
+  </div>
+</div>

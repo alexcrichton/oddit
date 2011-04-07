@@ -24,7 +24,11 @@
             :child_index => 'ALTERME' do |rf| %>
         <%= render 'requirements_fields', :f => rf %>
       <% end %>
-    </script>
+    <% if id != 'CHANGEME' %>
+      </script>
+    <% else %>
+      __ENDSCRIPT__
+    <% end %>
   </div>
 
   <%= link_to '[show/hide]', '#', :class => 'show-hide' %>

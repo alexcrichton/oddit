@@ -18,6 +18,7 @@ class CoursesController < ApplicationController
   end
 
   def index
+    @courses = @courses.page(params[:page]).per(30)
     respond_with @courses
   end
 

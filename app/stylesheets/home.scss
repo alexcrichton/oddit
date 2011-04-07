@@ -133,12 +133,10 @@
     }
 
     input#course_name {
-      background: image-url('icons/search.png') no-repeat;
+      background: image-url('icons/search.png') no-repeat right;
       margin-left: 10px;
-      padding-left: 20px;
       height: 18px;
-      background-position: 1px 1px;
-      width: 170px;
+      width: 190px;
       font-size: 14px;
     }
 
@@ -245,5 +243,21 @@
     margin-left: 5px;
     display: block;
     float: left;
+  }
+}
+
+#add-major {
+  span {
+    width: 100%;
+    display: inline-block;
+
+    input {
+      width: 100%;
+      font-size: 14px;
+    }
+  }
+
+  .new {
+    float: right;
   }
 }

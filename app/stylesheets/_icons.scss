@@ -40,6 +40,10 @@ a.scheduleman {
   @include replace-text-with-dimensions('icons/scheduleman.png');
 }
 
+a.clone {
+  @include replace-text-with-dimensions('icons/add_page.png');
+}
+
 a.add {
   @include replace-text-with-dimensions('icons/add.png');
 

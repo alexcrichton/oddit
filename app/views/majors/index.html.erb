@@ -16,9 +16,11 @@
       <td><%= link_to major.name, major %></td>
       <td><%= major.year %></td>
       <td>
-        <%= link_to '[edit]', [:edit, major] %> |
-        <%= link_to '[destroy]', major, :method => :delete %>
+        <%= link_to '[edit]', [:edit, major] if can? :update, major %> |
+        <%= link_to '[destroy]', major, :method => :delete if can? :destroy, major %>
       </td>
     </tr>
   <% end %>
 </table>
+
+<%= paginate @majors %>

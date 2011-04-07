@@ -5,11 +5,25 @@ class MajorsController < ApplicationController
   respond_to :html
 
   def index
+    @majors = @majors.page(params[:page]).per(20)
     respond_with @majors
   end
 
+  def clone
+    new_major = @major.clone
+    new_major.user_id = current_user.id
+    new_major.save!
+
+    current_user.major_ids.delete @major.id
+    current_user.major_ids << new_major.id
+    current_user.save
+
+    redirect_to [:edit, new_major]
+  end
+
   def search
-    @majors = Major.search params[:term]
+    @majors = Major.search(params[:term]).
+      where(:_id.nin => current_user.major_ids)
 
     respond_with @majors do |format|
       format.json {
