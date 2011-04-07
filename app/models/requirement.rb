@@ -4,7 +4,8 @@ class Requirement
   field :name
   field :required, :type => Integer, :default => 1
   field :use_others_in_group, :type => Boolean, :default => false
-  field :course_ids, :type => Array
+  field :course_ids, :type => Array, :default => []
+  field :pattern
 
   validates_presence_of :name
   validates_size_of :course_ids, :minimum => 1, :unless => :use_others_in_group
@@ -23,7 +24,6 @@ class Requirement
   def courses
     # Can mongoid do has_and_belongs_to_many where it doesn't update the other
     # end?
-    @courses = nil if course_ids_changed?
     @courses ||= Course.where(:_id.in => course_ids)
   end
 
@@ -34,9 +34,20 @@ class Requirement
       id_pool = requirement_group.requirements.map(&:course_ids).flatten
     end
 
+    id_pool.map!(&:to_s)
+    regex = pattern? ? Regexp.compile(pattern) : nil
+
     (1..required).map {
-      course = courses.detect{ |c| !used[c.id] && id_pool.include?(c.id) }
-      used[course.id] = true
+      course = courses.detect{ |c|
+        explicit = !used[c.id] && id_pool.include?(c.id.to_s)
+
+        if regex
+          explicit = explicit || c.name.match(regex)
+        end
+
+        explicit
+      }
+      used[course.id] = true if course.present?
       course
     }.compact
   end

@@ -1,0 +1,46 @@
+a.show-hide {
+  position: absolute;
+  display: block;
+  @include replace-text-with-dimensions('icons/up.png');
+
+  &.other {
+    @include replace-text-with-dimensions('icons/download.png');
+  }
+}
+
+.completed a.show-hide, .hiding a.show-hide {
+  @include replace-text-with-dimensions('icons/download.png');
+
+  &.other {
+    @include replace-text-with-dimensions('icons/up.png');
+  }
+}
+
+a.remove {
+  @include replace-text-with-dimensions('icons/remove.png');
+}
+
+a.sync {
+  @include replace-text-with-dimensions('icons/refresh.png');
+}
+
+a.edit {
+  @include replace-text-with-dimensions('icons/tool.png');
+}
+
+a.audit {
+  @include replace-text-with-dimensions('icons/email.png');
+}
+
+a.info {
+  @include replace-text-with-dimensions('icons/info.png');
+}
+
+a.add {
+  @include replace-text-with-dimensions('icons/add.png');
+
+  &.other {
+    opacity: 0.5;
+/*    display: none !important;*/
+  }
+}

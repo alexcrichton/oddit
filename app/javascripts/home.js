@@ -128,7 +128,8 @@ $(function() {
 
   // Showing/hiding add course form
   $('#semesters .add').live('click', function() {
-    $(this).closest('.semester').find('form').show().find('input:text').focus();
+    $(this).closest('.semester').find('form').toggle().
+        find('input:text').focus();
     $(this).toggleClass('other');
     return false;
   });

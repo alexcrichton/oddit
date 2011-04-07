@@ -1,9 +1,21 @@
 @import "compass";
+@import "icons";
 
-fieldset {
+.requirement-group {
   border: 3px solid black;
   @include border-radius(20px);
   margin-bottom: 15px;
+  min-height: 60px;
+  position: relative;
+
+  &.hiding .content {
+    display: none;
+  }
+
+  .show-hide {
+    right: 10px;
+    bottom: 10px;
+  }
 }
 
 legend {

@@ -1,4 +1,5 @@
 @import "compass";
+@import "icons";
 
 .course {
   cursor: move;
@@ -129,6 +130,7 @@
 
     input#course_name {
       background: image-url('icons/search.png') no-repeat;
+      margin-left: 10px;
       padding-left: 20px;
       height: 18px;
       background-position: 1px 1px;
@@ -176,20 +178,22 @@
     margin: 2px;
     padding: 2px;
     border-top: 1px dotted black;
-    background-color: lighten(red, 40%);
 
     &:first-of-type {
       border: none;
     }
 
+    background: image-url('icons/exclamation.png') no-repeat top right;
+    background-color: lighten(red, 40%);
+
     &.completed {
       background: image-url('icons/accept.png') no-repeat top right;
-      background-color: lighten(green, 60%);
+      background-color: #e4f9cb;
     }
 
     &.planned {
       background: image-url('icons/puzzle.png') no-repeat top right;
-      background-color: lighten(yellow, 35%);
+      background-color: #cadaef;
     }
 
     ul {
@@ -237,43 +241,5 @@
     margin-left: 5px;
     display: block;
     float: left;
-  }
-}
-
-.show-hide {
-  position: absolute;
-  display: block;
-  @include replace-text-with-dimensions('icons/up.png');
-
-  &.other {
-    @include replace-text-with-dimensions('icons/download.png');
-  }
-}
-
-.completed .show-hide {
-  @include replace-text-with-dimensions('icons/download.png');
-
-  &.other {
-    @include replace-text-with-dimensions('icons/up.png');
-  }
-}
-
-.remove {
-  @include replace-text-with-dimensions('icons/remove.png');
-}
-
-.sync {
-  @include replace-text-with-dimensions('icons/refresh.png');
-}
-
-.edit {
-  @include replace-text-with-dimensions('icons/tool.png');
-}
-
-.add {
-  @include replace-text-with-dimensions('icons/add.png');
-
-  &.other {
-    display: none !important;
   }
 }

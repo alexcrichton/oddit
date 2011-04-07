@@ -39,8 +39,22 @@ $(function() {
     return false;
   });
 
-  // Tokenizers
-  $(':text.autocomplete').each(function(_, el) {
-    bindAutocomplete(el);
+  // Accordian groups
+  $('.show-hide').live('click', function() {
+    $(this).toggleClass('other');
+    var content = $(this).closest('.requirement-group').find('.content');
+    content.slideToggle();
+    var el = $(this).closest('.requirement-group').find('input.visible');
+
+    if (content.is(':visible')) {
+      el.val('1').removeAttr('disabled');
+    } else {
+      el.val('0').attr('disabled', 'disabled');
+    }
+
+    return false;
   });
+
+  // Autocomplete tokenizers
+  $(':text.autocomplete').each(function(_, el) { bindAutocomplete(el); });
 });

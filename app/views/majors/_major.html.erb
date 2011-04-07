@@ -61,8 +61,10 @@
 
       <div class='links'>
         <% if can? :remove, major %>
-          <%= link_to '[X]', [:remove, major], :method => :delete, :remote => true,
-                :confirm => 'Are you sure?', :class => 'remove',
+          <%= link_to '[X]', remove_major_path(:major_id => major),
+                :method => :delete,
+                :remote => true, :confirm => 'Are you sure?',
+                :class => 'remove',
                 :title => 'Remove this major' %>
         <% end %>
 
@@ -71,6 +73,15 @@
                 :class => 'edit', :title => 'Edit major requirements' %>
         <% end %>
 
+        <% if major.audit_url %>
+          <%= link_to '[audit]', major.audit_url, :class => 'audit',
+                :title => 'View CMU Audit', :target => 'blank' %>
+        <% end %>
+
+        <% if major.link %>
+          <%= link_to '[info]', major.link, :class => 'info',
+                :target => 'blank' %>
+        <% end %>
       </div>
     </div>
 

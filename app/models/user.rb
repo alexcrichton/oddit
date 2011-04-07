@@ -19,26 +19,24 @@ class User
     course_ids = Set.new
     semesters.each{ |s|
       s.course_ids.each{ |id|
-        mapping[id] << s
+        mapping[id.to_s] << s
         course_ids << id
       }
       s.courses = []
     }
 
     majors.each{ |major|
-      major.requirement_groups.each{ |group|
-        group.requirements.each{ |req|
-          req.course_ids.each { |id|
-            mapping[id] << req
-            course_ids << id
-          }
-          req.courses = []
+      major.requirements.each{ |req|
+        req.course_ids.each { |id|
+          mapping[id.to_s] << req
+          course_ids << id
         }
+        req.courses = []
       }
     }
 
     Course.where(:_id.in => course_ids.to_a).each do |course|
-      mapping[course.id].each{ |o| o.courses << course }
+      mapping[course.id.to_s].each{ |o| o.courses << course }
     end
   end
 

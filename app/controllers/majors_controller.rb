@@ -33,15 +33,16 @@ class MajorsController < ApplicationController
   end
 
   def create
-    @major.save
+    location = nil
+    location = edit_major_path(@major) if @major.save
 
-    respond_with @major
+    respond_with @major, :location => location
   end
 
   def update
     @major.update_attributes params[:major]
 
-    respond_with @major, :location => edit_major_path(@major)
+    respond_with @major, :location => [:edit, @major]
   end
 
   def destroy

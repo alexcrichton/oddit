@@ -1,25 +1,32 @@
 <% id = f.object.new_record? ? f.options[:child_index] : f.object.id %>
 
-<fieldset data-id="<%= id %>">
+<fieldset class='requirement-group<%= ' hiding' unless f.object.visible %>'
+          data-id="<%= id %>">
   <legend>
     <%= f.label :name, 'Group Name:' %> <%= f.text_field :name %>
 
     &mdash;
     <%= f.check_box :_destroy %> <%= f.label :_destroy, 'Remove?' %>
+    <%= f.hidden_field :visible, :class => 'visible' %>
   </legend>
 
-  <div class='requirements'>
-    <%= f.fields_for :requirements do |rf| %>
-      <%= render 'requirements_fields', :f => rf %>
-    <% end %>
+  <div class='content'>
+    <div class='requirements'>
+      <%= f.fields_for :requirements do |rf| %>
+        <%= render 'requirements_fields', :f => rf %>
+      <% end %>
+    </div>
+
+    <%= link_to '[add requirement]', '#', :class => 'add-req' %>
+
+    <script type='text/html' class='new-requirement' data-id="<%= id %>">
+      <%= f.fields_for :requirements, f.object.requirements.build,
+            :child_index => 'ALTERME' do |rf| %>
+        <%= render 'requirements_fields', :f => rf %>
+      <% end %>
+    </script>
   </div>
 
-  <%= link_to '[add requirement]', '#', :class => 'add-req' %>
+  <%= link_to '[show/hide]', '#', :class => 'show-hide' %>
 
-  <script type='text/html' class='new-requirement' data-id="<%= id %>">
-    <%= f.fields_for :requirements, f.object.requirements.build,
-          :child_index => 'ALTERME' do |rf| %>
-      <%= render 'requirements_fields', :f => rf %>
-    <% end %>
-  </script>
 </fieldset>

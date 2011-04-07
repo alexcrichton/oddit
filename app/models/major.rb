@@ -3,6 +3,9 @@ class Major
 
   field :name
   field :year, :type => Integer
+  field :college
+  field :major_file
+  field :link
 
   validates_presence_of :name, :year
 
@@ -11,7 +14,20 @@ class Major
 
   scope :search, lambda{ |q| where(:name => /#{q}/i) }
 
-  attr_accessible :name, :year, :requirement_groups_attributes
+  attr_accessible :name, :year, :requirement_groups_attributes, :college,
+    :major_file, :link
+
+  def audit_url
+    if college.present? && major_file.present? && name.present?
+      "https://enr-apps.as.cmu.edu/audit/audit?" + {
+        :college   => college,
+        :call      => 14,
+        :year      => year,
+        :MajorFile => major_file.gsub('/', ':'),
+        :major     => name
+      }.to_query
+    end
+  end
 
   def pretty_name
     name + " (#{year})"

@@ -16,7 +16,7 @@ class Semester
   field :state
   field :scheduleman_id
   field :color
-  field :course_ids, :type => Array
+  field :course_ids, :type => Array, :default => []
 
   embedded_in :user
 

@@ -8,12 +8,13 @@
 </div>
 
 <div id='majors'>
-  <%= render current_user.majors %>
-
   <div class='legend'>
     <%= image_tag 'icons/puzzle.png' %> = planned,
-    <%= image_tag 'icons/accept.png' %> = completed
+    <%= image_tag 'icons/accept.png' %> = completed,
+    <%= image_tag 'icons/exclamation.png' %> = unmet
   </div>
+
+  <%= render current_user.majors %>
 
   <%= form_tag add_major_path, :remote => true do %>
     <div>

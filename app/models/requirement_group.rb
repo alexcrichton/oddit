@@ -10,5 +10,7 @@ class RequirementGroup
 
   accepts_nested_attributes_for :requirements, :allow_destroy => true
 
-  attr_accessible :requirements_attributes, :name
+  attr_accessible :requirements_attributes, :name, :visible
+  attr_accessor :visible
+
 end

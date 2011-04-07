@@ -1,4 +1,4 @@
-<% javascript 'rails', 'majors/form' %>
+<% javascript 'rails', 'majors/form', 'tooltip' %>
 <% stylesheet 'majors/form' %>
 
 <%= form_for @major do |f| %>
@@ -8,8 +8,17 @@
     <dt><%= f.label :name %></dt>
     <dd><%= f.text_field :name %></dd>
 
+    <dt><%= f.label :college %></dt>
+    <dd><%= f.text_field :college %></dd>
+
     <dt><%= f.label :year %></dt>
-    <dd><%= f.text_field :year %></dd>
+    <dd><%= f.text_field :year, :size => 4 %></dd>
+
+    <dt><%= f.label :major_file %></dt>
+    <dd><%= f.text_field :major_file, :size => 60 %></dd>
+
+    <dt><%= f.label :link %></dt>
+    <dd><%= f.text_field :link, :size => 60 %></dd>
 
     <dt><strong>Groups</strong></dt>
     <dd><%= link_to '[add]', '#' %></dd>

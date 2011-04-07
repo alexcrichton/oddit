@@ -10,7 +10,7 @@ $('.ui-dialog-content').dialog('destroy');
   newEl.find('.content').show();
 
   <% if params[:focus] == '1' %>
-    newEl.find(':text').focus();
+    newEl.find('a.add').click();
   <% end %>
 <% else %>
   area.find('form :text').parent().addClass('field_with_errors');
