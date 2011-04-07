@@ -13,7 +13,10 @@ class Course
 
   attr_accessible :number, :name, :units
 
-  scope :search, lambda{ |q| any_of({:name => /#{q}/i}, {:number => /^#{q}/i}) }
+  scope :search, lambda{ |q|
+    num = q.to_s.gsub(/^(\d{2})(\d{0,3})$/, '\1-\2')
+    any_of({:name => /#{q}/i}, {:number => /^#{num}/i})
+  }
 
   def self.import_cmu!
     puts "Importing fall schedule..."
