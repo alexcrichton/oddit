@@ -15,7 +15,6 @@ class Semester
   field :name
   field :state
   field :scheduleman_id
-  field :color
   field :course_ids, :type => Array, :default => []
 
   embedded_in :user
@@ -23,7 +22,7 @@ class Semester
   validates_presence_of :name
   validates_format_of :scheduleman_id, :with => /^\w+$/, :allow_blank => true
 
-  attr_accessible :name, :course_ids, :state, :scheduleman_id, :color
+  attr_accessible :name, :course_ids, :state, :scheduleman_id
   attr_accessor :courses
 
   before_save :store_changes

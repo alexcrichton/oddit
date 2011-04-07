@@ -47,11 +47,8 @@ class User
   protected
 
   def initialize_semesters
-    palette = Semester::PALETTES[rand(Semester::PALETTES.size)]
-
     8.times{ |i|
-      semesters.create!(:name => "Semester #{i + 1}", :status => 'planned',
-        :color => palette[i])
+      semesters.create!(:name => "Semester #{i + 1}", :status => 'planned')
     }
   end
 
