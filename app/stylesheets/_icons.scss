@@ -36,6 +36,10 @@ a.info {
   @include replace-text-with-dimensions('icons/info.png');
 }
 
+a.scheduleman {
+  @include replace-text-with-dimensions('icons/scheduleman.png');
+}
+
 a.add {
   @include replace-text-with-dimensions('icons/add.png');
 

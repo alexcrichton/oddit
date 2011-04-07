@@ -28,6 +28,12 @@ class Semester
   before_save :store_changes
   after_save :scheduleman_sync!, :if => :need_sync?
 
+  def scheduleman_url
+    if scheduleman_id.present?
+      'https://scheduleman.org/schedules/' + scheduleman_id
+    end
+  end
+
   def units
     courses.map(&:units).sum
   end

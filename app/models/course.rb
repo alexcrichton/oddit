@@ -50,6 +50,10 @@ class Course
     true
   end
 
+  def info_url
+    'https://scheduleman.org/courses/' + number.gsub('-', '')
+  end
+
   def pretty_name
     name + " (#{number})"
   end

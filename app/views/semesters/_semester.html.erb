@@ -18,10 +18,14 @@
           <div class='course'
                data-id="<%= course.id %>"
                data-units="<%= course.units %>">
+            <%= link_to '[info]',
+                   course.info_url,
+                   :class => 'info', :target => 'blank',
+                   :title => 'Course information on ScheduleMan' %>
             <%= link_to '[X]',
-                  remove_semester_path(semester, :course_id => course),
-                  :method => :delete, :remote => true,
-                  :class => 'remove', :title => 'Remove course' %>
+                   remove_semester_path(semester, :course_id => course),
+                   :method => :delete, :remote => true,
+                   :class => 'remove', :title => 'Remove course' %>
 
             <span class='number'><%= course.number %></span>
             <span class='name'><%= truncate course.name, :length => 25 %></span>
@@ -61,6 +65,13 @@
         <% if can? :add_course, semester %>
           <%= link_to '[add]', '#', :class => 'add',
                 :title => 'Add a course/Hide search box' %>
+        <% end %>
+
+        <% if semester.scheduleman_url %>
+          <%= link_to '[sman]', semester.scheduleman_url,
+                :class => 'scheduleman',
+                :title => 'See schedule on ScheduleMan',
+                :target => 'blank' %>
         <% end %>
       </div>
     </div>
