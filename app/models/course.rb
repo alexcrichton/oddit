@@ -9,13 +9,23 @@ class Course
 
   validates_presence_of :number, :name, :units
   validates_format_of :number, :with => /^\d{2}-\d{3}$/
-  validates_uniqueness_of :number
+  validates_uniqueness_of :number, :if => :number_changed?
 
   attr_accessible :number, :name, :units
 
   scope :search, lambda{ |q| any_of({:name => /#{q}/i}, {:number => /^#{q}/i}) }
 
-  def self.import_from_url url
+  def self.import_cmu!
+    puts "Importing fall schedule..."
+    import_from_url!(
+      'https://enr-apps.as.cmu.edu/assets/SOC/sched_layout_fall.htm')
+
+    puts "Importing spring schedule..."
+    import_from_url!(
+      'https://enr-apps.as.cmu.edu/assets/SOC/sched_layout_spring.htm')
+  end
+
+  def self.import_from_url! url
     n = Nokogiri::HTML(open(url).read)
 
     n.css('tr').each{ |row|
