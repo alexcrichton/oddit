@@ -4,7 +4,7 @@ class User
   field :andrew_id
   field :email
   field :name
-  field :major_ids, :type => Array
+  field :major_ids, :type => Array, :default => []
 
   has_many :authentications, :dependent => :destroy
   embeds_many :semesters
