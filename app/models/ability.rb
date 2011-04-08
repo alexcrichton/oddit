@@ -2,12 +2,13 @@ class Ability
   include CanCan::Ability
 
   def initialize user
-    alias_action :search, :home, :to => :read
+    alias_action :search, :to => :read
 
     can :read, [User, Major, Course]
 
     return if user.nil?
 
+    can :home, User
     can [:add_major, :remove_major, :update_major], User
 
     can :create, Major
