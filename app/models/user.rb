@@ -9,7 +9,6 @@ class User
   has_many :authentications, :dependent => :destroy
   embeds_many :semesters
 
-  validates_presence_of :email
   validates_uniqueness_of :email
 
   attr_accessible :andrew_id, :email
@@ -26,7 +25,7 @@ class User
 
   def apply_omniauth(omniauth)
     if email.blank?
-      self.email = omniauth['user_info']['email']
+      self.email ||= omniauth['user_info']['email']
 
       if omniauth['extra'] && omniauth['extra']['user_hash']
         self.email ||= omniauth['extra']['user_hash']['email']
@@ -34,7 +33,7 @@ class User
     end
 
     if name.blank?
-      self.name = omniauth['user_info']['name']
+      self.name ||= omniauth['user_info']['name']
     end
 
     authentications.build(
