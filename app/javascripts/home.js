@@ -51,6 +51,9 @@ $(function() {
   $('#semesters :text').each(function(_, el) {
     bindAutocomplete(el);
   });
+  $('#semesters form').submit(function() {
+    $(this).find('.ui-autocomplete-input').autocomplete('close');
+  });
 
   // Expanding major menus
   $('#majors .req .name').live('click', function() {
