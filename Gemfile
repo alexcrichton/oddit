@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.0.6'
+gem 'rails'
 
 gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
@@ -9,7 +9,7 @@ group :useful do
   gem 'heroku'
 
   # OpenID URLs are huge
-  gem 'mongrel'
+  gem 'mongrel', '>= 1.2.0.pre2'
 end
 
 gem 'paste', :git => 'git://github.com/alexcrichton/paste.git'
