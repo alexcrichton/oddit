@@ -1,5 +1,6 @@
 class SemestersController < ApplicationController
   load_and_authorize_resource :through => :current_user
+  before_filter :find_course, :only => [:add, :remove]
 
   respond_to :html
 
@@ -46,7 +47,6 @@ class SemestersController < ApplicationController
   end
 
   def add
-    @course = Course.find(params[:course_id])
     @semester.course_ids << @course.id
     @semester.save
 
@@ -56,13 +56,23 @@ class SemestersController < ApplicationController
   end
 
   def remove
-    @course = Course.find(params[:course_id])
     @semester.course_ids.delete @course.id
     @semester.save
 
     respond_with @course  do |format|
        format.js { render 'update_semester' }
      end
+  end
+
+  protected
+
+  def find_course
+    if params[:course_id].blank?
+      courses = Course.search(params[:course_name])
+      @course = courses.first if courses.size == 1
+    end
+
+    @course ||= Course.find(params[:course_id])
   end
 
 end
