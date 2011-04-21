@@ -8,14 +8,14 @@ class Ability
 
     return if user.nil?
 
-    can :home, User
-    can [:add_major, :remove_major, :update_major], User
+    # These actions are always on the current user, so specify the class as the
+    # target instead of the user object
+    can [:home, :add_major, :remove_major, :update_major], User
 
-    can :create, Major
+    can [:create, :clone], Major
     can :update, Major, :user_id => user.id
-    can :clone, Major
     can :manage, user
-    can :manage, Semester, :user => user
+    can :manage, Semester, :user => user # semesters are embedded, no user_id
 
     cannot :sync, Semester, :scheduleman_id => nil
     cannot :sync, Semester, :scheduleman_id => ''

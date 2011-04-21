@@ -1,8 +1,8 @@
 //= require <jquery>
 
 $(function() {
-  $('.major a.info').live('click', function() {
-    var majors = $(this).closest('.info').siblings('.majors');
+  $('.major a.extra').live('click', function() {
+    var majors = $(this).closest('.extra').siblings('.majors');
     majors.toggle();
 
     $(this).find('.expand').text(majors.is(':visible') ? '-' : '+');

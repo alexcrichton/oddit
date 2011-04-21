@@ -1,5 +1,31 @@
-<h1>Majors#show</h1>
-<p>Find me in app/views/majors/show.html.erb</p>
+<h1><%= @major.name %> (<%= @major.year %>)</h1>
 
-<%= link_to '[edit]', [:edit, @major] if can? :update, @major %> |
-<%= link_to '[destroy]', @major, :method => :delete if can? :destroy, @major %>
+<div class='links'>
+  <%= link_to '[edit]', [:edit, @major], :class => 'edit' if can? :update, @major %>
+  <%= link_to '[destroy]', @major, :method => :delete, :class => 'remove' if can? :destroy, @major %>
+</div>
+
+<% @major.requirement_groups.each do |group| %>
+  <fieldset>
+    <legend><%= group.name %></legend>
+
+    <ul>
+      <% group.requirements.each do |req| %>
+        <li>
+          <%= req.name %>
+          <%= "(#{req.required})" if req.required > 1 %>
+
+          <ul>
+            <% req.courses.each do |course| %>
+              <li><%= course.pretty_name %></li>
+            <% end %>
+
+            <% if req.use_others_in_group %>
+              <li>Any other course in <%= group.name %></li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </fieldset>
+<% end %>

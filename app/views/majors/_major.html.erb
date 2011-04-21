@@ -5,18 +5,23 @@
   <h2><%= link_to major.name, major %> &mdash; <%= major.year %></h2>
 
   <div class='links'>
-    <%= link_to 'audit', major.audit_url, :target => 'blank' if major.audit_url %>
-    <%= link_to 'clone', [:clone, major], :method => :put %>
-    <%= link_to 'edit', [:edit, major] if can? :edit, major %>
+    <%= link_to 'audit', major.audit_url,
+          :target => 'blank', :class => 'audit',
+          :title => "See your official audit for this major" if major.audit_url %>
+    <%= link_to 'clone', [:clone, major], :method => :put, :class => 'clone',
+          :title => 'Clone this major to edit it' %>
+    <%= link_to 'edit', [:edit, major], :class => 'edit',
+          :title => 'Edit this major' if can? :edit, major %>
 
     <% if (current_user.nil? || !current_user.major_ids.include?(major.id)) &&
           can?(:add_major, current_user) %>
-      <%= link_to 'add', add_major_path(:major_id => major) %>
+      <%= link_to 'add', add_major_path(:major_id => major), :class => 'add',
+            :title => 'Add this major to your plan' %>
     <% end %>
   </div>
 
   <% if children.any? %>
-    <a href='#' class='info'>
+    <a href='#' class='extra'>
       [<span class='expand'>+</span>]
       <span class='count'>
         <%= pluralize children.size, 'cloned major' %>

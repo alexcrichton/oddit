@@ -1,4 +1,5 @@
 @import "compass";
+@import "icons";
 
 .major {
   overflow: auto;
@@ -17,7 +18,7 @@
     float: right;
   }
 
-  .info {
+  .extra {
     display: inline-block;
     float: left;
     clear: both;
