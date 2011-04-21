@@ -1,6 +1,13 @@
 <% javascript 'rails' %>
+<% stylesheet 'majors' %>
 
-<h1>Listing Majors</h1>
+<div class='title'>
+  <h1><%= params[:q].present? ? 'Search Results' : 'Listing Majors' %></h1>
+
+  <%= form_tag search_majors_path, :id => 'major-search' do %>
+    <p><%= text_field_tag :q, params[:q] %></p>
+  <% end %>
+</div>
 
 <%= link_to '[new major]', new_major_path %>
 

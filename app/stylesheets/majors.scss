@@ -53,3 +53,23 @@
     overflow: auto;
   }
 }
+
+.title {
+  overflow: auto;
+
+  h1 {
+    float: left;
+  }
+}
+
+#major-search {
+  float: right;
+
+  input {
+    width: 200px;
+    font-size: 120%;
+
+    background: image-url('icons/search.png') no-repeat right;
+    padding-right: 20px;
+  }
+}

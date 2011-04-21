@@ -14,6 +14,7 @@ class Ability
 
     can [:create, :clone], Major
     can :update, Major, :user_id => user.id
+    can :destroy, Major, :user_id => user.id, :user_count => 0
     can :manage, user
     can :manage, Semester, :user => user # semesters are embedded, no user_id
 

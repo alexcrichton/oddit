@@ -16,6 +16,7 @@ class User
   attr_accessible :andrew_id, :email
 
   after_create :initialize_semesters
+  before_destroy :decrement_major_counts
 
   def majors
     @majors ||= Major.where(:_id.in => major_ids).to_a # Trigger the query
@@ -75,6 +76,10 @@ class User
   end
 
   protected
+
+  def decrement_major_counts
+    majors.each{ |m| m.inc(:user_count, -1) }
+  end
 
   def initialize_semesters
     8.times{ |i|

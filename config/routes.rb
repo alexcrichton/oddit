@@ -12,7 +12,7 @@ AuditMan::Application.routes.draw do
   end
 
   resources :majors do
-    get :search, :on => :collection
+    match :search, :on => :collection
     put :clone, :on => :member
   end
 
@@ -22,7 +22,7 @@ AuditMan::Application.routes.draw do
   end
 
   get 'users/update_major',    :as => 'update_major'
-  post 'users/add_major',      :as => 'add_major'
+  match 'users/add_major',     :as => 'add_major'
   delete 'users/remove_major', :as => 'remove_major'
 
   root :to => 'users#home'

@@ -1,6 +1,11 @@
 class Major
   include Mongoid::Document
   include Mongoid::Ancestry
+
+  # This must be before the call to has_ancestry because we want to override
+  # what has_ancestry's default action is to do
+  before_destroy :move_children_to_parent
+
   has_ancestry
 
   field :name
@@ -21,8 +26,6 @@ class Major
 
   attr_accessible :name, :year, :requirement_groups_attributes, :college,
     :major_file, :link, :cmu_audit_name
-
-  before_destroy :move_children_to_parent
 
   def self.update_user_counts!
     Major.all.each { |m|

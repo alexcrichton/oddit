@@ -19,18 +19,6 @@
   <% end %>
 
   <% if can? :add_major, @user %>
-    <%= form_tag add_major_path, :remote => true, :id => 'add-major' do %>
-      <div>
-        <%= hidden_field_tag :major_id %>
-        <span><%= text_field_tag :major_name %></span>
-        <%= submit_tag 'Add Major', :disable_with => 'Adding...' %>
-
-        <% if can? :create, Major %>
-          <div class='new'>
-            <%= link_to 'Create a new major', new_major_path %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+    <%= link_to 'Add major', majors_path %>
   <% end %>
 </div>

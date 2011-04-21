@@ -31,17 +31,6 @@ $(function() {
     }
   }
 
-  // Adding a new major
-  $('#majors :text').autocomplete({
-    source: '/majors/search',
-    select: function(event, ui) {
-      if (ui.item) {
-        var form = $(event.srcElement).closest('form');
-        form.find('#major_id').val(ui.item.id);
-      }
-    }
-  });
-
   // Removing field_with_errors stuff when typing
   $(':text').live('keyup', function() {
     $(this).parent().removeClass('field_with_errors');
@@ -139,7 +128,7 @@ $(function() {
 
   // Escape closes add course form
   $('#semesters input:text').live('keydown', function(e) {
-    if (e.keyCode == 27) { // ESC key
+    if (e.keyCode == 27 && $(this).is(':visible')) { // ESC key
       $(this).closest('.semester').find('a.add').click();
     }
   });

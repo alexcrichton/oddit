@@ -1,4 +1,3 @@
-<% stylesheet 'majors' %>
 <% javascript 'rails', 'majors' %>
 
 <div class='major'>
@@ -22,6 +21,9 @@
       <%= link_to 'add', add_major_path(:major_id => major), :class => 'add',
             :title => 'Add this major to your plan' %>
     <% end %>
+
+    <%= link_to 'destroy', major, :class => 'remove', :method => :delete,
+          :title => 'Destroy this major' if can? :destroy, major %>
   </div>
 
   <% if children.any? %>
