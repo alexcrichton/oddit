@@ -21,6 +21,9 @@ class MajorsController < ApplicationController
     current_user.major_ids << new_major.id
     current_user.save
 
+    @major.inc(:user_count, -1)
+    new_major.inc(:user_count, 1)
+
     redirect_to [:edit, new_major]
   end
 
@@ -51,7 +54,13 @@ class MajorsController < ApplicationController
 
   def create
     location = nil
-    location = edit_major_path(@major) if @major.save
+    @major.user_count = 1
+    @major.user = current_user
+
+    if @major.save
+      location = edit_major_path(@major)
+      flash[:notice] = 'Major created! You can now edit it some more.'
+    end
 
     respond_with @major, :location => location
   end

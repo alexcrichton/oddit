@@ -4,6 +4,10 @@
 <div class='major'>
   <h2><%= link_to major.name, major %> &mdash; <%= major.year %></h2>
 
+  <div class='count'>
+    Used by <%= pluralize major.user_count, 'person' %>
+  </div>
+
   <div class='links'>
     <%= link_to 'audit', major.audit_url,
           :target => 'blank', :class => 'audit',

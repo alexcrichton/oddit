@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     @major = Major.find(params[:major_id])
     current_user.major_ids << @major.id
     current_user.save
+    @major.inc(:user_count, 1)
 
     respond_with @major do |format|
       format.html { redirect_to root_path }
@@ -34,6 +35,7 @@ class UsersController < ApplicationController
     @major = Major.find(params[:major_id])
     current_user.major_ids.delete @major.id
     current_user.save
+    @major.inc(:user_count, -1)
 
     respond_with @major do |format|
       format.js

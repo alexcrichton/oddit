@@ -9,6 +9,7 @@ class Major
   field :cmu_audit_name
   field :major_file
   field :link
+  field :user_count, :type => Integer, :default => 0
 
   validates_presence_of :name, :year
 
@@ -22,6 +23,14 @@ class Major
     :major_file, :link, :cmu_audit_name
 
   before_destroy :move_children_to_parent
+
+  def self.update_user_counts!
+    Major.all.each { |m|
+      # user_count is a protected attribute
+      m.user_count = User.where(:major_ids => m.id).count
+      m.save!
+    }
+  end
 
   def audit_url
     if college.present? && major_file.present? && cmu_audit_name.present?

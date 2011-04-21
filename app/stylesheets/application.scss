@@ -46,11 +46,11 @@ a {
 
   li {
     border: none;
-    padding: 0 5px;
     display: block;
+    border: 1px solid #333;
 
     &:hover {
-      border: 1px solid white;
+      border-color: white;
       @include border-radius(10px);
     }
 
@@ -58,6 +58,7 @@ a {
       @include unstyled-link;
       cursor: pointer;
       font-size: 18px;
+      padding: 0 10px;
     }
   }
 
