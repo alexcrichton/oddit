@@ -1,5 +1,7 @@
 class Major
   include Mongoid::Document
+  include Mongoid::Ancestry
+  has_ancestry
 
   field :name
   field :year, :type => Integer
@@ -18,6 +20,8 @@ class Major
 
   attr_accessible :name, :year, :requirement_groups_attributes, :college,
     :major_file, :link, :cmu_audit_name
+
+  before_destroy :move_children_to_parent
 
   def audit_url
     if college.present? && major_file.present? && cmu_audit_name.present?
@@ -48,6 +52,12 @@ class Major
         hash[requirement] = requirement.satisfy!(courses, used)
       end
     end
+  end
+
+  protected
+
+  def move_children_to_parent
+    children.each{ |c| c.parent = parent; c.save! }
   end
 
 end

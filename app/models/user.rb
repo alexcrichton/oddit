@@ -1,6 +1,8 @@
 class User
   include Mongoid::Document
 
+  devise :rememberable, :omniauthable
+
   field :andrew_id
   field :email
   field :name
@@ -16,7 +18,7 @@ class User
   after_create :initialize_semesters
 
   def majors
-    @majors ||= Major.where(:_id.in => major_ids).all # Trigger the query
+    @majors ||= Major.where(:_id.in => major_ids).to_a # Trigger the query
   end
 
   def display_name
@@ -43,7 +45,7 @@ class User
   end
 
   def preload_courses!
-    mapping = Hash.new{ |h, k| h[k] = Set.new }
+    mapping    = Hash.new{ |h, k| h[k] = Set.new }
     course_ids = Set.new
     semesters.each{ |s|
       s.course_ids.each{ |id|

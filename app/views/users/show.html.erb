@@ -14,7 +14,9 @@
     <%= image_tag 'icons/exclamation.png' %> = unmet
   </div>
 
-  <%= render @user.majors %>
+  <% @user.majors.each do |major| %>
+    <%= render 'users/major', :major => major %>
+  <% end %>
 
   <% if can? :add_major, @user %>
     <%= form_tag add_major_path, :remote => true, :id => 'add-major' do %>

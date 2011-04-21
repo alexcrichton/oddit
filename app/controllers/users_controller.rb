@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     current_user.save
 
     respond_with @major do |format|
+      format.html { redirect_to root_path }
       format.js { build_cache [@major] if @major }
     end
   end

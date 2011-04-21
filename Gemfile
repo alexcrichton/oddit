@@ -4,6 +4,9 @@ gem 'rails'
 
 gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
+gem 'mongoid-ancestry', :git => 'git://github.com/skyeagle/mongoid-ancestry'
+
+gem 'devise'
 
 group :useful do
   gem 'heroku'

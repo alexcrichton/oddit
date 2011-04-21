@@ -4,23 +4,10 @@
 
 <%= link_to '[new major]', new_major_path %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Year</th>
-    <th></th>
-  </tr>
-
-  <% @majors.each do |major| %>
-    <tr>
-      <td><%= link_to major.name, major %></td>
-      <td><%= major.year %></td>
-      <td>
-        <%= link_to '[edit]', [:edit, major] if can? :update, major %> |
-        <%= link_to '[destroy]', major, :method => :delete if can? :destroy, major %>
-      </td>
-    </tr>
+<div class='majors'>
+  <% @arranged.each do |major, children| %>
+    <%= render major, :children => children %>
   <% end %>
-</table>
+</div>
 
 <%= paginate @majors %>

@@ -4,12 +4,13 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   rescue_from CanCan::AccessDenied do |e|
-    store_location!
+    session['user_return_to'] = request.request_uri if request.get?
+
     if request.format =~ /html/
       flash[:error] = 'Please log in.'
     end
 
-    redirect_to login_path
+    redirect_to new_user_session_path
   end
 
   rescue_from ActionController::RoutingError,
@@ -27,13 +28,8 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new current_user
   end
 
-  def current_user
-    return @current_user if defined?(@current_user)
-    @current_user = User.where(:_id => session[:user_id]).first
-  end
-
-  def store_location!
-    session[:return_to] = request.fullpath
+  def after_sign_out_path_for scope
+    new_user_session_path
   end
 
 end

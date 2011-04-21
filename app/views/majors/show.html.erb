@@ -1,2 +1,5 @@
 <h1>Majors#show</h1>
 <p>Find me in app/views/majors/show.html.erb</p>
+
+<%= link_to '[edit]', [:edit, @major] if can? :update, @major %> |
+<%= link_to '[destroy]', @major, :method => :delete if can? :destroy, @major %>

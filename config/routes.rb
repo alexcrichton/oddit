@@ -16,10 +16,10 @@ AuditMan::Application.routes.draw do
     put :clone, :on => :member
   end
 
-  get 'login'                     => 'sessions#new'
-  match 'auth/:provider/callback' => 'sessions#create'
-  match 'auth/failure'            => 'sessions#failure'
-  match 'logout'                  => 'sessions#destroy'
+  devise_for :users, :controllers => {:omniauth_callbacks => 'omniauth'} do
+    get 'login'  => 'omniauth#new', :as => :new_user_session
+    get 'logout' => 'omniauth#destroy', :as => :destroy_user_session
+  end
 
   get 'users/update_major',    :as => 'update_major'
   post 'users/add_major',      :as => 'add_major'

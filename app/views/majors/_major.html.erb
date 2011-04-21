@@ -1,96 +1,32 @@
-<div class='major' data-id="<%= major.id %>">
-  <fieldset>
+<% stylesheet 'majors' %>
+<% javascript 'rails', 'majors' %>
 
-    <legend>
-      <%= major.name %> <%= major.year %>
+<div class='major'>
+  <h2><%= link_to major.name, major %> &mdash; <%= major.year %></h2>
+
+  <div class='links'>
+    <%= link_to 'audit', major.audit_url, :target => 'blank' if major.audit_url %>
+    <%= link_to 'clone', [:clone, major], :method => :put %>
+    <%= link_to 'edit', [:edit, major] if can? :edit, major %>
+
+    <% if (current_user.nil? || !current_user.major_ids.include?(major.id)) &&
+          can?(:add_major, current_user) %>
+      <%= link_to 'add', add_major_path(:major_id => major) %>
+    <% end %>
+  </div>
+
+  <% if children.any? %>
+    <a href='#' class='info'>
+      [<span class='expand'>+</span>]
       <span class='count'>
-        (<%= completed_requirements_count major %> /
-        <%= requirements_count major %>)
+        <%= pluralize children.size, 'cloned major' %>
       </span>
-    </legend>
+    </a>
 
-    <div class='content'>
-      <div class='more'>
-        <%= check_box_tag "show_completed_#{major.id}", '0', false,
-              :class => 'show_completed' %>
-        <%= label_tag "show_completed_#{major.id}",
-              'Show completed requirements?' %>
-      </div>
-
-      <% major.requirement_groups.each do |group| %>
-        <div class='group'>
-          <h4>
-            <%= group.name %>
-            (<%= completed_requirements_count group %> /
-            <%= requirements_count group %>)
-          </h4>
-
-          <% group.requirements.each do |req| %>
-            <% klass = requirement_class major, req %>
-            <div class='req<%= klass %>'
-                 <%= raw("style='display:none'") if klass == ' completed' %>
-                 data-scheduled="<%= scheduled_data major, req %>">
-              <%= link_to '#', :class => 'name' do %>
-                <%= req.name %>
-
-                <% if req.required > 1 %>
-                  (<%= @cache[major][req].size %> / <%= req.required %>)
-                <% end %>
-              <% end %>
-
-              <ul style='display:none'>
-                <% req.courses.each do |course| %>
-                  <li class='<%= course_class(major, req, course) %>'>
-                    <span class='course new' data-id="<%= course.id %>">
-                      <%= course.pretty_name %>
-                    </span>
-                  </li>
-                <% end %>
-
-                <% if req.use_others_in_group %>
-                  <li>
-                    Any other course in <%= req.requirement_group.name %>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-
-        </div>
+    <div class='majors'>
+      <% children.each do |m, c| %>
+        <%= render m, :children => c %>
       <% end %>
-
-      <div class='links'>
-        <% if can? :remove_major, @user %>
-          <%= link_to '[X]', remove_major_path(:major_id => major),
-                :method  => :delete,
-                :remote  => true,
-                :confirm => 'Are you sure?',
-                :class   => 'remove',
-                :title   => 'Remove this major' %>
-        <% end %>
-
-        <% if can? :update, major %>
-          <%= link_to '[edit]', [:edit, major],
-                :class => 'edit', :title => 'Edit major requirements' %>
-        <% elsif can? :clone, major %>
-          <%= link_to '[clone]', [:clone, major], :class => 'clone',
-                :method => :put,
-                :title => 'Clone this major so you can edit it' %>
-        <% end %>
-
-        <% if major.audit_url %>
-          <%= link_to '[audit]', major.audit_url, :class => 'audit',
-                :title => 'View CMU Audit', :target => 'blank' %>
-        <% end %>
-
-        <% if major.link %>
-          <%= link_to '[info]', major.link, :class => 'info',
-                :target => 'blank', :target => 'Official requirement list' %>
-        <% end %>
-      </div>
     </div>
-
-    <%= link_to 'show/hide', '#', :class => 'show-hide',
-          :title => 'Show/hide major' %>
-  </fieldset>
+  <% end %>
 </div>

@@ -41,7 +41,7 @@ class Semester
   def courses
     # Can mongoid do has_and_belongs_to_many where it doesn't update the other
     # end?
-    @courses = nil if course_ids_changed?
+    # @courses = nil if course_ids_changed?
     @courses ||= Course.where(:_id.in => course_ids)
   end
 

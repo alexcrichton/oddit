@@ -5,13 +5,16 @@ class MajorsController < ApplicationController
   respond_to :html
 
   def index
-    @majors = @majors.page(params[:page]).per(20)
+    @majors = @majors.roots.page(params[:page]).per(10)
+    @arranged = Major.any_of(@majors.map(&:subtree_conditions).flatten).
+      order(:name.asc).arrange
     respond_with @majors
   end
 
   def clone
     new_major = @major.clone
     new_major.user_id = current_user.id
+    new_major.parent = @major
     new_major.save!
 
     current_user.major_ids.delete @major.id
