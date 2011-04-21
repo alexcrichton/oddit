@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   rescue_from CanCan::AccessDenied do |e|
-    session['user_return_to'] = request.request_uri if request.get?
+    session['user_return_to'] = request.fullpath if request.get?
 
     if request.format =~ /html/
       flash[:error] = 'Please log in.'
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
               ActionController::UnknownAction,
               BSON::InvalidObjectId do |exception|
 
-    @exception     = exception
+    @exception = exception
 
     render :template => 'errors/404',
            :layout   => 'application',

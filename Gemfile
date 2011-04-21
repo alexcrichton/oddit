@@ -4,8 +4,11 @@ gem 'rails'
 
 gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
+
+# Building the tree-structure of majors
 gem 'mongoid-ancestry', :git => 'git://github.com/skyeagle/mongoid-ancestry'
 
+# Managing user sessions/remembering them
 gem 'devise'
 
 group :useful do

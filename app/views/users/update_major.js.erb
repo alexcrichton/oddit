@@ -1,4 +1,4 @@
-var major = $("<%= escape_javascript render(@major) %>");
+var major = $("<%= escape_javascript render('users/major', :major => @major) %>");
 
 var old = $('.major[data-id=<%= @major.id %>]');
 
