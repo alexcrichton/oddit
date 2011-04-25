@@ -103,7 +103,7 @@
       right: 3px;
     }
 
-    &:hover a.info {
+    &:hover a.icon-info {
       right: 20px;
     }
 
@@ -133,7 +133,7 @@
     }
 
     input#course_name {
-      background: image-url('icons/search.png') no-repeat right;
+      background: image-url('icon/search.png') no-repeat right;
       margin-left: 10px;
       height: 18px;
       width: 170px;
@@ -186,16 +186,16 @@
       border: none;
     }
 
-    background: image-url('icons/exclamation.png') no-repeat top right;
+    background: image-url('icon/exclamation.png') no-repeat top right;
     background-color: lighten(red, 40%);
 
     &.completed {
-      background: image-url('icons/accept.png') no-repeat top right;
+      background: image-url('icon/accept.png') no-repeat top right;
       background-color: #e4f9cb;
     }
 
     &.planned {
-      background: image-url('icons/puzzle.png') no-repeat top right;
+      background: image-url('icon/puzzle.png') no-repeat top right;
       background-color: #cadaef;
     }
 

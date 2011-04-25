@@ -20,12 +20,12 @@
                data-units="<%= course.units %>">
             <%= link_to '[info]',
                    course.info_url,
-                   :class => 'info', :target => 'blank',
+                   :class => 'icon-info', :target => 'blank',
                    :title => 'Course information on ScheduleMan' %>
             <%= link_to '[X]',
                    remove_semester_path(semester, :course_id => course),
                    :method => :delete, :remote => true,
-                   :class => 'remove', :title => 'Remove course' %>
+                   :class => 'icon-remove', :title => 'Remove course' %>
 
             <span class='number'><%= course.number %></span>
             <span class='name'><%= truncate course.name, :length => 25 %></span>
@@ -47,29 +47,29 @@
       <div class='links'>
         <% if can? :remove, semester %>
           <%= link_to '[X]', semester, :method => :delete, :remote => true,
-                :confirm => 'Are you sure?', :class => 'remove',
+                :confirm => 'Are you sure?', :class => 'icon-remove',
                 :title => 'Delete this semester' %>
         <% end %>
 
         <% if can? :sync, semester %>
           <%= link_to '[sync]', [:sync, semester], :method => :put,
-              :remote => true, :class => 'sync',
+              :remote => true, :class => 'icon-refresh',
               :title => 'Sync with ScheduleMan' %>
         <% end %>
 
         <% if can? :update, semester %>
           <%= link_to '[edit]', [:edit, semester], :remote => true,
-                :class => 'edit', :title => 'Edit semester settings' %>
+                :class => 'icon-tool', :title => 'Edit semester settings' %>
         <% end %>
 
         <% if can? :add_course, semester %>
-          <%= link_to '[add]', '#', :class => 'add',
+          <%= link_to '[add]', '#', :class => 'icon-add',
                 :title => 'Add a course/Hide search box' %>
         <% end %>
 
         <% if semester.scheduleman_url %>
           <%= link_to '[sman]', semester.scheduleman_url,
-                :class => 'scheduleman',
+                :class => 'icon-scheduleman',
                 :title => 'See schedule on ScheduleMan',
                 :target => 'blank' %>
         <% end %>

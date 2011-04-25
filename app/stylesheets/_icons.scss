@@ -1,58 +1,34 @@
-.links a {
+@import "icon/*.png";
+@include all-icon-sprites;
+
+.links a, .course .icon-info, .course .icon-remove {
   display: inline-block;
+  height: 16px;
+  width: 16px;
+  @include hide-text;
 }
 
 a.show-hide {
   position: absolute;
   display: block;
-  @include replace-text-with-dimensions('icons/up.png');
+  height: 16px;
+  width: 16px;
+  @include hide-text;
 
+  @include icon-sprite(up);
   &.other {
-    @include replace-text-with-dimensions('icons/download.png');
+    @include icon-sprite(download);
   }
 }
 
 .completed a.show-hide, .hiding a.show-hide {
-  @include replace-text-with-dimensions('icons/download.png');
+  @include icon-sprite(download);
 
   &.other {
-    @include replace-text-with-dimensions('icons/up.png');
+    @include icon-sprite(up);
   }
 }
 
-a.remove {
-  @include replace-text-with-dimensions('icons/remove.png');
-}
-
-a.sync {
-  @include replace-text-with-dimensions('icons/refresh.png');
-}
-
-a.edit {
-  @include replace-text-with-dimensions('icons/tool.png');
-}
-
-a.audit {
-  @include replace-text-with-dimensions('icons/email.png');
-}
-
-a.info {
-  @include replace-text-with-dimensions('icons/info.png');
-}
-
-a.scheduleman {
-  @include replace-text-with-dimensions('icons/scheduleman.png');
-}
-
-a.clone {
-  @include replace-text-with-dimensions('icons/add_page.png');
-}
-
-a.add {
-  @include replace-text-with-dimensions('icons/add.png');
-
-  &.other {
-    opacity: 0.5;
-/*    display: none !important;*/
-  }
+a.icon-add.other {
+  opacity: 0.5;
 }

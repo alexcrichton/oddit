@@ -16,5 +16,21 @@ environment     = Compass::AppIntegration::Rails.env
 
 if Rails.env.production?
   output_style = :compressed
-  css_dir      = 'tmp/stylesheets' # For Heroku
+  css_dir      = 'tmp/stylesheets'
 end
+
+require 'compass/sass_extensions/sprites/base'
+
+module AuditMan::CompassHack
+  def filename
+    if Rails.env.production?
+      Rails.root.join('tmp/images')
+    else
+      super
+    end
+  end
+end
+
+Compass::SassExtensions::Sprites::Base.class_eval {
+  include AuditMan::CompassHack
+}

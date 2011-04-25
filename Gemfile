@@ -34,3 +34,8 @@ gem 'oa-openid'
 
 # Pagination
 gem 'kaminari'
+
+group :production do
+  # Memcache client
+  gem 'dalli'
+end

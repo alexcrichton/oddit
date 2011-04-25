@@ -119,7 +119,7 @@ $(function() {
   });
 
   // Showing/hiding add course form
-  $('#semesters .add').live('click', function() {
+  $('#semesters .icon-add').live('click', function() {
     $(this).closest('.semester').find('form').toggle().
         find('input:text').focus();
     $(this).toggleClass('other');
@@ -129,7 +129,7 @@ $(function() {
   // Escape closes add course form
   $('#semesters input:text').live('keydown', function(e) {
     if (e.keyCode == 27 && $(this).is(':visible')) { // ESC key
-      $(this).closest('.semester').find('a.add').click();
+      $(this).closest('.semester').find('a.icon-add').click();
     }
   });
 });

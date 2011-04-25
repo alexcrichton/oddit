@@ -20,7 +20,7 @@ a {
 }
 
 #header {
-  @include linear-gradient(color-stops(#333 95%, #fff), top);
+  @include background-image(linear-gradient(top, #333333 95%, #ffffff));
   height: 65px;
 
   .content {

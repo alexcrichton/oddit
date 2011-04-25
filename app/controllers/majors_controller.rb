@@ -83,6 +83,7 @@ class MajorsController < ApplicationController
 
   def destroy
     @major.destroy
+    flash[:notice] = 'Major removed.'
 
     respond_with :majors
   end

@@ -29,6 +29,7 @@ AuditMan::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
+  # config.cache_store = :dalli_store
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
@@ -41,7 +42,7 @@ AuditMan::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable threaded mode
-  # config.threadsafe!
+  config.threadsafe!
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
@@ -57,7 +58,7 @@ AuditMan::Application.configure do
 
   config.app_middleware.insert_before Rack::Runtime,
       ::Rack::Static,
-      :urls => ['/stylesheets', '/javascripts'],
+      :urls => ['/stylesheets', '/javascripts', '/images'],
       :root => Rails.root.join('tmp').to_s
 
 end

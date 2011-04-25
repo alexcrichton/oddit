@@ -65,26 +65,26 @@
                 :method  => :delete,
                 :remote  => true,
                 :confirm => 'Are you sure?',
-                :class   => 'remove',
+                :class   => 'icon-remove',
                 :title   => 'Remove this major' %>
         <% end %>
 
         <% if can? :update, major %>
           <%= link_to '[edit]', [:edit, major],
-                :class => 'edit', :title => 'Edit major requirements' %>
+                :class => 'icon-tool', :title => 'Edit major requirements' %>
         <% elsif can? :clone, major %>
-          <%= link_to '[clone]', [:clone, major], :class => 'clone',
+          <%= link_to '[clone]', [:clone, major], :class => 'icon-add_page',
                 :method => :put,
                 :title => 'Clone this major so you can edit it' %>
         <% end %>
 
         <% if major.audit_url %>
-          <%= link_to '[audit]', major.audit_url, :class => 'audit',
+          <%= link_to '[audit]', major.audit_url, :class => 'icon-email',
                 :title => 'View CMU Audit', :target => 'blank' %>
         <% end %>
 
         <% if major.link %>
-          <%= link_to '[info]', major.link, :class => 'info',
+          <%= link_to '[info]', major.link, :class => 'icon-info',
                 :target => 'blank', :target => 'Official requirement list' %>
         <% end %>
       </div>
