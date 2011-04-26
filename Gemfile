@@ -13,9 +13,7 @@ gem 'devise'
 
 group :useful do
   gem 'heroku'
-
-  # OpenID URLs are huge
-  gem 'mongrel', '>= 1.2.0.pre2'
+  gem 'mongrel', '>= 1.2.0.pre2' # OpenID URLs are huge
 end
 
 gem 'paste', :git => 'git://github.com/alexcrichton/paste.git'
