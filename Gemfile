@@ -20,6 +20,7 @@ end
 
 gem 'paste', :git => 'git://github.com/alexcrichton/paste.git'
 gem 'compass'
+gem 'oily_png' # Faster C extension for compass sprite creation
 gem 'cancan'
 
 # Parsing the course list from CMU's SOC

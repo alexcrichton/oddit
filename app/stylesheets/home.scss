@@ -5,6 +5,9 @@
   cursor: move;
 }
 
+/******************************************************************************/
+/* Semesters */
+/******************************************************************************/
 #semesters {
   float: left;
   width: 65%;
@@ -134,6 +137,7 @@
 
     input#course_name {
       background: image-url('icon/search.png') no-repeat right;
+
       margin-left: 10px;
       height: 18px;
       width: 170px;
@@ -154,6 +158,9 @@
   }
 }
 
+/******************************************************************************/
+/* Majors */
+/******************************************************************************/
 #majors {
   float: right;
   width: 33%;
@@ -181,21 +188,28 @@
     margin: 2px;
     padding: 2px;
     border-top: 1px dotted black;
+    position: relative;
 
     &:first-of-type {
       border: none;
     }
 
-    background: image-url('icon/exclamation.png') no-repeat top right;
+    /* Different icon for each requirement class */
+    .icon {
+      @include icon-sprite(exclamation);
+      position: absolute;
+      right: 3px;
+      top: 3px;
+    }
     background-color: lighten(red, 40%);
 
     &.completed {
-      background: image-url('icon/accept.png') no-repeat top right;
+      .icon { @include icon-sprite(accept); }
       background-color: #e4f9cb;
     }
 
     &.planned {
-      background: image-url('icon/puzzle.png') no-repeat top right;
+      .icon { @include icon-sprite(puzzle); }
       background-color: #cadaef;
     }
 
@@ -233,6 +247,7 @@
   }
 }
 
+/* Make sure these always show up on top */
 .qtip {
   z-index: 100000;
 }
@@ -247,18 +262,7 @@
   }
 }
 
-#add-major {
-  span {
-    width: 100%;
-    display: inline-block;
-
-    input {
-      width: 100%;
-      font-size: 14px;
-    }
-  }
-
-  .new {
-    float: right;
-  }
+/* Legend for the majors */
+.legend span {
+  display: inline-block;
 }

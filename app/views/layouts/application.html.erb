@@ -2,9 +2,9 @@
 <html>
   <head>
     <title>AuditMan</title>
+    <%= csrf_meta_tag %>
     <%= stylesheet_tags 'application' %>
     <%= javascript_tags %>
-    <%= csrf_meta_tag %>
   </head>
   <body>
 
@@ -12,9 +12,11 @@
       <div class='content'>
         <div class='logo'><%= link_to 'AuditMan', root_path %></div>
 
-        <ul class='links'>
-          <li><%= link_to 'Majors', majors_path %></li>
-        </ul>
+        <nav>
+          <ul>
+            <li><%= link_to 'Majors', majors_path %></li>
+          </ul>
+        </nav>
 
         <div class='user-info'>
           <% if current_user %>

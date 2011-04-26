@@ -1,18 +1,15 @@
+$icon-sprite-dimensions: true;
 @import "icon/*.png";
 @include all-icon-sprites;
 
 .links a, .course .icon-info, .course .icon-remove {
   display: inline-block;
-  height: 16px;
-  width: 16px;
   @include hide-text;
 }
 
 a.show-hide {
   position: absolute;
   display: block;
-  height: 16px;
-  width: 16px;
   @include hide-text;
 
   @include icon-sprite(up);

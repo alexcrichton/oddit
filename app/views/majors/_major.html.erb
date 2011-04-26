@@ -9,20 +9,20 @@
 
   <div class='links'>
     <%= link_to 'audit', major.audit_url,
-          :target => 'blank', :class => 'audit',
+          :target => 'blank', :class => 'icon-email',
           :title => "See your official audit for this major" if major.audit_url %>
-    <%= link_to 'clone', [:clone, major], :method => :put, :class => 'clone',
-          :title => 'Clone this major to edit it' %>
-    <%= link_to 'edit', [:edit, major], :class => 'edit',
+    <%= link_to 'clone', [:clone, major], :method => :put,
+          :class => 'icon-add_page', :title => 'Clone this major to edit it' %>
+    <%= link_to 'edit', [:edit, major], :class => 'icon-tool',
           :title => 'Edit this major' if can? :edit, major %>
 
     <% if (current_user.nil? || !current_user.major_ids.include?(major.id)) &&
           can?(:add_major, current_user) %>
-      <%= link_to 'add', add_major_path(:major_id => major), :class => 'add',
-            :title => 'Add this major to your plan' %>
+      <%= link_to 'add', add_major_path(:major_id => major),
+            :class => 'icon-add', :title => 'Add this major to your plan' %>
     <% end %>
 
-    <%= link_to 'destroy', major, :class => 'remove', :method => :delete,
+    <%= link_to 'destroy', major, :class => 'icon-remove', :method => :delete,
           :title => 'Destroy this major' if can? :destroy, major %>
   </div>
 

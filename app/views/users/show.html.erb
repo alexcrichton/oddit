@@ -9,9 +9,9 @@
 
 <div id='majors'>
   <div class='legend'>
-    <%= image_tag 'icon/puzzle.png' %> = planned,
-    <%= image_tag 'icon/accept.png' %> = completed,
-    <%= image_tag 'icon/exclamation.png' %> = unmet
+    <span class='icon-puzzle'></span> = planned,
+    <span class='icon-accept'></span> = completed,
+    <span class='icon-exclamation'></span> = unmet
   </div>
 
   <% @user.majors.each do |major| %>
