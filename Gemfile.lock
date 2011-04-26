@@ -120,6 +120,8 @@ GEM
     oauth2 (0.4.1)
       faraday (~> 0.6.1)
       multi_json (>= 0.0.5)
+    oily_png (1.0.0)
+      chunky_png (~> 1.0)
     orm_adapter (0.0.4)
     polyglot (0.3.1)
     rack (1.2.2)
@@ -176,6 +178,7 @@ DEPENDENCIES
   nokogiri
   oa-oauth
   oa-openid
+  oily_png
   paste!
   rails
   ri_cal
