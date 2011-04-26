@@ -18,7 +18,7 @@ module MajorsHelper
 
   def requirement_class major, req
     if satisfied?(major, req)
-      semesters = @cache[major][req].map{ |c| current_user.semester_of(c) }
+      semesters = @cache[major][req].map{ |c| @user.semester_of(c) }
 
       if semesters.all?{ |s| s.state == 'completed' }
         ' completed'
@@ -34,7 +34,7 @@ module MajorsHelper
 
   def scheduled_data major, req
     @cache[major][req].map{ |a|
-      [a.id, current_user.semester_of(a).id]
+      [a.id, @user.semester_of(a).id]
     }.to_json
   end
 
