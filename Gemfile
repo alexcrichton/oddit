@@ -14,6 +14,10 @@ gem 'devise'
 group :useful do
   gem 'heroku'
   gem 'mongrel', '>= 1.2.0.pre2' # OpenID URLs are huge
+
+  gem 'guard-bundler'
+  gem 'guard-livereload'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
 end
 
 gem 'paste', :git => 'git://github.com/alexcrichton/paste.git'
