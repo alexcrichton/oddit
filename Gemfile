@@ -41,4 +41,5 @@ gem 'kaminari'
 group :production do
   # Memcache client
   gem 'dalli'
+  gem 'rack-ssl', :require => 'rack/ssl'
 end

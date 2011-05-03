@@ -56,6 +56,7 @@ AuditMan::Application.configure do
 
   ActionView::Helpers::AssetTagHelper.cache_asset_timestamps = false
 
+  config.app_middleware.insert_before Rack::Runtime, Rack::SSL
   config.app_middleware.insert_before Rack::Runtime,
       ::Rack::Static,
       :urls => ['/stylesheets', '/javascripts', '/images'],
