@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def add_major
+    @user = current_user
     @major = Major.find(params[:major_id])
     current_user.major_ids << @major.id
     current_user.save
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
   end
 
   def remove_major
+    @user = current_user
     @major = Major.find(params[:major_id])
     current_user.major_ids.delete @major.id
     current_user.save
@@ -43,6 +45,7 @@ class UsersController < ApplicationController
   end
 
   def update_major
+    @user = current_user
     @major = Major.find(params[:major_id])
 
     respond_with @major do |format|
