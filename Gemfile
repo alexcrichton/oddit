@@ -17,7 +17,7 @@ group :useful do
 
   gem 'guard-bundler'
   gem 'guard-livereload'
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent', :require => false
 end
 
 gem 'paste', :git => 'git://github.com/alexcrichton/paste.git'
