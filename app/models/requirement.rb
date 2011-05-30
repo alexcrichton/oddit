@@ -8,7 +8,6 @@ class Requirement
   field :pattern
 
   validates_presence_of :name
-  validates_size_of :course_ids, :minimum => 1, :unless => :use_others_in_group
 
   embedded_in :requirement_group
 
