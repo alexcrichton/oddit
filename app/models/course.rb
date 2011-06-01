@@ -29,6 +29,7 @@ class Course
   end
 
   def self.import_from_url! url
+    require 'nokogiri'
     n = Nokogiri::HTML(open(url).read)
 
     n.css('tr').each{ |row|
