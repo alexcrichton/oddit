@@ -1,0 +1,271 @@
+//= require jquery/ui
+//= require _icons
+
+@import "compass";
+/*@import "icons";*/
+
+.course {
+  cursor: move;
+}
+
+/******************************************************************************/
+/* Semesters */
+/******************************************************************************/
+#semesters {
+  float: left;
+  width: 65%;
+
+  .completed legend {
+    color: green;
+  }
+
+  .in_progress legend {
+    color: darken(yellow, 15%);
+  }
+
+  fieldset {
+    overflow: auto;
+    padding: 8px 0 3px 0;
+    min-height: 19px;
+    border: 3px solid #666;
+    @include border-radius(7px);
+  }
+
+  legend {
+    font-weight: bold;
+    padding: 0 10px;
+    margin-left: 10px;
+
+    .edit {
+      @include unstyled-link;
+      padding: 1px 4px;
+      margin-top: 3px;
+      display: inline-block;
+
+      &:hover {
+        padding: 0 3px;
+        border: 1px solid black;
+        background: lighten(yellow, 40%);
+      }
+    }
+  }
+
+  .links {
+    clear: both;
+  }
+
+  $block_height: 225px;
+  $block_width: 272px;
+
+  .courses {
+    overflow-y: auto;
+    height: $block_height - 60px;
+    margin: 0 8px;
+  }
+
+  .drag {
+    position: absolute;
+    width: 220px;
+    font-size: 20px;
+    color: #aaa;
+    padding-top: 50px;
+    margin: 10px;
+    text-align: center;
+    height: 80px;
+    border: 2px dashed #878;
+    @include border-radius(15px);
+  }
+
+  .semester.selected legend {
+    background: lighten(green, 65%);
+  }
+
+  .course {
+    padding: 1px;
+    position: relative;
+    border-top: 1px dashed #888;
+
+    &:first-of-type {
+      border: none;
+    }
+
+    &.selected {
+      background: lighten(green, 65%);
+    }
+
+    .name {
+      width: 165px;
+      display: inline-block;
+    }
+
+    a {
+      display: none;
+      padding: 0 2px;
+    }
+
+    &:hover a {
+      display: block;
+      position: absolute;
+      right: 3px;
+    }
+
+    &:hover a.icon-info {
+      right: 20px;
+    }
+
+    .units {
+      display: inline-block;
+      width: 15px;
+      text-align: center;
+    }
+  }
+
+  .semester {
+    margin: 5px 5px 10px 5px;
+    width: $block_width;
+    float: left;
+    position: relative;
+
+    form {
+      display: none;
+    }
+
+    &:nth-child(odd) {
+      clear: left;
+    }
+
+    .completed {
+      display: none;
+    }
+
+    input#course_name {
+      background: url(<%= asset_path 'icon/search.png' %>) no-repeat right;
+
+      margin-left: 10px;
+      height: 18px;
+      width: 170px;
+      font-size: 14px;
+      padding-right: 20px;
+    }
+
+    .show-hide {
+      right: 10px;
+      bottom: 6px;
+    }
+  }
+
+  .ui-state-highlight {
+    height: 20px;
+    width: 98%;
+    display: inline-block;
+  }
+}
+
+/******************************************************************************/
+/* Majors */
+/******************************************************************************/
+#majors {
+  float: right;
+  width: 33%;
+
+  .major {
+    position: relative;
+  }
+
+  fieldset {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 5px 0;
+
+    .show-hide {
+      right: 13px;
+      bottom: 11px;
+    }
+  }
+
+  dt {
+    font-weight: bold;
+  }
+
+  .req {
+    margin: 2px;
+    padding: 2px;
+    border-top: 1px dotted black;
+    position: relative;
+
+    &:first-of-type {
+      border: none;
+    }
+
+    /* Different icon for each requirement class */
+    .icon {
+      @include replace-text-with-dimensions('icon/exclamation.png');
+      position: absolute;
+      right: 3px;
+      top: 3px;
+    }
+    background-color: lighten(red, 40%);
+
+    &.completed {
+      .icon { @include replace-text-with-dimensions('icon/accept.png'); }
+      background-color: #e4f9cb;
+    }
+
+    &.planned {
+      .icon { @include replace-text-with-dimensions('icon/puzzle.png'); }
+      background-color: #cadaef;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 5px;
+    }
+
+    li {
+      padding: 5px 5px;
+      margin: 0px 5px;
+    }
+
+    .taken {
+      font-weight: bold;
+    }
+  }
+
+  .name {
+    width: 100%;
+    display: inline-block;
+    padding: 3px;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: lighten(black, 50%);
+    }
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 13px;
+  }
+}
+
+/* Make sure these always show up on top */
+.qtip {
+  z-index: 100000;
+}
+
+.links {
+  padding-top: 4px;
+
+  a {
+    margin-left: 5px;
+    display: block;
+    float: left;
+  }
+}
+
+/* Legend for the majors */
+.legend span {
+  display: inline-block;
+}

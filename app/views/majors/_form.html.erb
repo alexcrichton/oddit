@@ -1,5 +1,9 @@
-<% javascript 'rails', 'majors/form', 'tooltip' %>
-<% stylesheet 'majors/form' %>
+<% provide :stylesheets do %>
+  <%= stylesheet_link_tag 'majors/form' %>
+<% end %>
+<% provide :javascripts do %>
+  <%= javascript_include_tag 'majors/form' %>
+<% end %>
 
 <%= form_for @major do |f| %>
   <%= render 'shared/error_messages', :target => @major %>

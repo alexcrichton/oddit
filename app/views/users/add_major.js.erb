@@ -1,6 +1,6 @@
 <% if @major %>
   var form = $('#majors form');
-  var newEl = $("<%= escape_javascript render(@major) %>");
+  var newEl = $("<%= j render(@major) %>");
   newEl.insertBefore(form);
   form.find(':text, #major_id').val('')
   form.find('.field_with_errors').removeClass('.field_with_errors');

@@ -16,13 +16,12 @@ class Major
   field :link
   field :user_count, :type => Integer, :default => 0
 
-  validates_presence_of :name, :year
-
   belongs_to :user
   embeds_many :requirement_groups
   accepts_nested_attributes_for :requirement_groups, :allow_destroy => true
 
   scope :search, lambda{ |q| where(:name => /#{q}/i) }
+  scope :valid, where(:name.nin => [nil, ''], :year.ne => nil)
 
   attr_accessible :name, :year, :requirement_groups_attributes, :college,
     :major_file, :link, :cmu_audit_name

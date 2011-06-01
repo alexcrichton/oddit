@@ -1,0 +1,108 @@
+//= require _errors
+//= require _dl
+
+@import "blueprint/typography";
+@import "compass";
+
+/*@import "errors";*/
+/*@import "dl";*/
+
+body {
+  @include blueprint-typography-body(12px);
+  padding: 0;
+  margin: 0;
+}
+
+a img {
+  border: none;
+}
+
+a {
+  color: #0000FF;
+}
+
+#header {
+  @include background-image(linear-gradient(top, #333333 95%, #ffffff));
+  height: 65px;
+
+  .content {
+    width: 900px;
+    color: white;
+    margin: 0 auto;
+  }
+
+  .logo {
+    float: left;
+    font-size: 40px;
+    a {
+      @include unstyled-link;
+      cursor: pointer;
+    }
+  }
+
+  ul {
+    float: left;
+    @include horizontal-list;
+    margin: 25px 0 0 50px;
+  }
+
+  li {
+    border: none;
+    display: block;
+    border: 1px solid #333;
+
+    &:hover {
+      border-color: white;
+      @include border-radius(10px);
+    }
+
+    a {
+      @include unstyled-link;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 0 10px;
+    }
+  }
+
+  .user-info {
+    float: right;
+
+    a {
+      @include unstyled-link;
+
+      &:hover {
+        color: #aaa;
+      }
+    }
+  }
+}
+
+#main {
+  width: 900px;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 20px 40px;
+  overflow: auto;
+}
+
+.flash {
+  &.notice, &.error, &.alert {
+    padding: 5px 8px;
+    margin: 10px 0;
+  }
+
+  &.notice {
+    background-color: #CFC;
+    border: solid 1px #6C6;
+  }
+
+  &.error, &.alert {
+    background-color: #FCC;
+    border: solid 1px #C66;
+  }
+
+}
+
+form .actions {
+  margin-top: 20px;
+}

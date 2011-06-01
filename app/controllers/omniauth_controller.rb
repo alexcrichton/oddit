@@ -1,6 +1,7 @@
 class OmniauthController < Devise::OmniauthCallbacksController
 
   include Devise::Controllers::Rememberable
+  stream
 
   def new
   end

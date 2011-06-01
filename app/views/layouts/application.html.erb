@@ -3,8 +3,12 @@
   <head>
     <title>AuditMan</title>
     <%= csrf_meta_tag %>
-    <%= stylesheet_tags 'application' %>
-    <%= javascript_tags %>
+    <%= favicon_link_tag %>
+
+    <%= stylesheet_link_tag 'application' %>
+    <%= yield :stylesheets %>
+    <%= javascript_include_tag 'rails' %>
+    <%= yield :javascripts %>
   </head>
   <body>
 

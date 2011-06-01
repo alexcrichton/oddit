@@ -1,0 +1,11 @@
+#= require jquery
+#= require jquery_ujs
+
+window.ajaxSmall = '<img src="<%= asset_path "ajax-small.gif" %>"/>'
+
+jQuery ->
+  $('a[data-remote]').live 'ajax:beforeSend', ->
+    $(ajaxSmall).insertAfter(this)
+
+  $('a[data-remote]').live 'ajax:complete', ->
+    $(this).next('img').remove()

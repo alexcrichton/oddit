@@ -1,5 +1,9 @@
-<% javascript 'rails' %>
-<% stylesheet 'majors' %>
+<% provide :stylesheets do %>
+  <%= stylesheet_link_tag 'majors' %>
+<% end %>
+<% provide :javascripts do %>
+  <%= javascript_include_tag 'majors' %>
+<% end %>
 
 <div class='title'>
   <h1><%= params[:q].present? ? 'Search Results' : 'Listing Majors' %></h1>

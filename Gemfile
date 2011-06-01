@@ -1,7 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.0.7'
-gem 'rake', '0.8.7'
+gem 'rails', '3.1.0.rc1'
 
 gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
@@ -21,13 +20,14 @@ group :useful do
   gem 'rb-fsevent', :require => false
 end
 
-gem 'paste', :git => 'git://github.com/alexcrichton/paste.git'
+gem 'jquery-rails'
 gem 'compass'
-gem 'oily_png' # Faster C extension for compass sprite creation
+gem 'sass'
+gem 'coffee-script'
 gem 'cancan'
 
 # Parsing the course list from CMU's SOC
-gem 'nokogiri'
+gem 'nokogiri', :require => false
 
 # Parsing scheduleman ics feeds
 gem 'ri_cal'
@@ -42,5 +42,5 @@ gem 'kaminari'
 group :production do
   # Memcache client
   gem 'dalli'
-  gem 'rack-ssl', :require => 'rack/ssl'
+  gem 'uglifier'
 end

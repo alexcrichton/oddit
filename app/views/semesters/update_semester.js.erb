@@ -2,7 +2,7 @@ var area = $('#semesters [data-id=<%= @semester.id %>]');
 $('.ui-dialog-content').dialog('destroy');
 
 <% if @course || params[:action] =~ /sync|update/ %>
-  var newEl = $("<%= escape_javascript render(@semester) %>");
+  var newEl = $("<%= j render(@semester) %>");
   area.replaceWith(newEl);
 
   bindAutocomplete(newEl.find(':text'));

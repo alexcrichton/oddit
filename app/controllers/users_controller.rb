@@ -7,13 +7,12 @@ class UsersController < ApplicationController
   respond_to :html
 
   def show
-    build_cache @user.majors
     respond_with @user
   end
 
   def home
     @user = current_user
-    build_cache @user.majors
+
     respond_with @user do |format|
       format.html { render 'show' }
     end
@@ -54,12 +53,6 @@ class UsersController < ApplicationController
   end
 
   protected
-
-  def build_cache majors
-    @user.preload_courses!
-    @cache = {}
-    majors.each{ |m| @cache[m] = m.satisfy_requirements(@user) }
-  end
 
   def find_user
     @user = User.where(:andrew_id => params[:id]).first ||

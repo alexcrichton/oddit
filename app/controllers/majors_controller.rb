@@ -5,9 +5,9 @@ class MajorsController < ApplicationController
   respond_to :html
 
   def index
-    @majors = @majors.roots.page(params[:page]).per(10)
+    @majors = @majors.roots.valid.page(params[:page]).per(10)
     @arranged = Major.any_of(@majors.map(&:subtree_conditions).flatten).
-      order(:name.asc).arrange
+      order(:name.asc).valid.arrange
     respond_with @majors
   end
 
@@ -53,26 +53,16 @@ class MajorsController < ApplicationController
   end
 
   def new
-    respond_with @major
+    @major = Major.create! do |m|
+      m.user_count = 1
+      m.user       = current_user
+    end
+
+    redirect_to [:edit, @major]
   end
 
   def edit
     respond_with @major
-  end
-
-  def create
-    location          = nil
-    @major.user_count = 1
-    @major.user       = current_user
-
-    if @major.save
-      location = edit_major_path(@major)
-      current_user.major_ids << @major.id
-      current_user.save!
-      flash[:notice] = 'Major created! You can now edit it some more.'
-    end
-
-    respond_with @major, :location => location
   end
 
   def update
