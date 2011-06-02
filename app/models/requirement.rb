@@ -7,12 +7,14 @@ class Requirement
   field :course_ids, :type => Array, :default => []
   field :pattern
 
-  validates_presence_of :name
-
   embedded_in :requirement_group
 
   attr_accessible :name, :course_ids, :required, :use_others_in_group
   attr_accessor :courses
+
+  def display_name
+    name or "Requirement"
+  end
 
   def course_ids= str
     # Forms submit a comma-separated list of IDs, split it here

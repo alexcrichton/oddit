@@ -12,7 +12,7 @@
     <ul>
       <% group.requirements.each do |req| %>
         <li>
-          <%= req.name %>
+          <%= req.display_name %>
           <%= "(#{req.required})" if req.required > 1 %>
 
           <ul>

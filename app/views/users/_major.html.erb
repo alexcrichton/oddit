@@ -31,7 +31,7 @@
                  <%= raw("style='display:none'") if klass == ' completed' %>
                  data-scheduled="<%= scheduled_data major, req %>">
               <%= link_to '#', :class => 'name' do %>
-                <%= req.name %>
+                <%= req.display_name %>
 
                 <% if req.required > 1 %>
                   (<%= @cache[major][req].size %> / <%= req.required %>)
