@@ -24,6 +24,7 @@ class Major
 
   scope :search, lambda{ |q| where(:name => /#{q}/i) }
   scope :valid, where(:name.nin => [nil, ''], :year.ne => nil)
+  scope :invalid, where(:name.in => [nil, ''], :year => nil)
 
   attr_accessible :name, :year, :requirement_groups_attributes, :college,
     :major_file, :link, :cmu_audit_name
@@ -34,6 +35,10 @@ class Major
       m.user_count = User.where(:major_ids => m.id).count
       m.save!
     }
+  end
+
+  def self.clean_useless_majors!
+    Major.where(:created_at.lt => 1.week.ago.utc).invalid.destroy_all
   end
 
   def audit_url
