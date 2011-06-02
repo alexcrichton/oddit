@@ -7,7 +7,7 @@
 
 <% @major.requirement_groups.each do |group| %>
   <fieldset>
-    <legend><%= group.name %></legend>
+    <legend><%= group.display_name %></legend>
 
     <ul>
       <% group.requirements.each do |req| %>
@@ -21,7 +21,7 @@
             <% end %>
 
             <% if req.use_others_in_group %>
-              <li>Any other course in <%= group.name %></li>
+              <li>Any other course in <%= group.display_name %></li>
             <% end %>
           </ul>
         </li>

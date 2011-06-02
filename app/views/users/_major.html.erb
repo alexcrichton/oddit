@@ -20,7 +20,7 @@
       <% major.requirement_groups.each do |group| %>
         <div class='group'>
           <h4>
-            <%= group.name %>
+            <%= group.display_name %>
             (<%= completed_requirements_count group %> /
             <%= requirements_count group %>)
           </h4>
@@ -51,7 +51,7 @@
 
                 <% if req.use_others_in_group %>
                   <li>
-                    Any other course in <%= req.requirement_group.name %>
+                    Any other course in <%= req.requirement_group.display_name %>
                   </li>
                 <% end %>
               </ul>

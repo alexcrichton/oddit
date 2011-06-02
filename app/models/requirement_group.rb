@@ -3,8 +3,6 @@ class RequirementGroup
 
   field :name
 
-  validates_presence_of :name
-
   embedded_in :major
   embeds_many :requirements
 
@@ -12,5 +10,9 @@ class RequirementGroup
 
   attr_accessible :requirements_attributes, :name, :visible
   attr_accessor :visible
+
+  def display_name
+    name or "Group #{major.requirement_groups.index(self) + 1}"
+  end
 
 end
