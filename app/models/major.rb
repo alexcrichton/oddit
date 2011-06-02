@@ -20,6 +20,8 @@ class Major
   embeds_many :requirement_groups
   accepts_nested_attributes_for :requirement_groups, :allow_destroy => true
 
+  validates_format_of :link, :with => %r{^https?://}
+
   scope :search, lambda{ |q| where(:name => /#{q}/i) }
   scope :valid, where(:name.nin => [nil, ''], :year.ne => nil)
 
