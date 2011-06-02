@@ -1,15 +1,33 @@
 //= require _icons
+//= require jquery/tokeninput
 
 @import "compass";
 
 form {
-  dt {
-    width: 8.5em;
-  }
+  dt { width: 6.5em; }
+  dd { margin-left: 7em; position: relative; padding-right: 20px; }
+  dd img { position: absolute; right: -2px; top: 2px; }
 
-  dd {
-    margin-left: 9em;
+  dl.top {
+    float: left;
+    font-size: 16px;
+
+    &:nth-of-type(even) {
+      border-left: 1px solid black;
+      margin-left: 20px;
+
+      dt { width: 8.5em; }
+      dd { margin-left: 9em; }
+    }
+
+    input[type=text] {
+      font-size: 16px;
+    }
   }
+}
+
+#groups {
+  clear: both;
 }
 
 .requirement-group {

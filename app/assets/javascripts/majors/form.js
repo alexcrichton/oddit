@@ -1,6 +1,5 @@
 //= require jquery-ui
 //= require jquery/tokeninput
-//= require tooltip
 //= require majors/liveedit
 
 $(function() {

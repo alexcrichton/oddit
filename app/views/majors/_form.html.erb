@@ -8,7 +8,7 @@
 <%= form_for @major do |f| %>
   <%= render 'shared/error_messages', :target => @major %>
 
-  <dl>
+  <dl class='top'>
     <dt><%= f.label :name %></dt>
     <dd><%= f.text_field :name %></dd>
 
@@ -21,16 +21,18 @@
     <dd><%= f.text_field :year, :size => 4, :'data-tooltip' =>
             "This should be the same year as listed on the official \
              audit" %></dd>
+  </dl>
 
+  <dl class='top'>
     <dt><%= f.label :cmu_audit_name, 'CMU Audit Name' %></dt>
-    <dd><%= f.text_field :cmu_audit_name, :size => 60,
+    <dd><%= f.text_field :cmu_audit_name, :size => 30,
               :'data-tooltip' => "This is the name that the CMU Audit gives\
                 to the major. You can find this by going to the audit page \
                 and seeing what is under the 'Major' heading in the top \
                 navigation boxes" %></dd>
 
     <dt><%= f.label :major_file %></dt>
-    <dd><%= f.text_field :major_file, :size => 60, :'data-tooltip' =>
+    <dd><%= f.text_field :major_file, :size => 30, :'data-tooltip' =>
             "This is provided by CMU's official audit system. If you're \
              looking at an audit for this major, at the bottom of the page \
              there will be an odd string starting with 'FinishForm:'.\
@@ -38,15 +40,16 @@
              by colons." %></dd>
 
     <dt><%= f.label :link %></dt>
-    <dd><%= f.text_field :link, :size => 60, :'data-tooltip' =>
+    <dd><%= f.text_field :link, :size => 30, :'data-tooltip' =>
             "This should be a link to the official requirement list for this \
              major (if one exists)" %></dd>
-
-    <dt><strong>Groups</strong></dt>
-    <dd><%= link_to '[add]', '#' %></dd>
   </dl>
 
   <div id='groups'>
+    <div id='required'>
+      <%#= f.text_field :required_ids %>
+    </div>
+
     <%= f.fields_for :requirement_groups do |gf| %>
       <%= render 'group_fields', :f => gf %>
     <% end %>

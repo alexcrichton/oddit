@@ -25,6 +25,24 @@ class ApplicationController < ActionController::Base
            :status   => 404
   end
 
+  # We stream all actions, and you can't set cookies once the rendering process
+  # has started (i.e. the view can't set any cookies). This is a problem because
+  # all forms generate the session csrf_token when they're rendered. If the
+  # csrf_token wasn't already set in the session, then it's not set at all
+  # because we're streaming. Hence, the csrf_token for the user's session isn't
+  # set when they enter a form. When the comparison against the csrf_token in
+  # the session and the supplied csrf_token from a request are compared, a new
+  # token for the session is created and it's different.
+  #
+  # For this reason, we just make sure that the csrf_token is always set on all
+  # requests. This doesn't regenerate the csrf token, it just makes sure that
+  # it's always present (so if one isn't set and we're rendering a form then
+  # everything works out OK)
+  before_filter :set_csrf_token
+  def set_csrf_token
+    form_authenticity_token()
+  end
+
   def current_ability
     @current_ability ||= Ability.new current_user
   end

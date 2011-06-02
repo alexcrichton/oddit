@@ -3,6 +3,7 @@ class MajorsController < ApplicationController
   load_and_authorize_resource :collection => :search
 
   respond_to :html
+  respond_to :json, :only => [:update]
 
   def index
     @majors = @majors.roots.valid.page(params[:page]).per(10)
@@ -62,6 +63,7 @@ class MajorsController < ApplicationController
   end
 
   def edit
+    Rails.logger.debug session[:_csrf_token].inspect
     respond_with @major
   end
 
