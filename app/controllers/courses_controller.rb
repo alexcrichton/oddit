@@ -9,8 +9,7 @@ class CoursesController < ApplicationController
 
     respond_with @courses do |format|
       format.json {
-        @courses = @courses.limit(10)
-        render :json => @courses.map { |c|
+        render :json => @courses.limit(10).map { |c|
           {:id => c.id.to_s, :name => c.pretty_name, :value => c.pretty_name}
         }
       }
