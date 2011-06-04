@@ -42,5 +42,8 @@ gem 'kaminari'
 group :production do
   # Memcache client
   gem 'dalli'
+
   gem 'uglifier'
+
+  gem 'therubyracer-heroku'
 end
