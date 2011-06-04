@@ -1,0 +1,24 @@
+<fieldset class='requirement-group<%= ' hiding' unless requirement_group.visible %>'
+          data-id="<%= requirement_group.id %>">
+  <legend>
+    <%= form_for [@major, requirement_group] do |f| %>
+      <%= f.label :name, 'Group Name:' %> <%= f.text_field :name %>
+
+      &mdash;
+      <%= link_to 'Remove', [@major, requirement_group],
+            :remote => true, :method => :delete, :class => 'remove' %>
+    <% end %>
+  </legend>
+
+  <div class='content'>
+    <div class='requirements'>
+      <%= render requirement_group.requirements %>
+    </div>
+
+    <%= link_to '[add requirement]', [@major, requirement_group, :requirements],
+          :remote => true, :method => :post %>
+  </div>
+
+  <%= link_to '[show/hide]', '#', :class => 'show-hide' %>
+
+</fieldset>

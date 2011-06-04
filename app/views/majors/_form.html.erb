@@ -44,25 +44,13 @@
             "This should be a link to the official requirement list for this \
              major (if one exists)" %></dd>
   </dl>
-
-  <div id='groups'>
-    <div id='required'>
-      <%#= f.text_field :required_ids %>
-    </div>
-
-    <%= f.fields_for :requirement_groups do |gf| %>
-      <%= render 'group_fields', :f => gf %>
-    <% end %>
-  </div>
-
-  <script type='text/html' id='new-group'>
-    <%= f.fields_for :requirement_groups, @major.requirement_groups.build,
-          :child_index => 'CHANGEME' do |gf| %>
-      <%= render 'group_fields', :f => gf %>
-    <% end %>
-  </script>
-
-  <div class='actions'>
-    <%= f.submit :disable_with => 'Submitting...' %>
-  </div>
 <% end %>
+
+<div id='groups'>
+  <%= render @major.requirement_groups %>
+</div>
+
+<div class='actions'>
+  <%= link_to 'Add Group', [@major, :requirement_groups], :remote => true,
+        :method => 'post' %>
+</div>

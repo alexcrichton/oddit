@@ -14,6 +14,10 @@ AuditMan::Application.routes.draw do
   resources :majors do
     match :search, :on => :collection
     put :clone, :on => :member
+
+    resources :requirement_groups, :only => [:create, :destroy, :update] do
+      resources :requirements, :only => [:create, :destroy, :update]
+    end
   end
 
   devise_for :users, :controllers => {:omniauth_callbacks => 'omniauth'} do

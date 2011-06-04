@@ -3,7 +3,6 @@ class MajorsController < ApplicationController
   load_and_authorize_resource :collection => :search
 
   respond_to :html
-  respond_to :json, :only => [:update]
 
   def index
     @majors = @majors.roots.valid.page(params[:page]).per(10)
@@ -70,7 +69,9 @@ class MajorsController < ApplicationController
   def update
     @major.update_attributes params[:major]
 
-    respond_with @major, :location => [:edit, @major]
+    respond_with @major, :location => [:edit, @major] do |format|
+      format.json
+    end
   end
 
   def destroy

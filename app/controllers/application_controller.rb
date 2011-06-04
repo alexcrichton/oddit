@@ -25,6 +25,8 @@ class ApplicationController < ActionController::Base
            :status   => 404
   end
 
+  protected
+
   # We stream all actions, and you can't set cookies once the rendering process
   # has started (i.e. the view can't set any cookies). This is a problem because
   # all forms generate the session csrf_token when they're rendered. If the

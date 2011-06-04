@@ -1,0 +1,33 @@
+<%= form_for [@major, requirement.requirement_group, requirement] do |f| %>
+  <div class='requirement' data-id="<%= f.object.id %>">
+    <div class='info'>
+      <div class='name'>
+        <%= f.text_field :name, :placeholder => 'Name...' %>
+      </div>
+      <div class='required'>
+        <%= f.label :required, 'Amt:' %>
+        <%= f.text_field :required %>
+
+        <div class='remove'>
+          <%= link_to 'Remove', [f.object.requirement_group.major,
+                f.object.requirement_group, f.object], :remote => true,
+                :method => :delete %>
+        </div>
+
+        <div class='extra'>
+          <%= f.check_box :use_others_in_group %>
+          <%= f.label :use_others_in_group,
+                  'Use other classes in requirement group' %>
+        </div>
+      </div>
+    </div>
+
+    <div class='courses'>
+      <%= f.label :course_ids, 'Courses:' %>
+      <% data = f.object.courses.map{ |c|
+            {:name => c.pretty_name, :id => c.id.to_s} }.to_json %>
+      <%= f.text_field :course_ids, :class => 'autocomplete', :value => '',
+            :'data-courses' => data %>
+    </div>
+  </div>
+<% end %>

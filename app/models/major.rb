@@ -18,16 +18,15 @@ class Major
 
   belongs_to :user
   embeds_many :requirement_groups
-  accepts_nested_attributes_for :requirement_groups, :allow_destroy => true
 
   validates_format_of :link, :with => %r{^https?://}
+  validates_numericality_of :year
 
   scope :search, lambda{ |q| where(:name => /#{q}/i) }
   scope :valid, where(:name.nin => [nil, ''], :year.ne => nil)
   scope :invalid, where(:name.in => [nil, ''], :year => nil)
 
-  attr_accessible :name, :year, :requirement_groups_attributes, :college,
-    :major_file, :link, :cmu_audit_name
+  attr_accessible :name, :year, :college, :major_file, :link, :cmu_audit_name
 
   def self.update_user_counts!
     Major.all.each { |m|

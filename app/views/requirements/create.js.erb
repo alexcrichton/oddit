@@ -1,0 +1,5 @@
+var el = $("<%=j render(@requirement) %>");
+bindCourseAutocomplete(el.find(':input.autocomplete'));
+
+$('.requirement-group[data-id=<%= @requirement_group.id %>] .requirements').
+  append(el);

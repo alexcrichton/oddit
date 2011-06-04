@@ -9,6 +9,8 @@ class Requirement
 
   embedded_in :requirement_group
 
+  validates_numericality_of :required
+
   attr_accessible :name, :course_ids, :required, :use_others_in_group
   attr_accessor :courses
 
