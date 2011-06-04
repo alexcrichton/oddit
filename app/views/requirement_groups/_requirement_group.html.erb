@@ -2,7 +2,8 @@
           data-id="<%= requirement_group.id %>">
   <legend>
     <%= form_for [@major, requirement_group] do |f| %>
-      <%= f.label :name, 'Group Name:' %> <%= f.text_field :name %>
+      <%= f.label :name, 'Group Name:' %>
+      <span class='input'><%= f.text_field :name %></span>
 
       &mdash;
       <%= link_to 'Remove', [@major, requirement_group],

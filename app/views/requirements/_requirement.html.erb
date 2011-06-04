@@ -6,7 +6,7 @@
       </div>
       <div class='required'>
         <%= f.label :required, 'Amt:' %>
-        <%= f.text_field :required %>
+        <div class='input'><%= f.text_field :required %></div>
 
         <div class='remove'>
           <%= link_to 'Remove', [f.object.requirement_group.major,

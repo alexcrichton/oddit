@@ -1,18 +1,20 @@
 jQuery ->
-  $(':input').each (_, el) ->
-    $(el).data('original', $(el).val())
+  $(':input').live 'change', ->
+    input     = $(this)
+    container = input.parent()
+    form      = input.closest('form')
 
-  $(':input').live 'blur', ->
-    input = $(this)
-    form = input.closest('form')
-    return if input.val() == input.data('original') or
-              input.closest('.token-input-list').length > 0
+    return if input.closest('.token-input-list').length > 0
 
-    input.data('original', input.val())
-    input.addClass('saving').removeClass('error')
+    container.addClass('saving').removeClass('error good')
 
     data = {_method: 'put'}
-    data[input.prop('name')] = input.val()
+    # A checkbox's val() method always returns whatever is in the "value"
+    # property, regardless of whether it's checked or not
+    if input.is(':checkbox')
+      data[input.prop('name')] = input.is(':checked')
+    else
+      data[input.prop('name')] = input.val()
 
     $.ajax
       url: form.attr('action')
@@ -20,7 +22,7 @@ jQuery ->
       data: data
       dataType: 'json'
       success: ->
-        input.addClass('good')
-        setTimeout (-> input.removeClass('saving good')), 2000
+        container.addClass('good')
+        setTimeout (-> container.removeClass('saving good')), 2000
       error: ->
-        input.addClass('error')
+        container.addClass('error')

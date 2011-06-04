@@ -61,7 +61,6 @@ legend {
 
 input {
   font-size: 16px;
-/*  padding: 2px;*/
 }
 
 .requirement {
@@ -69,6 +68,10 @@ input {
   padding: 10px;
   margin: 10px;
   border-bottom: 1px dashed #888;
+
+  .name, .input { padding-right: 25px }
+  .input { display: inline-block; }
+  .name input { width: 215px; }
 
   .info {
     float: left;
@@ -90,6 +93,7 @@ input {
 
   .courses {
     float: right;
+    padding-right: 25px;
 
     label {
       font-size: 15px;

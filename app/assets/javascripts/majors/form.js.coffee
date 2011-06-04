@@ -5,7 +5,7 @@
 jQuery ->
   # Binding the autocomplete of each class search list
   window.bindCourseAutocomplete = (el) ->
-    update = -> $(el).blur()
+    update = -> $(el).change()
     $(el).tokenInput '/courses/search',
       prePopulate: $(el).data('courses')
       onAdd: update
