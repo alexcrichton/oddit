@@ -39,11 +39,13 @@ gem 'oa-openid'
 # Pagination
 gem 'kaminari'
 
+group :production, :staging do
+  gem 'uglifier'
+end
+
 group :production do
   # Memcache client
   gem 'dalli'
-
-  gem 'uglifier'
 
   gem 'therubyracer-heroku'
 end

@@ -8,9 +8,6 @@ AuditMan::Application.configure do
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  # config.action_controller.assets_dir      = Rails.root.join('tmp')
-  # config.action_controller.stylesheets_dir = Rails.root.join('tmp/stylesheets')
-  # config.action_controller.javascripts_dir = Rails.root.join('tmp/javascripts')
 
   # Specifies the header that your server uses for sending files
   config.action_dispatch.x_sendfile_header = 'X-Sendfile'
@@ -32,10 +29,9 @@ AuditMan::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
-  # config.cache_store = :dalli_store
+  config.cache_store = :dalli_store
 
-  # Disable Rails's static asset server
-  # In production, Apache or nginx will already do this
+  # Enable static asset server for heroku
   config.serve_static_assets = true
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
@@ -53,17 +49,7 @@ AuditMan::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  # Paste.config.serve_assets = true
-  # Paste.config.no_cache     = true
-  # Paste.config.js_destination = Rails.root.join('tmp/javascripts')
 
-  # ActionView::Helpers::AssetTagHelper.cache_asset_timestamps = false
-
-  # config.app_middleware.insert_before Rack::Runtime, Rack::SSL
   # config.force_ssl = true
-  # config.app_middleware.insert_before Rack::Runtime,
-  #     ::Rack::Static,
-  #     :urls => ['/stylesheets', '/javascripts', '/images'],
-  #     :root => Rails.root.join('tmp').to_s
 
 end

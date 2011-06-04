@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   # requests. This doesn't regenerate the csrf token, it just makes sure that
   # it's always present (so if one isn't set and we're rendering a form then
   # everything works out OK)
-  before_filter :set_csrf_token
+  after_filter :set_csrf_token
   def set_csrf_token
     form_authenticity_token()
   end
