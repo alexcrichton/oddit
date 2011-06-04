@@ -106,3 +106,17 @@ a {
 form .actions {
   margin-top: 20px;
 }
+
+#share {
+  font-size: 14px;
+
+  pre {
+    margin-left: 10px;
+    background: #B5B5B5;
+    color: #2F2F2F;
+    font-weight: bold;
+    padding: 5px;
+
+    @include border-radius(5px);
+  }
+}

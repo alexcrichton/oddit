@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
            :status   => 404
   end
 
+  layout Proc.new{ |c|
+    c.request.format.to_s =~ /html/ && c.request.xhr? ? false : :application
+  }
+
   protected
 
   # We stream all actions, and you can't set cookies once the rendering process

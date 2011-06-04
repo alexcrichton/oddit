@@ -1,4 +1,8 @@
 AuditMan::Application.routes.draw do
+  get "home/share"
+
+  get "home/index"
+
   resources :semesters do
     member do
       put :add
@@ -29,7 +33,8 @@ AuditMan::Application.routes.draw do
   match 'users/add_major',     :as => 'add_major'
   delete 'users/remove_major', :as => 'remove_major'
 
-  root :to => 'users#home'
+  root :to => 'home#index'
 
-  match ':id' => 'users#show'
+  get ':id/share' => 'users#share', :as => 'share'
+  get ':id' => 'users#show', :as => 'permalink'
 end

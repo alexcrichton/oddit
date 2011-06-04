@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  load_resource :except => [:show]
-  before_filter :find_user, :only => [:show]
+  load_resource :except => [:show, :share]
+  before_filter :find_user, :only => [:show, :share]
   authorize_resource
 
   respond_to :html
@@ -10,12 +10,8 @@ class UsersController < ApplicationController
     respond_with @user
   end
 
-  def home
-    @user = current_user
-
-    respond_with @user do |format|
-      format.html { render 'show' }
-    end
+  def share
+    respond_with @user
   end
 
   def add_major

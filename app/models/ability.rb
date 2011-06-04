@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize user
-    alias_action :search, :to => :read
+    alias_action :share, :search, :to => :read
 
     can :read, [User, Major, Course]
 

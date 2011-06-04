@@ -1,11 +1,16 @@
-<% content_for :stylesheets do %>
+<% provide :stylesheets do %>
   <%= stylesheet_link_tag 'home' %>
 <% end %>
-<% content_for :javascripts do %>
+<% provide :javascripts do %>
   <%= javascript_include_tag 'home' %>
 <% end %>
 
-<!-- <div class='links'><%= link_to '[new semester]', [:new, :semester] %></div> -->
+<div class='toolbar'>
+  <%= link_to '[new semester]', [:new, :semester] %>
+  <%= link_to '[facebook]', facebook_url, :class => 'facebook' %>
+  <%= link_to '[twitter]', twitter_url, :class => 'twitter' %>
+  <%= link_to '[link]', share_url(@user), :class => 'link' %>
+</div>
 
 <% build_cache @user.majors %>
 

@@ -75,6 +75,10 @@ class User
     semesters.detect{ |s| s.course_ids.include?(course.id) }
   end
 
+  def to_param
+    andrew_id || super
+  end
+
   protected
 
   def decrement_major_counts

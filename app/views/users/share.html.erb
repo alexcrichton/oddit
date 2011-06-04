@@ -1,0 +1,16 @@
+<div id='share'>
+  <h2>Share via Link</h2>
+
+  <p>You can share your schedule via this link:</p>
+
+  <pre><%= permalink_url @user %></pre>
+
+  <p>Otherwise you can use this HTML to post on your site:</p>
+
+  <pre><%= "<a href='#{permalink_url(@user)}'>My plan on AuditMan</a>" %></pre>
+
+  <p>
+    This gets you something that looks like:
+    <%= link_to 'My plan on AuditMan', permalink_url(@user) %>
+  </p>
+</div>

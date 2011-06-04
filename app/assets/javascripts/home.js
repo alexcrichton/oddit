@@ -1,7 +1,8 @@
 //= require jquery-ui
 //= require jquery/scroll_to
-//= require home/dragging
 //= require tooltip
+//= require home/dragging
+//= require home/sharing
 
 $(function() {
 
