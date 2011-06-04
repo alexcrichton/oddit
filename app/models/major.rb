@@ -19,8 +19,8 @@ class Major
   belongs_to :user
   embeds_many :requirement_groups
 
-  validates_format_of :link, :with => %r{^https?://}
-  validates_numericality_of :year
+  validates_format_of :link, :with => %r{^https?://}, :allow_blank => true
+  validates_numericality_of :year, :allow_blank => true
 
   scope :search, lambda{ |q| where(:name => /#{q}/i) }
   scope :valid, where(:name.nin => [nil, ''], :year.ne => nil)
