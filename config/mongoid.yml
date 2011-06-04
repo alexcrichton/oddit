@@ -16,5 +16,4 @@ test:
 
 # set these environment variables on your prod server
 production:
-  <<: *defaults
-  database: audit_man_development
+  uri: <%= ENV['MONGOHQ_URL'] %>
