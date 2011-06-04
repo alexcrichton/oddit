@@ -54,8 +54,7 @@ class MajorsController < ApplicationController
 
   def new
     @major = Major.create! do |m|
-      m.user_count = 1
-      m.user       = current_user
+      m.user = current_user # protected attribute
     end
 
     redirect_to [:edit, @major]
