@@ -23,8 +23,8 @@ class Major
   validates_numericality_of :year, :allow_blank => true
 
   scope :search, lambda{ |q| where(:name => /#{q}/i) }
-  scope :valid, where(:name.nin => [nil, ''])
-  scope :invalid, where(:name.in => [nil, ''])
+  scope :valid, where(:name.ne => nil)
+  scope :invalid, where(:name => nil)
 
   attr_accessible :name, :year, :college, :major_file, :link, :cmu_audit_name
 
