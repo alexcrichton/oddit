@@ -34,6 +34,9 @@ AuditMan::Application.configure do
   # Enable static asset server for heroku
   config.serve_static_assets = true
 
+  # When precompiling, precompile everything
+  config.assets.precompile += %w( * )
+
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
@@ -50,6 +53,5 @@ AuditMan::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  # config.force_ssl = true
-
+  config.force_ssl = true
 end
