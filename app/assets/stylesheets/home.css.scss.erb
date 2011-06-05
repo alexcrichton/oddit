@@ -273,4 +273,25 @@
 .toolbar {
   clear: both;
   overflow: auto;
+
+  .share { float: right; }
+
+  a { display: inline-block; }
+  .facebook { @include replace-text-with-dimensions('facebook_32.png'); }
+  .twitter { @include replace-text-with-dimensions('twitter_32.png'); }
+  .link { @include replace-text-with-dimensions('link_32.png'); }
+}
+
+#share {
+  font-size: 14px;
+
+  pre {
+    margin-left: 10px;
+    background: #B5B5B5;
+    color: #2F2F2F;
+    font-weight: bold;
+    padding: 5px;
+
+    @include border-radius(5px);
+  }
 }
