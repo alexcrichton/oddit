@@ -43,8 +43,7 @@ module Oddit
     config.filter_parameters += [:password, :password_confirmation]
     config.assets.enabled = true
 
-    config.after_initialize do
-      Rails.configuration.middleware.delete(Sass::Plugin::Rack)
-    end
+    require 'sass/plugin/rack'
+    config.middleware.delete(Sass::Plugin::Rack)
   end
 end
