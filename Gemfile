@@ -14,10 +14,6 @@ gem 'devise'
 group :useful do
   gem 'heroku'
   gem 'mongrel', '>= 1.2.0.pre2' # OpenID URLs are huge
-
-  gem 'guard-bundler'
-  gem 'guard-livereload'
-  gem 'rb-fsevent', :require => false
 end
 
 gem 'jquery-rails'
