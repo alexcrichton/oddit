@@ -199,5 +199,5 @@ DEPENDENCIES
   rails (= 3.1.0.rc2)
   ri_cal
   sass
-  therubyracer-heroku
+  therubyracer-heroku (= 0.8.1.pre3)
   uglifier
