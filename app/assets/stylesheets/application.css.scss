@@ -27,6 +27,8 @@ a {
 
   .content {
     width: 900px;
+    overflow: auto;
+    position: relative;
     color: white;
     margin: 0 auto;
   }

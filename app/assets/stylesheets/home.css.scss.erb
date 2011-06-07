@@ -12,6 +12,7 @@
 /* Semesters */
 /******************************************************************************/
 #semesters {
+  margin-top: 10px;
   float: left;
   width: 65%;
 
@@ -189,6 +190,7 @@
 
   .req {
     margin: 2px;
+    margin-left: 10px;
     padding: 2px;
     border-top: 1px dotted black;
     position: relative;
@@ -204,16 +206,23 @@
       right: 3px;
       top: 3px;
     }
-    background-color: lighten(red, 40%);
+    $unmet_color: lighten(red, 40%);
+    $completed_color: #e4f9cb;
+    $planned_color: #cadaef;
+
+    background-color: $unmet_color;
+    &:hover { background-color: darken($unmet_color, 7%); }
 
     &.completed {
       .icon { @include replace-text-with-dimensions('icon/accept.png'); }
-      background-color: #e4f9cb;
+      background-color: $completed_color;
+      &:hover { background-color: darken($completed_color, 7%); }
     }
 
     &.planned {
       .icon { @include replace-text-with-dimensions('icon/puzzle.png'); }
-      background-color: #cadaef;
+      background-color: $planned_color;
+      &:hover { background-color: darken($planned_color, 7%); }
     }
 
     ul {
@@ -227,9 +236,7 @@
       margin: 0px 5px;
     }
 
-    .taken {
-      font-weight: bold;
-    }
+    .taken { font-weight: bold; }
   }
 
   .name {
@@ -238,10 +245,6 @@
     padding: 3px;
     text-decoration: none;
     color: inherit;
-
-    &:hover {
-      color: lighten(black, 50%);
-    }
   }
 
   h4 {
@@ -249,6 +252,10 @@
     font-size: 13px;
   }
 }
+
+/******************************************************************************/
+/* Misc */
+/******************************************************************************/
 
 /* Make sure these always show up on top */
 .qtip {
@@ -266,12 +273,16 @@
 }
 
 /* Legend for the majors */
-.legend span {
-  display: inline-block;
+.legend {
+  display: none;
+
+  span { display: inline-block; }
 }
 
-.toolbar {
-  clear: both;
+#toolbar {
+  position: absolute;
+  top: 25px;
+  right: 0;
   overflow: auto;
 
   .share { float: right; }
@@ -294,4 +305,8 @@
 
     @include border-radius(5px);
   }
+}
+
+#main {
+  padding: 0 40px !important;
 }

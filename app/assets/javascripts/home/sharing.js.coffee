@@ -3,7 +3,7 @@ jQuery ->
     window.open this.href, 'sharer', 'toolbar=0,status=0,width=626,height=436'
     false
 
-  $('.toolbar .link').click ->
+  $('#toolbar .link').click ->
     dialog = $('<div>' + ajaxSmall + '</div>')
     dialog.load this.href, ->
       console.log 'here'
