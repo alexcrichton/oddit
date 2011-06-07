@@ -42,5 +42,9 @@ module Oddit
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
     config.assets.enabled = true
+
+    config.after_initialize do
+      Rails.configuration.middleware.delete(Sass::Plugin::Rack)
+    end
   end
 end
