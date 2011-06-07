@@ -53,7 +53,7 @@ Oddit::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.force_ssl = true
+  config.force_ssl = false # Turn to true when we have certs
 
   config.action_mailer.default_url_options = { :host => 'oddit.me' }
 end
