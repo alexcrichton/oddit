@@ -8,11 +8,11 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: audit_man_development
+  database: oddit_development
 
 test:
   <<: *defaults
-  database: audit_man_test
+  database: oddit_test
 
 # set these environment variables on your prod server
 production:
@@ -20,4 +20,4 @@ production:
 
 staging:
   <<: *defaults
-  database: audit_man_development
+  database: oddit_development

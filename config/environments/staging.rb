@@ -1,7 +1,7 @@
 # Inherit all production settings
 require File.expand_path('../production', __FILE__)
 
-AuditMan::Application.configure do
+Oddit::Application.configure do
   # Don't wanna have to bother with dalli in staging
   config.cache_store = :memory_store
 

@@ -16,7 +16,7 @@ module UsersHelper
   def facebook_url user = @user
     'http://www.facebook.com/sharer.php?' + {
       :u => permalink_url(user),
-      :t => "#{user.display_name}'s plan for CMU | AuditMan"
+      :t => "#{user.display_name}'s plan for CMU | Oddit"
     }.to_query
   end
 
