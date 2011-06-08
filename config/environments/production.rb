@@ -34,8 +34,8 @@ Oddit::Application.configure do
   # Enable static asset server for heroku
   config.serve_static_assets = true
 
-  # When precompiling, precompile everything
-  config.assets.precompile += %w( * )
+  # When precompiling, precompile all js/css
+  config.assets.precompile.push(/\w+\.(?:js|css).*/)
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
