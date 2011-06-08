@@ -53,9 +53,4 @@ class OmniauthController < Devise::OmniauthCallbacksController
     end
   end
 
-  def redirect_back_or_default path
-    redirect_to session[:return_to] ? session[:return_to] : path
-    session[:return_to] = nil
-  end
-
 end
