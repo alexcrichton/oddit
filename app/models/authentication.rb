@@ -6,6 +6,6 @@ class Authentication
 
   belongs_to :user
 
-  validates_presence_of :provider, :uid
+  validates_presence_of :provider, :uid, :user
   validates_uniqueness_of :uid, :scope => :provider
 end
