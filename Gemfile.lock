@@ -8,6 +8,16 @@ GIT
       tzinfo (~> 0.3.22)
 
 GIT
+  remote: git://github.com/rails/sass-rails
+  revision: 4771b3f3f0641eed1f90686de9c261ac1f792518
+  specs:
+    sass-rails (3.1.0.rc.2)
+      actionpack (~> 3.1.0.rc1)
+      railties (~> 3.1.0.rc1)
+      sass (>= 3.1.2)
+      sprockets (>= 2.0.0.beta.9)
+
+GIT
   remote: git://github.com/skyeagle/mongoid-ancestry
   revision: 022331790d24125094d38dba8460f15fd3ccd0c8
   specs:
@@ -200,6 +210,6 @@ DEPENDENCIES
   oa-openid
   rails (= 3.1.0.rc4)
   ri_cal
-  sass
+  sass-rails!
   therubyracer-heroku (= 0.8.1.pre3)
   uglifier

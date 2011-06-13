@@ -18,7 +18,7 @@ end
 
 gem 'jquery-rails'
 gem 'compass'
-gem 'sass'
+gem 'sass-rails', :git => 'git://github.com/rails/sass-rails'
 gem 'coffee-script'
 gem 'cancan'
 

@@ -1,12 +1,10 @@
 Rails.application.config.after_initialize do
-  Sass::Engine::DEFAULT_OPTIONS[:load_paths].tap do |load_paths|
-    compass = Gem.loaded_specs['compass'].full_gem_path
-    load_paths.push *Rails.application.assets.paths
-    load_paths << "#{compass}/frameworks/compass/stylesheets"
-    load_paths << "#{compass}/frameworks/blueprint/stylesheets"
-  end
+  compass_path = Gem.loaded_specs['compass'].full_gem_path
+  config = Rails.application.config
+  config.sass.load_paths << "#{compass_path}/frameworks/compass/stylesheets"
+  config.sass.load_paths << "#{compass_path}/frameworks/blueprint/stylesheets"
 
-  compass = Rails.application.config.compass
+  compass = config.compass
   compass.images_dir = 'app/assets/images'
   compass.css_dir    = 'app/assets/stylesheets'
   compass.fonts_dir  = 'app/assets/fonts'
