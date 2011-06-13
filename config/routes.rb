@@ -1,8 +1,4 @@
 Oddit::Application.routes.draw do
-  get "home/share"
-
-  get "home/index"
-
   resources :semesters do
     member do
       put :add
