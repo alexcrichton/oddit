@@ -2,7 +2,7 @@ source :rubygems
 
 gem 'rails', '3.1.0.rc4'
 
-gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
+gem 'mongoid'
 gem 'bson_ext'
 
 # Building the tree-structure of majors
