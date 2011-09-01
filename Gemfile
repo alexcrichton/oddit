@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.1.0.rc4'
+gem 'rails', '3.1.0'
 
 gem 'mongoid'
 gem 'bson_ext'
@@ -16,11 +16,14 @@ group :useful do
   gem 'mongrel', '>= 1.2.0.pre2' # OpenID URLs are huge
 end
 
-gem 'jquery-rails'
-gem 'compass'
-gem 'sass-rails', :git => 'git://github.com/rails/sass-rails'
-gem 'coffee-script'
-gem 'cancan'
+group :assets do
+  gem 'jquery-rails'
+  gem 'compass'
+  gem 'sass-rails', '~> 3.1.0'
+  gem 'coffee-rails', '~> 3.1.0'
+  gem 'cancan'
+  gem 'uglifier'
+end
 
 # Parsing the course list from CMU's SOC
 gem 'nokogiri', :require => false
@@ -34,10 +37,6 @@ gem 'oa-openid'
 
 # Pagination
 gem 'kaminari'
-
-group :production, :staging do
-  gem 'uglifier'
-end
 
 group :production do
   # Memcache client

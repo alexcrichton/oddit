@@ -46,8 +46,8 @@ class User
   end
 
   def preload_courses!
-    mapping    = Hash.new{ |h, k| h[k] = Set.new }
-    course_ids = Set.new
+    mapping    = Hash.new{ |h, k| h[k] = ::Set.new }
+    course_ids = ::Set.new
     semesters.each{ |s|
       s.course_ids.each{ |id|
         mapping[id.to_s] << s
