@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  include UsersHelper
+
   load_resource :except => [:show, :share]
   before_filter :find_user, :only => [:show, :share]
   authorize_resource
