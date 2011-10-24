@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.1'
 
 gem 'mongoid'
 gem 'bson_ext'
