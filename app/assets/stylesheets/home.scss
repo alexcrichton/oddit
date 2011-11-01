@@ -140,7 +140,7 @@
     }
 
     input#course_name {
-      background: url(<%= asset_path 'icon/search.png' %>) no-repeat right;
+      background: asset-url('icon/search.png', image) no-repeat right;
 
       margin-left: 10px;
       height: 18px;
