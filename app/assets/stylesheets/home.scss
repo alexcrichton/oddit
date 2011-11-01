@@ -2,6 +2,7 @@
 //= require _icons
 
 @import "compass";
+
 /*@import "icons";*/
 
 .course {
@@ -95,7 +96,9 @@
     }
 
     .name {
-      width: 165px;
+      @include ellipsis(true);
+      @include nowrap;
+      width: 180px;
       display: inline-block;
     }
 
@@ -118,6 +121,7 @@
       display: inline-block;
       width: 15px;
       text-align: center;
+      float: right;
     }
   }
 
@@ -135,9 +139,7 @@
       clear: left;
     }
 
-    .completed {
-      display: none;
-    }
+    .completed { display: none; }
 
     input#course_name {
       background: asset-url('icon/search.png', image) no-repeat right;
@@ -309,4 +311,16 @@
 
 #main {
   padding: 0 40px !important;
+}
+
+@media print {
+  #majors, #header { display: none; }
+  #semesters {
+    width: 100%;
+    .semester {
+      width: 48%;
+      .completed { display: block }
+      .name { width: 300px; }
+    }
+  }
 }
