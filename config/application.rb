@@ -5,6 +5,10 @@ require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'active_resource/railtie'
 
+module Compass
+  RAILS_LOADED = true
+end
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   # Bundler.require *Rails.groups(:assets => %w(development test))
@@ -44,12 +48,10 @@ module Oddit
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
-    config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
-    require 'sass/plugin/rack'
-    config.middleware.delete(Sass::Plugin::Rack)
+    config.assets.enabled = true
+    config.sass.load_paths << Compass::Frameworks['compass'].stylesheets_directory
   end
 end
