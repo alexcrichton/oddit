@@ -20,4 +20,10 @@ module UsersHelper
     }.to_query
   end
 
+  def reqs_satisfied_by course, user = @user
+    @cache.map { |major, req_cache|
+      req_cache.map { |req, ids| ids.include?(course) ? req.id : nil }.compact
+    }.flatten
+  end
+
 end

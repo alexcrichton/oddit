@@ -29,6 +29,7 @@
             <% klass = requirement_class major, req %>
             <div class='req<%= klass %>'
                  <%= raw("style='display:none'") if klass == ' completed' %>
+                 data-id="<%= req.id.to_s %>"
                  data-scheduled="<%= scheduled_data major, req %>">
               <%= link_to '#', :class => 'name' do %>
                 <%= req.display_name %>

@@ -17,7 +17,8 @@
         <% semester.courses.each do |course| %>
           <div class='course'
                data-id="<%= course.id %>"
-               data-units="<%= course.units %>">
+               data-units="<%= course.units %>"
+               data-satisfies='<%= reqs_satisfied_by(course).to_json %>'>
             <%= link_to '[info]',
                    course.info_url,
                    :class => 'icon-info', :target => 'blank',
