@@ -52,7 +52,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.1.2)
-    compass (0.11.5)
+    compass (0.12.alpha.0)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
@@ -191,7 +191,7 @@ DEPENDENCIES
   bson_ext
   cancan
   coffee-rails (~> 3.1.0)
-  compass
+  compass (>= 0.12.alpha.0)
   dalli
   devise
   heroku

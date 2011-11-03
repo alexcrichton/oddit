@@ -5,9 +5,9 @@ require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'active_resource/railtie'
 
-module Compass
-  RAILS_LOADED = true
-end
+# module Compass
+#   RAILS_LOADED = true
+# end
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -52,6 +52,7 @@ module Oddit
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.assets.enabled = true
-    config.sass.load_paths << Compass::Frameworks['compass'].stylesheets_directory
+    # config.sass.load_paths << Compass::Frameworks['compass'].stylesheets_directory
+    # config.sass.load_paths << Compass::Frameworks['blueprint'].stylesheets_directory
   end
 end

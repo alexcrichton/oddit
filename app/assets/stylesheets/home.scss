@@ -1,9 +1,9 @@
 //= require jquery/ui
-//= require _icons
 
 @import "compass";
+@import "icons";
 
-/*@import "icons";*/
+$selected: lighten(green, 65%);
 
 .course {
   cursor: move;
@@ -78,22 +78,15 @@
     @include border-radius(15px);
   }
 
-  .semester.selected legend {
-    background: lighten(green, 65%);
-  }
+  .semester.selected legend { background: $selected; }
 
   .course {
     padding: 1px;
     position: relative;
     border-top: 1px dashed #888;
 
-    &:first-of-type {
-      border: none;
-    }
-
-    &.selected {
-      background: lighten(green, 65%);
-    }
+    &:first-of-type { border: none; }
+    &.selected { background: $selected; }
 
     .name {
       @include ellipsis(true);
@@ -219,12 +212,14 @@
       .icon { @include replace-text-with-dimensions('icon/accept.png'); }
       background-color: $completed_color;
       &:hover { background-color: darken($completed_color, 7%); }
+      &.selected { background-color: mix($completed_color, green, 70%); }
     }
 
     &.planned {
       .icon { @include replace-text-with-dimensions('icon/puzzle.png'); }
       background-color: $planned_color;
       &:hover { background-color: darken($planned_color, 7%); }
+      &.selected { background-color: mix($planned_color, green, 70%); }
     }
 
     ul {
@@ -252,6 +247,7 @@
   h4 {
     margin: 0;
     font-size: 13px;
+    &.selected { background: $selected; }
   }
 }
 

@@ -62,7 +62,7 @@ $(function() {
   // Dragging requirements over to the courses
   makeDraggable($('#majors .course'));
 
-  // Hovering to show connections
+  // Hovering to show connections from a major to the courses that satisfy it
   $('#majors .req').live('mouseover mouseout', function(e) {
     $.each($(this).data('scheduled'), function(_, el) {
       var course = $(
@@ -83,6 +83,23 @@ $(function() {
 
   $('#majors h4').live('mouseover mouseout', function(e) {
     $(this).closest('.group').find('.req').trigger(e.type);
+  });
+
+  // Hovering to show connections from a course to the requirement it satisfies
+  $('#semesters .course').live('mouseover mouseout', function(e) {
+    $.each($(this).data('satisfies'), function(_, el) {
+      var requirement = $('#majors .req[data-id=' + el + ']');
+
+      if (!requirement.is(':visible')) {
+        requirement = requirement.siblings('h4');
+      }
+
+      if (e.type == 'mouseover') {
+        requirement.addClass('selected');
+      } else {
+        requirement.removeClass('selected');
+      }
+    });
   });
 
   // Accordian majors

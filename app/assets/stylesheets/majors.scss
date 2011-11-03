@@ -1,8 +1,5 @@
-//= require _icons
-
-/*@import "compass";*/
-
-/*@import "icons";*/
+@import "compass";
+@import "icons";
 
 .major {
   overflow: auto;
@@ -72,7 +69,7 @@
     width: 200px;
     font-size: 120%;
 
-    background: url(<%= asset_path 'icon/search.png' %>) no-repeat right;
+    background: asset-url('icon/search.png', image) no-repeat right;
     padding-right: 20px;
   }
 }
