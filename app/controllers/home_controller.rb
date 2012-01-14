@@ -9,7 +9,7 @@ class HomeController < ApplicationController
       render :template => 'users/show'
     else
       # TODO: have a nice landing page
-      redirect_to new_user_session_path
+      redirect_to new_session_path
     end
   end
 
