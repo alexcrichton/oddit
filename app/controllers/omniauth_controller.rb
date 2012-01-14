@@ -11,10 +11,10 @@ class OmniauthController < Devise::OmniauthCallbacksController
       sign_out current_user
     end
 
-    redirect_to new_user_session_path
+    redirect_to new_session_path
   end
 
-  def open_id
+  def google
     login_from_omniauth
   end
 
@@ -48,7 +48,7 @@ class OmniauthController < Devise::OmniauthCallbacksController
         sign_in_and_redirect user
       else
         flash[:error] = 'Sorry, we could not log you in'
-        redirect_to new_user_session_path
+        redirect_to new_session_path
       end
     end
   end

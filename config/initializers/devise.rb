@@ -184,12 +184,13 @@ Devise.setup do |config|
 
   require 'openid/store/filesystem'
 
-  fb_app_id = ENV['FB_APP_ID'] || '133075676730741'
-  fb_secret = ENV['FB_SECRET'] || 'a0b890b1d884000ad6505a7b7390c611'
-
-  config.omniauth :facebook, fb_app_id, fb_secret, :scope => 'email'
+  config.omniauth :facebook, ENV['FB_APP_ID'], ENV['FB_SECRET'],
+                  :scope => 'email'
   config.omniauth :open_id,
-    OpenID::Store::Filesystem.new(Rails.root.join('tmp').to_s)
+    :store      => OpenID::Store::Filesystem.new(Rails.root.join('tmp').to_s),
+    :name       => 'google',
+    :identifier => 'https://www.google.com/accounts/o8/id',
+    :require    => 'omniauth-openid'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

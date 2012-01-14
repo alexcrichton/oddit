@@ -1,9 +1,9 @@
 source :rubygems
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.2.0.rc2'
 
-gem 'mongoid'
 gem 'bson_ext'
+gem 'mongoid'
 
 # Building the tree-structure of majors
 gem 'mongoid-ancestry', :git => 'git://github.com/skyeagle/mongoid-ancestry'
@@ -19,11 +19,12 @@ end
 group :assets do
   gem 'jquery-rails'
   gem 'compass', '>= 0.12.alpha.0'
-  gem 'sass-rails', '~> 3.1.0'
-  gem 'coffee-rails', '~> 3.1.0'
-  gem 'cancan'
+  gem 'sass-rails', '~> 3.2.0'
+  gem 'coffee-rails', '~> 3.2.0'
   gem 'uglifier'
 end
+
+gem 'cancan'
 
 # Parsing the course list from CMU's SOC
 gem 'nokogiri', :require => false
@@ -32,8 +33,8 @@ gem 'nokogiri', :require => false
 gem 'ri_cal'
 
 # OAuth/OpenID Login
-gem 'oa-oauth'
-gem 'oa-openid'
+gem 'omniauth-facebook'
+gem 'omniauth-openid'
 
 # Pagination
 gem 'kaminari'
@@ -41,6 +42,5 @@ gem 'kaminari'
 group :production do
   # Memcache client
   gem 'dalli'
-
-  gem 'therubyracer-heroku', '0.8.1.pre3'
+  gem 'thin'
 end

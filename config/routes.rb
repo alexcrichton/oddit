@@ -21,8 +21,8 @@ Oddit::Application.routes.draw do
   end
 
   devise_for :users, :controllers => {:omniauth_callbacks => 'omniauth'} do
-    get 'login'  => 'omniauth#new', :as => :new_user_session
-    get 'logout' => 'omniauth#destroy', :as => :destroy_user_session
+    get 'login'  => 'omniauth#new', :as => :new_session
+    get 'logout' => 'omniauth#destroy', :as => :destroy_session
   end
 
   get 'users/update_major',    :as => 'update_major'

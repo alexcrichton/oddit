@@ -28,15 +28,11 @@ class User
 
   def apply_omniauth(omniauth)
     if email.blank?
-      self.email ||= omniauth['user_info']['email']
-
-      if omniauth['extra'] && omniauth['extra']['user_hash']
-        self.email ||= omniauth['extra']['user_hash']['email']
-      end
+      self.email ||= omniauth[:info][:email]
     end
 
     if name.blank?
-      self.name ||= omniauth['user_info']['name']
+      self.name ||= omniauth[:info][:name]
     end
 
     authentications.build(

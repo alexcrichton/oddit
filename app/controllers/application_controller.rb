@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       flash[:error] = 'Please log in.'
     end
 
-    redirect_to new_user_session_path
+    redirect_to new_session_path
   end
 
   rescue_from ActionController::RoutingError,
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   layout Proc.new{ |c|
-    c.request.format.to_s =~ /html/ && c.request.xhr? ? false : :application
+    c.request.format.to_s =~ /html/ && c.request.xhr? ? false : 'application'
   }
 
   protected
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for scope
-    new_user_session_path
+    new_session_path
   end
 
 end
