@@ -9,19 +9,19 @@ Oddit::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server? (Apache or nginx will already do this)
-  config.serve_static_assets = true # for heroku
+  config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
   # Fall back to assets pipeline if a precompiled asset is missed?
-  config.assets.compile = true # for heroku
+  config.assets.compile = false
 
   # Generate digests for assets URLs
   config.assets.digest = true
 
   # Defaults to Rails.root.join("public/assets")
-  config.assets.manifest = Rails.root.join('tmp/assets')
+  # config.assets.manifest = Rails.root.join('tmp/assets')
 
   # If you have no front-end server that supports something like X-Sendfile,
   # just comment this out and Rails will serve the files

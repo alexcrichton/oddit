@@ -54,5 +54,6 @@ module Oddit
     config.assets.enabled = true
     # config.sass.load_paths << Compass::Frameworks['compass'].stylesheets_directory
     # config.sass.load_paths << Compass::Frameworks['blueprint'].stylesheets_directory
+    config.assets.initialize_on_precompile = false
   end
 end
