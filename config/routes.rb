@@ -3,6 +3,7 @@ Oddit::Application.routes.draw do
     member do
       put :add
       put :sync
+      put :transfer
       delete :remove
     end
   end

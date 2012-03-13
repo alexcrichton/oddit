@@ -1,9 +1,9 @@
 module UsersHelper
 
   def build_cache majors, user = @user
-    @user.preload_courses!
+    user.preload_courses!
     @cache = {}
-    majors.each{ |m| @cache[m] = m.satisfy_requirements(@user) }
+    majors.each{ |m| @cache[m] = m.satisfy_requirements(user) }
   end
 
   def twitter_url user = @user

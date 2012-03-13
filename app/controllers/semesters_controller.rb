@@ -1,6 +1,6 @@
 class SemestersController < ApplicationController
   load_and_authorize_resource :through => :current_user
-  before_filter :find_course, :only => [:add, :remove]
+  before_filter :find_course, :only => [:add, :remove, :transfer]
 
   respond_to :html
 
@@ -62,6 +62,18 @@ class SemestersController < ApplicationController
     respond_with @course  do |format|
        format.js { render 'update_semester' }
      end
+  end
+
+  def transfer
+    @to = current_user.semesters.find params[:to]
+    @semester.course_ids.delete @course.id
+    @to.course_ids << @course.id
+    @semester.save
+    @to.save
+
+    respond_with @course do |format|
+      format.js { render 'update_semester' }
+    end
   end
 
   protected

@@ -64,27 +64,22 @@
           });
         } else {
           // Dragged between two semesters
-          course_id = $(event.originalEvent.target).closest('.course').data('id');
-          semester_id = $(event.target).closest('.semester').data('id');
+          var course = $(event.originalEvent.target).closest('.course');
+          course_id = course.data('id');
+          var to_semester_id = course.closest('.semester').data('id');
+          var from_semester_id = course.data('original-semester');
 
           $.ajax({
-            url: '/semesters/' + semester_id + '/add',
+            url: '/semesters/' + from_semester_id + '/transfer',
             type: 'PUT',
             dataType: 'script',
-            data: {id: semester_id, course_id: course_id}
+            data: {to: to_semester_id, course_id: course_id}
           });
         }
       },
-      remove: function(event, ui) {
+      start: function(event, ui) {
         var course = $(event.originalEvent.target).closest('.course');
-        var semester_id = $(event.target).closest('.semester').data('id');
-
-        $.ajax({
-          url: '/semesters/' + semester_id + '/remove',
-          type: 'DELETE',
-          dataType: 'script',
-          data: {id: semester_id, course_id: course.data('id')}
-        });
+        course.data('original-semester', course.closest('.semester').data('id'));
       },
       placeholder: 'ui-state-highlight',
       connectWith: '.courses'

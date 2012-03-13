@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from ActionController::RoutingError,
-              ActionController::UnknownAction,
+              AbstractController::ActionNotFound,
               BSON::InvalidObjectId do |exception|
 
     @exception = exception

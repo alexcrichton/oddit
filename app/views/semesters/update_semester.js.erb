@@ -1,7 +1,16 @@
 var area = $('#semesters [data-id=<%= @semester.id %>]');
 $('.ui-dialog-content').dialog('destroy');
 
-<% if @course || params[:action] =~ /sync|update/ %>
+<% if params[:action] == 'transfer' %>
+  var update_units = function(id, units) {
+    var sem = $('#semesters [data-id=' + id + ']');
+    console.log(sem, id, units);
+    sem.find('legend .units').data('units', units).text(units);
+  };
+  update_units('<%= @semester.id %>', <%= @semester.units %>);
+  update_units('<%= @to.id %>', <%= @to.units %>);
+<% elsif @course || params[:action] =~ /sync|update|remove/ %>
+  <% build_cache current_user.majors, current_user %>
   var newEl = $("<%= j render(@semester) %>");
   area.replaceWith(newEl);
 
@@ -12,8 +21,7 @@ $('.ui-dialog-content').dialog('destroy');
   <% if params[:focus] == '1' %>
     newEl.find('a.add').click();
   <% end %>
+  window.updateMajors();
 <% else %>
   area.find('form :text').parent().addClass('field_with_errors');
 <% end %>
-
-window.updateMajors();
