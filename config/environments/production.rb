@@ -40,7 +40,7 @@ Oddit::Application.configure do
   # config.serve_static_assets = true
 
   # When precompiling, precompile all js/css
-  # config.assets.precompile.push(/\w+\.(?:js|css).*/)
+  config.assets.precompile.push(/\w+\.(?:js|css).*/)
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
