@@ -9,7 +9,7 @@ class Course
 
   validates_presence_of :number, :name, :units
   validates_format_of :number, :with => /^\d{2}-\d{3}$/
-  validates_uniqueness_of :number, :if => :number_changed?
+  validates_uniqueness_of :units, :scope => :number
 
   attr_accessible :number, :name, :units
 

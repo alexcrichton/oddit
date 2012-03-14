@@ -34,18 +34,19 @@ class Requirement
   end
 
   def satisfy! courses, used
-    id_pool = course_ids
-
     if use_others_in_group
-      id_pool = requirement_group.requirements.map(&:course_ids).flatten
+      number_pool = requirement_group.requirements.map(&:courses).
+                                      flatten.map(&:number)
+    else
+      number_pool = self.courses.map(&:number)
     end
-
-    id_pool.map!(&:to_s)
 
     left = required
     used_courses = []
     while left > 0
-      course = courses.detect{ |c| !used[c.id] && id_pool.include?(c.id.to_s) }
+      course = courses.detect{ |c|
+        !used[c.id] && number_pool.include?(c.number)
+      }
       if course
         used_courses << course
         left -= kind == AMT_COURSES ? 1 : course.units
