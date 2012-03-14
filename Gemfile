@@ -19,6 +19,7 @@ end
 group :assets do
   gem 'jquery-rails'
   gem 'compass-rails', '~> 1.0.0'
+  gem 'oily_png'
   gem 'sass-rails', '~> 3.2.0'
   gem 'coffee-rails', '~> 3.2.0'
   gem 'uglifier'
