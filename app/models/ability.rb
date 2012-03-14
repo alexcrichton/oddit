@@ -23,5 +23,7 @@ class Ability
     can :manage, Semester, :user => user # semesters are embedded, no user_id
     cannot :sync, Semester, :scheduleman_id => nil
     cannot :sync, Semester, :scheduleman_id => ''
+
+    can :create, Course
   end
 end

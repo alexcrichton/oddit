@@ -8,7 +8,8 @@ class Course
   field :units, :type => Integer
 
   validates_presence_of :number, :name, :units
-  validates_format_of :number, :with => /^\d{2}-\d{3}$/
+  validates_format_of :number, :with => /^\d{2}-\d{3}$/,
+                      :message => 'should look like "XX-XXX"'
   validates_uniqueness_of :units, :scope => :number
 
   attr_accessible :number, :name, :units

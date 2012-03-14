@@ -1,0 +1,8 @@
+<% if @course.errors.any? %>
+  var newform = $("<%= j render('form') %>");
+  var dialog = $('.ui-dialog-content');
+  dialog.find('form').replaceWith(newform);
+  dialog.dialog({height: 300, position: 'center'});
+<% else %>
+  $('.ui-dialog-content').dialog('destroy')
+<% end %>

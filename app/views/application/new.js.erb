@@ -1,0 +1,9 @@
+var el = $("<div><%= j render('form') %></div>");
+
+el.dialog({
+  width: 550,
+  height: 220,
+  modal: true
+});
+
+qtipElement(el.find('[data-tooltip]'));

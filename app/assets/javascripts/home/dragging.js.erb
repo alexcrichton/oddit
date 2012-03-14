@@ -9,7 +9,13 @@
       select: function(event, ui) {
         if (ui.item) {
           var form = $(el).closest('form');
-          form.find('#course_id').val(ui.item.id);
+          if (ui.item.id == 'NEWCOURSE') {
+            $.get('/courses/new.js');
+            form.find('#course_id').val('');
+            return false;
+          } else {
+            form.find('#course_id').val(ui.item.id);
+          }
         }
       },
 
@@ -23,6 +29,7 @@
         lastXhr = $.getJSON('/courses/search', request,
           function(data, status, xhr) {
             cache[term] = data;
+            data[data.length] = {value:'[+] Add a new course', id:'NEWCOURSE'};
             if (xhr === lastXhr) {
               response(data);
             }

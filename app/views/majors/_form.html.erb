@@ -6,7 +6,7 @@
 <% end %>
 
 <%= form_for @major do |f| %>
-  <%= render 'shared/error_messages', :target => @major %>
+  <%= render 'error_messages', :target => @major %>
 
   <dl class='top'>
     <dt><%= f.label :name %></dt>

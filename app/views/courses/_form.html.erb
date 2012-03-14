@@ -1,5 +1,5 @@
-<%= form_for @course do |f| %>
-  <%= render 'shared/error_messages', :target => @course %>
+<%= form_for @course, :remote => true do |f| %>
+  <%= render 'error_messages', :target => @course %>
 
   <dl>
     <dt><%= f.label :name %></dt>

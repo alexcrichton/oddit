@@ -1,7 +1,7 @@
 <% remote = request.format.to_s =~ /javascript/ %>
 
 <%= form_for @semester, :remote => remote do |f| %>
-  <%= render 'shared/error_messages', :target => @semester %>
+  <%= render 'error_messages', :target => @semester %>
 
   <dl>
     <dt><%= f.label :name %></dt>

@@ -30,7 +30,9 @@ class CoursesController < ApplicationController
   end
 
   def new
-    respond_with @course
+    respond_with @course do |format|
+      format.js { render 'application/new' }
+    end
   end
 
   def edit
@@ -40,7 +42,9 @@ class CoursesController < ApplicationController
   def create
     @course.save
 
-    respond_with @course, :location => new_course_path
+    respond_with @course, :location => new_course_path do |format|
+      format.js
+    end
   end
 
   def update
