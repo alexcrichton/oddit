@@ -35,7 +35,8 @@
                 <%= req.display_name %>
 
                 <% if req.required > 1 %>
-                  (<%= @cache[major][req].size %> / <%= req.required %>)
+                  (<%= req.amt_satisfied @cache[major][req] %> /
+                   <%= req.required %>)
                 <% end %>
               <% end %>
 

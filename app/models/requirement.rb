@@ -1,17 +1,20 @@
 class Requirement
   include Mongoid::Document
 
+  AMT_COURSES = 'courses'
+  AMT_UNITS   = 'units'
+
   field :name
   field :required, :type => Integer, :default => 1
+  field :kind, :default => AMT_COURSES
   field :use_others_in_group, :type => Boolean, :default => false
   field :course_ids, :type => Array, :default => []
-  field :pattern
 
   embedded_in :requirement_group
 
   validates_numericality_of :required
 
-  attr_accessible :name, :course_ids, :required, :use_others_in_group
+  attr_accessible :name, :course_ids, :required, :use_others_in_group, :kind
   attr_accessor :courses
 
   def display_name
@@ -38,25 +41,32 @@ class Requirement
     end
 
     id_pool.map!(&:to_s)
-    regex = pattern? ? Regexp.compile(pattern) : nil
 
-    (1..required).map {
-      course = courses.detect{ |c|
-        explicit = !used[c.id] && id_pool.include?(c.id.to_s)
+    left = required
+    used_courses = []
+    while left > 0
+      course = courses.detect{ |c| !used[c.id] && id_pool.include?(c.id.to_s) }
+      if course
+        used_courses << course
+        left -= kind == AMT_COURSES ? 1 : course.units
+        used[course.id] = true
+      else
+        break
+      end
+    end
+    used_courses
+  end
 
-        if regex
-          explicit = explicit || c.name.match(regex)
-        end
-
-        explicit
-      }
-      used[course.id] = true if course.present?
-      course
-    }.compact
+  def amt_satisfied courses
+    if kind == AMT_COURSES
+      courses.size
+    else
+      courses.sum(&:units)
+    end
   end
 
   def satisfied? courses
-    courses.size == required
+    amt_satisfied(courses) >= required
   end
 
 end

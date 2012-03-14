@@ -1,6 +1,7 @@
 #= require jquery-ui
 #= require jquery/tokeninput
 #= require majors/liveedit
+#= require tooltip
 
 jQuery ->
   # Binding the autocomplete of each class search list

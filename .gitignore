@@ -5,3 +5,4 @@ tmp/*
 public/javascripts/*
 public/stylesheets/*
 .sass-cache
+app/assets/images/icon-*.png

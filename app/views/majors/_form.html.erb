@@ -12,37 +12,60 @@
     <dt><%= f.label :name %></dt>
     <dd><%= f.text_field :name %></dd>
 
-    <dt><%= f.label :college %></dt>
-    <dd><%= f.text_field :college, :'data-tooltip' =>
-            "This should be the same college as listed when looking at the \
-             audit. This means that it's normally an abbreviation" %></dd>
+    <dt>
+      <%= f.label :college %>
+    </dt>
+    <dd>
+      <%= f.text_field :college %>
+      <div class='icon-help'
+           data-tooltip='This should be the same college as listed when looking
+                         at the audit. This means that it&apos;s normally an
+                         abbreviation'>
+      </div>
+    </dd>
 
     <dt><%= f.label :year %></dt>
-    <dd><%= f.text_field :year, :size => 4, :'data-tooltip' =>
-            "This should be the same year as listed on the official \
-             audit" %></dd>
+    <dd>
+      <%= f.text_field :year, :size => 4 %>
+      <div class='icon-help'
+           data-tooltip='This should be the same year as listed on the official
+                         audit'>
+      </div>
+    </dd>
   </dl>
 
   <dl class='top'>
     <dt><%= f.label :cmu_audit_name, 'CMU Audit Name' %></dt>
-    <dd><%= f.text_field :cmu_audit_name, :size => 30,
-              :'data-tooltip' => "This is the name that the CMU Audit gives\
-                to the major. You can find this by going to the audit page \
-                and seeing what is under the 'Major' heading in the top \
-                navigation boxes" %></dd>
+    <dd>
+      <%= f.text_field :cmu_audit_name, :size => 30 %>
+      <div class='icon-help'
+           data-tooltip='This is the name that the CMU Audit gives to the major.
+                         You can find this by doing to the audit page and
+                         seeing what is under the &apos;Major&apos; heading in
+                         the top navigation boxes.'>
+      </div>
+    </dd>
 
     <dt><%= f.label :major_file %></dt>
-    <dd><%= f.text_field :major_file, :size => 30, :'data-tooltip' =>
-            "This is provided by CMU's official audit system. If you're \
-             looking at an audit for this major, at the bottom of the page \
-             there will be an odd string starting with 'FinishForm:'.\
-             This value is the string after 'major='. It's normally separated \
-             by colons." %></dd>
+    <dd>
+      <%= f.text_field :major_file, :size => 30 %>
+      <div class='icon-help'
+           data-tooltip='This is provided by CMU&apos;s official audit system.
+           If you&apos;re looking at an audit for this major, at the bottom of
+           the page there will be an odd string starting with
+           &apos;FinishForm:&apos;. This value is the string after
+           &apos;major=&apos;. It&apos;s normally separated by colons.'>
+      </div>
+    </dd>
 
     <dt><%= f.label :link %></dt>
-    <dd><%= f.text_field :link, :size => 30, :'data-tooltip' =>
-            "This should be a link to the official requirement list for this \
-             major (if one exists)" %></dd>
+    <dd>
+      <%= f.text_field :link, :size => 30 %>
+      <div class='icon-help'
+           data-tooltip='This should be a link to the official requirement list
+                         for this major (if one exists).'>
+      </div>
+    </dd>
   </dl>
 <% end %>
 
@@ -53,4 +76,11 @@
 <div class='actions'>
   <%= link_to 'Add Group', [@major, :requirement_groups], :remote => true,
         :method => 'post' %>
+  <div class='icon-help'
+       data-tooltip='Major requirements are sorted into separate
+                     &apos;groups&apos;. These normally correspond to sections
+                     on the official audit, but that is not a requirement.
+                     Within each group, there are separate requirements which
+                     need to be fulfilled.'>
+  </div>
 </div>
