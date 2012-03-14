@@ -9,9 +9,12 @@ class CoursesController < ApplicationController
 
     respond_with @courses do |format|
       format.json {
-        render :json => @courses.limit(10).map { |c|
-          {:id => c.id.to_s, :name => c.pretty_name,
-           :value => c.pretty_name}
+        @courses = @courses.limit(10)
+        @courses = @courses.to_a.uniq(&:number) if params.key?(:q)
+        render :json => @courses.map { |c|
+          name = c.pretty_name
+          name += params.key?(:term) ? " (#{c.units} units)" : ""
+          {:id => c.id.to_s, :name => name, :value => name}
         }
       }
     end
