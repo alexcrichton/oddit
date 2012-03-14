@@ -8,7 +8,7 @@
     $(el).autocomplete({
       select: function(event, ui) {
         if (ui.item) {
-          var form = $(event.target).closest('form');
+          var form = $(el).closest('form');
           form.find('#course_id').val(ui.item.id);
         }
       },
