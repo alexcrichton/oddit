@@ -4,9 +4,15 @@ class User
   devise :rememberable, :omniauthable
 
   field :andrew_id
-  field :email
   field :name
   field :major_ids, :type => Array, :default => []
+
+  # Devise Base
+  field :email,              :type => String, :null => false
+  field :encrypted_password, :type => String, :null => false
+
+  # Devise Rememberable
+  field :remember_created_at, :type => Time
 
   has_many :authentications, :dependent => :destroy
   embeds_many :semesters
