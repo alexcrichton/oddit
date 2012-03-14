@@ -1,20 +1,7 @@
 @import "compass";
-
-.icon-accept { @include replace-text-with-dimensions('icon/accept.png'); }
-.icon-add { @include replace-text-with-dimensions('icon/add.png'); }
-.icon-add_page { @include replace-text-with-dimensions('icon/add_page.png'); }
-.icon-download { @include replace-text-with-dimensions('icon/download.png'); }
-.icon-email { @include replace-text-with-dimensions('icon/email.png'); }
-.icon-exclamation { @include replace-text-with-dimensions('icon/exclamation.png'); }
-.icon-info { @include replace-text-with-dimensions('icon/info.png'); }
-.icon-process { @include replace-text-with-dimensions('icon/process.png'); }
-.icon-puzzle { @include replace-text-with-dimensions('icon/puzzle.png'); }
-.icon-refresh { @include replace-text-with-dimensions('icon/refresh.png'); }
-.icon-remove { @include replace-text-with-dimensions('icon/remove.png'); }
-.icon-scheduleman { @include replace-text-with-dimensions('icon/scheduleman.png'); }
-.icon-search { @include replace-text-with-dimensions('icon/search.png'); }
-.icon-tool { @include replace-text-with-dimensions('icon/tool.png'); }
-.icon-up { @include replace-text-with-dimensions('icon/up.png'); }
+@import "icon/*.png";
+$icon-sprite-dimensions: true;
+@include all-icon-sprites;
 
 .links a, .course .icon-info, .course .icon-remove {
   display: inline-block;
@@ -26,17 +13,17 @@ a.show-hide {
   display: block;
   @include hide-text;
 
-  @include replace-text-with-dimensions('icon/up.png');
+  @include icon-sprite(up);
   &.other {
-    @include replace-text-with-dimensions('icon/download.png');
+    @include icon-sprite(download);
   }
 }
 
 .completed a.show-hide, .hiding a.show-hide {
-  @include replace-text-with-dimensions('icon/download.png');
+  @include icon-sprite(download);
 
   &.other {
-    @include replace-text-with-dimensions('icon/up.png');
+    @include icon-sprite(up);
   }
 }
 

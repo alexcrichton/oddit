@@ -196,7 +196,7 @@ $selected: lighten(green, 65%);
 
     /* Different icon for each requirement class */
     .icon {
-      @include replace-text-with-dimensions('icon/exclamation.png');
+      @include icon-sprite(exclamation);
       position: absolute;
       right: 3px;
       top: 3px;
@@ -209,14 +209,14 @@ $selected: lighten(green, 65%);
     &:hover { background-color: darken($unmet_color, 7%); }
 
     &.completed {
-      .icon { @include replace-text-with-dimensions('icon/accept.png'); }
+      .icon { @include icon-sprite(accept); }
       background-color: $completed_color;
       &:hover { background-color: darken($completed_color, 7%); }
       &.selected { background-color: mix($completed_color, green, 70%); }
     }
 
     &.planned {
-      .icon { @include replace-text-with-dimensions('icon/puzzle.png'); }
+      .icon { @include icon-sprite(puzzle); }
       background-color: $planned_color;
       &:hover { background-color: darken($planned_color, 7%); }
       &.selected { background-color: mix($planned_color, green, 70%); }
@@ -286,9 +286,9 @@ $selected: lighten(green, 65%);
   .share { float: right; }
 
   a { display: inline-block; }
-  .facebook { @include replace-text-with-dimensions('facebook_32.png'); }
-  .twitter { @include replace-text-with-dimensions('twitter_32.png'); }
-  .link { @include replace-text-with-dimensions('link_32.png'); }
+  .facebook { @include icon-sprite(facebook); }
+  .twitter { @include icon-sprite(twitter); }
+  .link { @include icon-sprite(link); }
 }
 
 #share {

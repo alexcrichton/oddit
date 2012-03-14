@@ -7,8 +7,6 @@
 
     <%= stylesheet_link_tag 'application', :media => 'all' %>
     <%= yield :stylesheets %>
-    <%= javascript_include_tag 'rails' %>
-    <%= yield :javascripts %>
   </head>
 
   <body>
@@ -46,5 +44,7 @@
       <%= yield %>
     </div>
 
+    <%= javascript_include_tag 'rails' %>
+    <%= yield :javascripts %>
   </body>
 </html>
