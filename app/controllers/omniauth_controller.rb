@@ -33,7 +33,7 @@ class OmniauthController < Devise::OmniauthCallbacksController
     ).first
 
     if authentication
-      remember_me authentication.user
+      # remember_me authentication.user
       sign_in_and_redirect authentication.user
     else
       newb = User.new{ |u| u.apply_omniauth omniauth }
@@ -44,7 +44,7 @@ class OmniauthController < Devise::OmniauthCallbacksController
           :provider => omniauth['provider'], :uid => omniauth['uid'])
         flash[:notice] = 'Authentication successful.'
 
-        remember_me user
+        # remember_me user
         sign_in_and_redirect user
       else
         flash[:error] = 'Sorry, we could not log you in'
